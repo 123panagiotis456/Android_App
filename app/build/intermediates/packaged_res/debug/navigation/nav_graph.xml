@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/categoryListFragment">
+
+    <fragment
+        android:id="@+id/categoryListFragment"
+        android:name="com.example.supermarketmanager.ui.fragment.CategoryListFragment"
+        android:label="@string/title_categories"/>
+
+    <fragment
+        android:id="@+id/productListFragment"
+        android:name="com.example.supermarketmanager.ui.fragment.ProductListFragment"
+        android:label="@string/title_products">
+        <argument android:name="categoryId" app:argType="integer"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.example.supermarketmanager.ui.fragment.ProductDetailFragment"
+        android:label="@string/title_product_detail">
+        <argument android:name="productId" app:argType="integer"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/shoppingListFragment"
+        android:name="com.example.supermarketmanager.ui.fragment.ShoppingListFragment"
+        android:label="@string/title_shopping_list"/>
+
+    <fragment
+        android:id="@+id/wishlistFragment"
+        android:name="com.example.supermarketmanager.ui.fragment.WishlistFragment"
+        android:label="@string/title_wishlist"/>
+
+    <fragment
+        android:id="@+id/purchaseHistoryFragment"
+        android:name="com.example.supermarketmanager.ui.fragment.PurchaseHistoryFragment"
+        android:label="@string/title_purchase_history"/>
+</navigation>
+
