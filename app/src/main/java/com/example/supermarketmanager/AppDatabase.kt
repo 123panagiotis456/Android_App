@@ -58,6 +58,7 @@ abstract class AppDatabase : RoomDatabase() {
                             val categoryDao = database.categoryDao()
                             val productDao = database.productDao()
                             val shoppingListDao = database.shoppingListDao()
+                            val wishlistDao = database.wishlistDao()
 
                             if (categoryDao.getAll().isEmpty()) {
                                 categoryDao.insertAll(
@@ -171,10 +172,15 @@ abstract class AppDatabase : RoomDatabase() {
 
                                 // ✅ Mock καλάθι
                                 if (shoppingListDao.getAll().isEmpty()) {
-                                    shoppingListDao.insert(ShoppingListItemEntity(productId = 1, quantity = 2)) // Μπανάνες
-                                    shoppingListDao.insert(ShoppingListItemEntity(productId = 2, quantity = 1)) // Γάλα
+                                    shoppingListDao.insert(ShoppingListItemEntity(productId = 1, quantity = 2))
+                                    shoppingListDao.insert(ShoppingListItemEntity(productId = 2, quantity = 1))
                                     shoppingListDao.insert(ShoppingListItemEntity(productId = 3, quantity = 8))
+                                }
 
+                                // ✅ Mock αγαπημένα
+                                if (wishlistDao.getAll().isEmpty()) {
+                                    wishlistDao.addItem(WishlistItemEntity(productId = 1)) // Banana
+                                    wishlistDao.addItem(WishlistItemEntity(productId = 4)) // Apple
                                 }
                             }
 

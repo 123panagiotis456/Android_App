@@ -6,11 +6,15 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.supermarketmanager.R
+import com.example.supermarketmanager.AppDatabase
+import com.example.supermarketmanager.data.entities.WishlistItemEntity
 import com.example.supermarketmanager.databinding.FragmentProductDetailBinding
 import com.example.supermarketmanager.ui.viewmodel.ProductViewModel
+import kotlinx.coroutines.launch
 
 class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
 
@@ -21,20 +25,44 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
     private val vm: ProductViewModel by viewModels()
 
     private var quantity = 1
+    private var isFavorite = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentProductDetailBinding.bind(view)
 
-        // Back arrow
+        val context = requireContext()
+        val wishlistDao = AppDatabase.getInstance(context).wishlistDao()
+        val productId = args.productId
+
+        // Back arrow toolbar
         (requireActivity() as AppCompatActivity).supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowTitleEnabled(false)
         }
 
-        // Παρακολούθηση καλαθιού για να αρχικοποιηθεί η ποσότητα
+        // Ελέγχει αν είναι στα αγαπημένα
+        lifecycleScope.launch {
+            isFavorite = wishlistDao.getItemByProductId(productId) != null
+            updateFavoriteIcon()
+        }
+
+        binding.btnFavorite.setOnClickListener {
+            lifecycleScope.launch {
+                if (isFavorite) {
+                    val item = wishlistDao.getItemByProductId(productId)
+                    item?.let { wishlistDao.removeItem(it.id) }
+                } else {
+                    wishlistDao.addItem(WishlistItemEntity(productId = productId))
+                }
+                isFavorite = !isFavorite
+                updateFavoriteIcon()
+            }
+        }
+
+        // Παρακολούθηση καλαθιού
         vm.cartItems.observe(viewLifecycleOwner) { cart ->
-            val item = cart.find { it.productId == args.productId }
+            val item = cart.find { it.productId == productId }
             quantity = item?.quantity ?: 1
             binding.tvDetailQuantity.text = quantity.toString()
         }
@@ -53,21 +81,17 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
         }
 
         // Παρακολούθηση προϊόντος
-        vm.getById(args.productId).observe(viewLifecycleOwner) { product ->
+        vm.getById(productId).observe(viewLifecycleOwner) { product ->
             if (product == null) {
                 findNavController().popBackStack()
                 return@observe
             }
 
-            // Εικόνα
-            val resId = requireContext()
-                .resources
-                .getIdentifier(product.imageDrawable, "drawable", requireContext().packageName)
+            val resId = context.resources.getIdentifier(product.imageDrawable, "drawable", context.packageName)
             binding.ivDetailImage.setImageResource(
                 if (resId != 0) resId else R.drawable.ic_placeholder
             )
 
-            // Πεδία
             binding.tvDetailnutritionalInfo.text = product.nutritionalInfo
             binding.tvDetailingredients.text = product.ingredients
             binding.tvDetailName.text = product.name
@@ -83,15 +107,24 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
                 binding.tvDetailOffer.visibility = View.GONE
             }
 
-            // Κουμπί "Προσθήκη"
             binding.btnAddDetail.setOnClickListener {
                 vm.setCartQuantity(product.id, quantity)
                 findNavController().popBackStack()
             }
         }
+
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
+    }
+
+    private fun updateFavoriteIcon() {
+        val iconRes = if (isFavorite) {
+            R.drawable.ic_favorite // γεμάτη καρδιά
+        } else {
+            R.drawable.ic_favorite_border // άδεια καρδιά
+        }
+        binding.btnFavorite.setImageResource(iconRes)
     }
 
     override fun onDestroyView() {

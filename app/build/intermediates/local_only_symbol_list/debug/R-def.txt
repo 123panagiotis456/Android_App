@@ -31,6 +31,8 @@ drawable ic_arrow_back
 drawable ic_bakery
 drawable ic_categories
 drawable ic_dairy
+drawable ic_favorite
+drawable ic_favorite_border
 drawable ic_fruits
 drawable ic_history
 drawable ic_launcher_background
@@ -60,6 +62,7 @@ id btnAddDetail
 id btnDecrease
 id btnDecreaseDetail
 id btnDelete
+id btnFavorite
 id btnIncrease
 id btnIncreaseDetail
 id btnOrder
@@ -150,6 +153,7 @@ string cd_decrease
 string cd_increase
 string cd_product_image
 string detail_offer
+string favorite
 string label_description
 string label_ingredients
 string label_nutritional_values

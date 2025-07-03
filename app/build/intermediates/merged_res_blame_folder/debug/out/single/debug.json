@@ -232,6 +232,10 @@
         "source": "com.example.supermarketmanager.app-main-58:/drawable/shopping_basket.xml"
     },
     {
+        "merged": "com.example.supermarketmanager.app-merged_res-56:/drawable_ic_favorite_border.xml.flat",
+        "source": "com.example.supermarketmanager.app-main-58:/drawable/ic_favorite_border.xml"
+    },
+    {
         "merged": "com.example.supermarketmanager.app-merged_res-56:/drawable_ic_arrow_back.xml.flat",
         "source": "com.example.supermarketmanager.app-main-58:/drawable/ic_arrow_back.xml"
     },
@@ -262,6 +266,10 @@
     {
         "merged": "com.example.supermarketmanager.app-merged_res-56:/menu_bottom_nav_menu.xml.flat",
         "source": "com.example.supermarketmanager.app-main-58:/menu/bottom_nav_menu.xml"
+    },
+    {
+        "merged": "com.example.supermarketmanager.app-merged_res-56:/drawable_ic_favorite.xml.flat",
+        "source": "com.example.supermarketmanager.app-main-58:/drawable/ic_favorite.xml"
     },
     {
         "merged": "com.example.supermarketmanager.app-merged_res-56:/anim_slide_out_right.xml.flat",

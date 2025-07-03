@@ -22,5 +22,6 @@
     <string name="btn_add">Προσθήκη</string>
     <string name="quantity_placeholder">1</string>
     <string name="shopping_icon">Προσθήκη</string>
+    <string name="favorite">favorite</string>
 
 </resources>

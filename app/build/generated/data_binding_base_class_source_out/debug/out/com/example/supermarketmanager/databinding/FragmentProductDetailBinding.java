@@ -29,6 +29,9 @@ public abstract class FragmentProductDetailBinding extends ViewDataBinding {
   public final ImageButton btnDecreaseDetail;
 
   @NonNull
+  public final ImageButton btnFavorite;
+
+  @NonNull
   public final ImageButton btnIncreaseDetail;
 
   @NonNull
@@ -78,15 +81,17 @@ public abstract class FragmentProductDetailBinding extends ViewDataBinding {
 
   protected FragmentProductDetailBinding(Object _bindingComponent, View _root, int _localFieldCount,
       LinearLayout bottomBar, Button btnAddDetail, ImageButton btnDecreaseDetail,
-      ImageButton btnIncreaseDetail, LinearLayout dgPriceCard, ImageView ivDetailImage,
-      TextView labelDescription, TextView labelingredients, TextView labelnutritionalInfo,
-      Toolbar toolbar, TextView tvDetailDescription, TextView tvDetailName, TextView tvDetailOffer,
-      TextView tvDetailPrice, TextView tvDetailQuantity, TextView tvDetailSubtitle,
-      TextView tvDetailUnitInfo, TextView tvDetailingredients, TextView tvDetailnutritionalInfo) {
+      ImageButton btnFavorite, ImageButton btnIncreaseDetail, LinearLayout dgPriceCard,
+      ImageView ivDetailImage, TextView labelDescription, TextView labelingredients,
+      TextView labelnutritionalInfo, Toolbar toolbar, TextView tvDetailDescription,
+      TextView tvDetailName, TextView tvDetailOffer, TextView tvDetailPrice,
+      TextView tvDetailQuantity, TextView tvDetailSubtitle, TextView tvDetailUnitInfo,
+      TextView tvDetailingredients, TextView tvDetailnutritionalInfo) {
     super(_bindingComponent, _root, _localFieldCount);
     this.bottomBar = bottomBar;
     this.btnAddDetail = btnAddDetail;
     this.btnDecreaseDetail = btnDecreaseDetail;
+    this.btnFavorite = btnFavorite;
     this.btnIncreaseDetail = btnIncreaseDetail;
     this.dgPriceCard = dgPriceCard;
     this.ivDetailImage = ivDetailImage;

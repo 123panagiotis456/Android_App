@@ -8,6 +8,7 @@ import com.example.supermarketmanager.data.entities.WishlistItemEntity
 
 @Dao
 interface WishlistDao {
+
     @Query("SELECT * FROM wishlist_items")
     suspend fun getAll(): List<WishlistItemEntity>
 
@@ -16,4 +17,7 @@ interface WishlistDao {
 
     @Query("DELETE FROM wishlist_items WHERE id = :itemId")
     suspend fun removeItem(itemId: Int)
+
+    @Query("SELECT * FROM wishlist_items WHERE productId = :productId LIMIT 1")
+    suspend fun getItemByProductId(productId: Int): WishlistItemEntity?
 }

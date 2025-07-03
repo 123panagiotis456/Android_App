@@ -3,6 +3,7 @@ package com.example.supermarketmanager.data.dao;
 import android.database.Cursor;
 import android.os.CancellationSignal;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.room.CoroutinesRoom;
 import androidx.room.EntityInsertionAdapter;
 import androidx.room.RoomDatabase;
@@ -127,6 +128,41 @@ public final class WishlistDao_Impl implements WishlistDao {
             _tmpProductId = _cursor.getInt(_cursorIndexOfProductId);
             _item = new WishlistItemEntity(_tmpId,_tmpProductId);
             _result.add(_item);
+          }
+          return _result;
+        } finally {
+          _cursor.close();
+          _statement.release();
+        }
+      }
+    }, $completion);
+  }
+
+  @Override
+  public Object getItemByProductId(final int productId,
+      final Continuation<? super WishlistItemEntity> $completion) {
+    final String _sql = "SELECT * FROM wishlist_items WHERE productId = ? LIMIT 1";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
+    int _argIndex = 1;
+    _statement.bindLong(_argIndex, productId);
+    final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
+    return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<WishlistItemEntity>() {
+      @Override
+      @Nullable
+      public WishlistItemEntity call() throws Exception {
+        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+        try {
+          final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
+          final int _cursorIndexOfProductId = CursorUtil.getColumnIndexOrThrow(_cursor, "productId");
+          final WishlistItemEntity _result;
+          if (_cursor.moveToFirst()) {
+            final int _tmpId;
+            _tmpId = _cursor.getInt(_cursorIndexOfId);
+            final int _tmpProductId;
+            _tmpProductId = _cursor.getInt(_cursorIndexOfProductId);
+            _result = new WishlistItemEntity(_tmpId,_tmpProductId);
+          } else {
+            _result = null;
           }
           return _result;
         } finally {

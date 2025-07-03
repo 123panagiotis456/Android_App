@@ -5,24 +5,43 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.supermarketmanager.data.entities.WishlistItemEntity
-import com.example.supermarketmanager.MyApplication
+import com.example.supermarketmanager.data.repository.WishlistRepository
 import kotlinx.coroutines.launch
 
-class WishlistViewModel : ViewModel() {
+class WishlistViewModel(
+    private val repository: WishlistRepository
+) : ViewModel() {
+
     private val _items = MutableLiveData<List<WishlistItemEntity>>()
-    val items: LiveData<List<WishlistItemEntity>> = _items
+    val items: LiveData<List<WishlistItemEntity>> get() = _items
 
-    fun loadItems() = viewModelScope.launch {
-        _items.postValue(MyApplication.database.wishlistDao().getAll())
+    fun loadItems() {
+        viewModelScope.launch {
+            _items.value = repository.getAllFavorites()
+        }
     }
 
-    fun addItem(item: WishlistItemEntity) = viewModelScope.launch {
-        MyApplication.database.wishlistDao().addItem(item)
-        loadItems()
+    fun removeItem(itemId: Int) {
+        viewModelScope.launch {
+            repository.removeFromWishlistById(itemId)
+            loadItems() // refresh
+        }
     }
 
-    fun removeItem(itemId: Int) = viewModelScope.launch {
-        MyApplication.database.wishlistDao().removeItem(itemId)
-        loadItems()
+    fun toggleFavorite(productId: Int, onToggle: (Boolean) -> Unit = {}) {
+        viewModelScope.launch {
+            val isFav = repository.isFavorite(productId)
+            if (isFav) {
+                repository.removeFromWishlist(productId)
+            } else {
+                repository.addToWishlist(productId)
+            }
+            onToggle(!isFav)
+        }
+    }
+
+    suspend fun isFavorite(productId: Int): Boolean {
+        return repository.isFavorite(productId)
     }
 }
+

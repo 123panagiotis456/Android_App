@@ -13,14 +13,24 @@ class WishlistAdapter(
 
     inner class VH(val binding: ItemWishlistItemBinding) : RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        VH(ItemWishlistItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ItemWishlistItemBinding.inflate(inflater, parent, false)
+        return VH(binding)
+    }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         val item = items[position]
-        // binding.tvProductName.text = ... fetch product by ID if needed
-        holder.binding.btnRemove.setOnClickListener { onRemove(item) }
+
+        // Αν θέλεις να εμφανίζεις το όνομα του προϊόντος:
+        // μπορείς να το κάνεις από εδώ αν έχεις πρόσβαση σε DAO ή να περάσεις επιπλέον δεδομένα
+        // holder.binding.tvProductName.text = "Προϊόν ID: ${item.productId}"
+
+        holder.binding.btnRemove.setOnClickListener {
+            onRemove(item)
+        }
     }
 
-    override fun getItemCount() = items.size
+    override fun getItemCount(): Int = items.size
 }
+

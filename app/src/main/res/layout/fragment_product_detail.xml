@@ -4,17 +4,18 @@
 
     <data/>
 
-    <!-- Root με λευκό background ώστε οι πρώτες 300dp να είναι λευκές -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white">
 
-        <!-- 1) Λευκή ζώνη ύψους 300dp με κεντραρισμένη εικόνα -->
+        <!-- Ζώνη 300dp με Toolbar, εικόνα και favorite -->
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:background="@android:color/white">
+
+            <!-- Toolbar με πίσω βελάκι -->
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
@@ -23,9 +24,9 @@
                 app:navigationIcon="@drawable/circle_black"
                 app:navigationContentDescription="@string/back"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:titleTextColor="@android:color/white">
-            </androidx.appcompat.widget.Toolbar>
+                app:titleTextColor="@android:color/white" />
 
+            <!-- Κεντρική εικόνα προϊόντος -->
             <ImageView
                 android:id="@+id/ivDetailImage"
                 android:layout_width="300dp"
@@ -33,12 +34,21 @@
                 android:layout_gravity="center"
                 android:scaleType="fitCenter"
                 android:contentDescription="@string/product_image" />
+
+            <!-- Favorite icon πάνω δεξιά -->
+            <ImageButton
+                android:id="@+id/btnFavorite"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="top|end"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_favorite_border"
+                android:contentDescription="@string/favorite" />
         </FrameLayout>
 
-        <!-- 2) ScrollView ξεκινάει ακριβώς από κάτω (marginTop=300dp), -->
-        <!--    με background που έχει στρογγυλεμένες πάνω γωνίες -->
-
-        <!-- Bottom bar -->
+        <!-- ScrollView κάτω από τη ζώνη 300dp -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -56,7 +66,6 @@
                 android:orientation="vertical"
                 android:padding="12dp">
 
-                <!-- Offer badge -->
                 <TextView
                     android:id="@+id/tvDetailOffer"
                     android:layout_width="wrap_content"
@@ -64,13 +73,11 @@
                     android:layout_marginTop="8dp"
                     android:background="@drawable/offer_background"
                     android:padding="4dp"
-                    android:text="1+1 Δώρο"
                     android:textColor="#FFFFFF"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:visibility="gone" />
 
-                <!-- Name -->
                 <TextView
                     android:id="@+id/tvDetailName"
                     android:layout_width="match_parent"
@@ -80,7 +87,6 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <!-- Subtitle -->
                 <TextView
                     android:id="@+id/tvDetailSubtitle"
                     android:layout_width="match_parent"
@@ -89,7 +95,6 @@
                     android:textColor="#CCCCCC"
                     android:textSize="14sp" />
 
-                <!-- Price -->
                 <TextView
                     android:id="@+id/tvDetailPrice"
                     android:layout_width="match_parent"
@@ -99,7 +104,6 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
-                <!-- Unit info -->
                 <TextView
                     android:id="@+id/tvDetailUnitInfo"
                     android:layout_width="match_parent"
@@ -108,7 +112,6 @@
                     android:textColor="#CCCCCC"
                     android:textSize="14sp" />
 
-                <!-- Divider με 16dp διαφορά -->
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -116,7 +119,6 @@
                     android:layout_marginBottom="16dp"
                     android:background="@android:color/white" />
 
-                <!-- Description -->
                 <TextView
                     android:id="@+id/labelDescription"
                     android:layout_width="match_parent"
@@ -126,7 +128,6 @@
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
-
                 <TextView
                     android:id="@+id/tvDetailDescription"
                     android:layout_width="match_parent"
@@ -135,6 +136,7 @@
                     android:lineSpacingExtra="4dp"
                     android:textColor="#CCCCCC"
                     android:textSize="14sp" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -159,6 +161,7 @@
                     android:lineSpacingExtra="4dp"
                     android:textColor="#CCCCCC"
                     android:textSize="14sp" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -174,6 +177,7 @@
                     android:textColor="#FFFFFF"
                     android:textSize="14sp"
                     android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/tvDetailingredients"
                     android:layout_width="match_parent"
@@ -182,12 +186,10 @@
                     android:lineSpacingExtra="4dp"
                     android:textColor="#CCCCCC"
                     android:textSize="14sp" />
-
-                <!-- … άλλες ενότητες full-width … -->
-
             </LinearLayout>
         </ScrollView>
 
+        <!-- Κάτω μπάρα με πλήκτρα -->
         <LinearLayout
             android:id="@+id/bottomBar"
             android:layout_width="match_parent"
@@ -247,8 +249,6 @@
                 app:cornerRadius="9dp"
                 android:textAllCaps="false"
                 android:layout_marginEnd="16dp" />
-
         </LinearLayout>
-
     </FrameLayout>
 </layout>
