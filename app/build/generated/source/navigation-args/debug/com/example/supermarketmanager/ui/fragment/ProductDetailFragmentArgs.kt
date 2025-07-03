@@ -8,7 +8,7 @@ import kotlin.Int
 import kotlin.jvm.JvmStatic
 
 public data class ProductDetailFragmentArgs(
-  public val productId: Int
+  public val productId: Int,
 ) : NavArgs {
   public fun toBundle(): Bundle {
     val result = Bundle()

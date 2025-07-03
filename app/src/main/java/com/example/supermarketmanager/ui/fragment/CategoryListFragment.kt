@@ -1,12 +1,15 @@
 package com.example.supermarketmanager.ui.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import com.example.supermarketmanager.R
 import com.example.supermarketmanager.databinding.FragmentCategoryListBinding
 import com.example.supermarketmanager.ui.adapter.CategoryAdapter
 import com.example.supermarketmanager.ui.viewmodel.CategoryViewModel
@@ -16,33 +19,69 @@ class CategoryListFragment : Fragment() {
     private var _binding: FragmentCategoryListBinding? = null
     private val binding get() = _binding!!
     private val vm: CategoryViewModel by viewModels()
-    private val adapter = CategoryAdapter()
+
+    private val adapter = CategoryAdapter { category ->
+        val action = CategoryListFragmentDirections
+            .actionCategoryListFragmentToProductListFragment(
+                categoryId = category.id,
+                categoryName = category.name // ✅ περνάμε και το όνομα
+            )
+        findNavController().navigate(action)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = FragmentCategoryListBinding
-        .inflate(inflater, container, false)
-        .also { _binding = it }
-        .root
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentCategoryListBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 1) Βάζουμε LayoutManager
-        binding.rvCategories.layoutManager = LinearLayoutManager(requireContext())
-
-        // 2) Ορίζουμε τον adapter
-        binding.rvCategories.adapter = adapter
-
-        // 3) Παρατηρούμε το LiveData<List<CategoryEntity>>
-        vm.categories.observe(viewLifecycleOwner) { list ->
-            adapter.submitList(list)
+        (requireActivity() as? AppCompatActivity)?.apply {
+            setSupportActionBar(binding.toolbar)
+            supportActionBar?.title = "PEPE MARKET"
+            supportActionBar?.setDisplayShowTitleEnabled(true)
         }
 
-        // 4) Φορτώνουμε τις κατηγορίες
+        binding.rvCategories.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.rvCategories.adapter = adapter
+
+        vm.categories.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
+
         vm.loadAllCategories()
+        super.onViewCreated(view, savedInstanceState)
+
+        val shoppingIcon = view.findViewById<ImageView>(R.id.toolbar_icon)
+
+        shoppingIcon.setOnClickListener {
+            // Μετάβαση στο καλάθι
+            findNavController().navigate(R.id.action_categoryListFragment_to_shoppingCartFragment)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_search, menu)
+
+        val searchItem = menu.findItem(R.id.action_search)
+        val searchView = searchItem.actionView as? SearchView
+
+        searchView?.queryHint = "Αναζήτηση κατηγορίας"
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean = false
+            override fun onQueryTextChange(newText: String?): Boolean {
+                vm.searchCategories(newText.orEmpty())
+                return true
+            }
+        })
     }
 
     override fun onDestroyView() {

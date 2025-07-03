@@ -1,8 +1,8 @@
 package com.example.supermarketmanager
 
 import android.app.Application
+import android.util.Log
 import androidx.room.Room
-import com.example.supermarketmanager.data.AppDatabase
 import com.example.supermarketmanager.data.entities.CategoryEntity
 import kotlinx.coroutines.*
 
@@ -12,7 +12,6 @@ class MyApplication : Application() {
         lateinit var database: AppDatabase
     }
 
-    // 🔹 Εδώ βάζεις το δικό σου scope για background λειτουργίες
     private val appScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     override fun onCreate() {
@@ -21,25 +20,27 @@ class MyApplication : Application() {
         database = Room.databaseBuilder(
             applicationContext,
             AppDatabase::class.java,
-            "app_database"
+            "supermarket-db"
         )
-            .fallbackToDestructiveMigration()
+            .fallbackToDestructiveMigration() // θα διαγράψει παλιά DB αν αλλάξει το schema
             .build()
 
-        // 🔹 Προσθήκη demo δεδομένων (μόνο αν λείπουν)
         appScope.launch {
             val dao = database.categoryDao()
             if (dao.getAll().isEmpty()) {
                 dao.insertAll(
                     listOf(
-                        CategoryEntity(id = 0, name = "Fruits"),
-                        CategoryEntity(id = 0, name = "Vegetables"),
-                        CategoryEntity(id = 0, name = "Dairy")
+                        CategoryEntity(id = 1, name = "Fruits", imageDrawable = "ic_fruits"),
+                        CategoryEntity(id = 2, name = "Vegetables", imageDrawable = "ic_vegetables"),
+                        CategoryEntity(id = 3, name = "Dairy", imageDrawable = "ic_dairy"),
+                        CategoryEntity(id = 4, name = "Snacks", imageDrawable = "ic_snacks"),
+                        CategoryEntity(id = 5, name = "Bakery", imageDrawable = "ic_bakery")
                     )
                 )
+                Log.d("MyApplication", "✔ Demo κατηγορίες με εικόνες προστέθηκαν.")
+            } else {
+                Log.d("MyApplication", "ℹ Κατηγορίες ήδη υπάρχουν.")
             }
         }
     }
 }
-
-

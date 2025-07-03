@@ -38,7 +38,7 @@ public final class CategoryDao_Impl implements CategoryDao {
       @Override
       @NonNull
       protected String createQuery() {
-        return "INSERT OR REPLACE INTO `categories` (`id`,`name`) VALUES (?,?)";
+        return "INSERT OR REPLACE INTO `categories` (`id`,`name`,`imageDrawable`) VALUES (?,?,?)";
       }
 
       @Override
@@ -49,6 +49,11 @@ public final class CategoryDao_Impl implements CategoryDao {
           statement.bindNull(2);
         } else {
           statement.bindString(2, entity.getName());
+        }
+        if (entity.getImageDrawable() == null) {
+          statement.bindNull(3);
+        } else {
+          statement.bindString(3, entity.getImageDrawable());
         }
       }
     };
@@ -86,6 +91,7 @@ public final class CategoryDao_Impl implements CategoryDao {
         try {
           final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
           final int _cursorIndexOfName = CursorUtil.getColumnIndexOrThrow(_cursor, "name");
+          final int _cursorIndexOfImageDrawable = CursorUtil.getColumnIndexOrThrow(_cursor, "imageDrawable");
           final List<CategoryEntity> _result = new ArrayList<CategoryEntity>(_cursor.getCount());
           while (_cursor.moveToNext()) {
             final CategoryEntity _item;
@@ -97,7 +103,13 @@ public final class CategoryDao_Impl implements CategoryDao {
             } else {
               _tmpName = _cursor.getString(_cursorIndexOfName);
             }
-            _item = new CategoryEntity(_tmpId,_tmpName);
+            final String _tmpImageDrawable;
+            if (_cursor.isNull(_cursorIndexOfImageDrawable)) {
+              _tmpImageDrawable = null;
+            } else {
+              _tmpImageDrawable = _cursor.getString(_cursorIndexOfImageDrawable);
+            }
+            _item = new CategoryEntity(_tmpId,_tmpName,_tmpImageDrawable);
             _result.add(_item);
           }
           return _result;

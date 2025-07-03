@@ -4,8 +4,11 @@ package com.example.supermarketmanager.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,10 +20,22 @@ public abstract class FragmentCategoryListBinding extends ViewDataBinding {
   @NonNull
   public final RecyclerView rvCategories;
 
+  @NonNull
+  public final Toolbar toolbar;
+
+  @NonNull
+  public final ImageView toolbarIcon;
+
+  @NonNull
+  public final TextView toolbarTitle;
+
   protected FragmentCategoryListBinding(Object _bindingComponent, View _root, int _localFieldCount,
-      RecyclerView rvCategories) {
+      RecyclerView rvCategories, Toolbar toolbar, ImageView toolbarIcon, TextView toolbarTitle) {
     super(_bindingComponent, _root, _localFieldCount);
     this.rvCategories = rvCategories;
+    this.toolbar = toolbar;
+    this.toolbarIcon = toolbarIcon;
+    this.toolbarTitle = toolbarTitle;
   }
 
   @NonNull

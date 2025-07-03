@@ -7,35 +7,70 @@
     <fragment
         android:id="@+id/categoryListFragment"
         android:name="com.example.supermarketmanager.ui.fragment.CategoryListFragment"
-        android:label="@string/title_categories"/>
+        android:label="@string/title_categories">
+
+        <!-- Υπάρχουσα μετάβαση -->
+        <action
+            android:id="@+id/action_categoryListFragment_to_productListFragment"
+            app:destination="@id/productListFragment"
+            app:popUpToInclusive="false" />
+
+        <!-- Νέα μετάβαση προς καλάθι -->
+        <action
+            android:id="@+id/action_categoryListFragment_to_shoppingCartFragment"
+            app:destination="@id/shoppingCartFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/productListFragment"
         android:name="com.example.supermarketmanager.ui.fragment.ProductListFragment"
-        android:label="@string/title_products">
-        <argument android:name="categoryId" app:argType="integer"/>
+        android:label="Products">
+        <argument
+            android:name="categoryId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <argument
+            android:name="categoryName"
+            app:argType="string"
+            android:defaultValue="Κατηγορία" />
+
+        <action
+            android:id="@+id/action_productListFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
         android:id="@+id/productDetailFragment"
         android:name="com.example.supermarketmanager.ui.fragment.ProductDetailFragment"
         android:label="@string/title_product_detail">
-        <argument android:name="productId" app:argType="integer"/>
+        <argument
+            android:name="productId"
+            app:argType="integer" />
     </fragment>
 
     <fragment
         android:id="@+id/shoppingListFragment"
-        android:name="com.example.supermarketmanager.ui.fragment.ShoppingListFragment"
-        android:label="@string/title_shopping_list"/>
+        android:name="com.example.supermarketmanager.ui.fragment.ShoppingCartFragment"
+        android:label="@string/title_shopping_list" />
 
     <fragment
         android:id="@+id/wishlistFragment"
         android:name="com.example.supermarketmanager.ui.fragment.WishlistFragment"
-        android:label="@string/title_wishlist"/>
+        android:label="@string/title_wishlist" />
 
     <fragment
         android:id="@+id/purchaseHistoryFragment"
         android:name="com.example.supermarketmanager.ui.fragment.PurchaseHistoryFragment"
-        android:label="@string/title_purchase_history"/>
-</navigation>
+        android:label="@string/title_purchase_history" />
 
+    <!-- ✅ Νέο Fragment για καλάθι -->
+    <fragment
+        android:id="@+id/shoppingCartFragment"
+        android:name="com.example.supermarketmanager.ui.fragment.ShoppingCartFragment"
+        android:label="Καλάθι" />
+
+</navigation>

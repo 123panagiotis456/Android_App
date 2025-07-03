@@ -1,29 +1,113 @@
 package com.example.supermarketmanager.ui.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.supermarketmanager.data.entities.ProductEntity
 import com.example.supermarketmanager.databinding.ItemProductBinding
+import com.example.supermarketmanager.ui.viewmodel.ProductViewModel
 
 class ProductAdapter(
-    private val items: List<ProductEntity>,
+    private val viewModel: ProductViewModel,
     private val onClick: (ProductEntity) -> Unit
-) : RecyclerView.Adapter<ProductAdapter.VH>() {
+) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
-    inner class VH(val binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root)
+    private var products: List<ProductEntity> = emptyList()
+    private val quantityMap = mutableMapOf<Int, Int>() // τοπική παρακολούθηση ποσοτήτων
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        VH(ItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false))
-
-    override fun onBindViewHolder(holder: VH, position: Int) {
-        val p = items[position]
-        holder.binding.tvName.text = p.name
-        holder.binding.tvPrice.text = "${p.pricePerUnit}€/${p.unit}"
-        Glide.with(holder.binding.ivProduct).load(p.imageUrl).into(holder.binding.ivProduct)
-        holder.binding.root.setOnClickListener { onClick(p) }
+    fun submitList(list: List<ProductEntity>) {
+        products = list
+        notifyDataSetChanged()
     }
 
-    override fun getItemCount() = items.size
+    fun updateQuantity(productId: Int, quantity: Int) {
+        quantityMap[productId] = quantity
+        notifyDataSetChanged()
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
+        val binding = ItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ProductViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
+        holder.bind(products[position])
+    }
+
+    override fun getItemCount(): Int = products.size
+
+    inner class ProductViewHolder(private val binding: ItemProductBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(product: ProductEntity) {
+            // Όνομα, περιγραφή, τιμή
+            binding.tvProductName.text = product.name
+            binding.tvProductDescription.text = product.description
+            binding.tvProductPrice.text = "${product.pricePerUnit} ${product.unit}"
+
+            // Εικόνα
+            val context = binding.ivProductImage.context
+            val resId = product.imageDrawable?.let {
+                context.resources.getIdentifier(it, "drawable", context.packageName)
+            } ?: 0
+            binding.ivProductImage.setImageResource(
+                if (resId != 0) resId else android.R.drawable.ic_menu_report_image
+            )
+
+            // Προσφορά
+            if (!product.offer.isNullOrBlank()) {
+                binding.tvProductOffer.visibility = View.VISIBLE
+                binding.tvProductOffer.text = product.offer
+            } else {
+                binding.tvProductOffer.visibility = View.GONE
+            }
+
+            // Click σε όλο το item
+            itemView.setOnClickListener {
+                onClick(product)
+            }
+
+            // Ποσότητα για το συγκεκριμένο προϊόν
+            val quantity = quantityMap[product.id] ?: 0
+
+            // Εμφάνιση ανάλογα με ποσότητα
+            if (quantity == 0) {
+                binding.btnAdd.visibility = View.VISIBLE
+                binding.quantityLayout.visibility = View.GONE
+            } else {
+                binding.btnAdd.visibility = View.GONE
+                binding.quantityLayout.visibility = View.VISIBLE
+                binding.tvQuantity.text = quantity.toString()
+            }
+
+            // Πάτημα στο αρχικό '+' κουμπί
+            binding.btnAdd.setOnClickListener {
+                viewModel.addOneToCart(product.id)
+                quantityMap[product.id] = 1
+                notifyItemChanged(adapterPosition)
+            }
+
+            // Πάτημα στο ➕
+            binding.btnIncrease.setOnClickListener {
+                val current = quantityMap[product.id] ?: 1
+                viewModel.addOneToCart(product.id)
+                quantityMap[product.id] = current + 1
+                binding.tvQuantity.text = (current + 1).toString()
+            }
+
+            // Πάτημα στο ➖
+            binding.btnDecrease.setOnClickListener {
+                val current = quantityMap[product.id] ?: 1
+                viewModel.removeOneFromCart(product.id)
+                if (current > 1) {
+                    quantityMap[product.id] = current - 1
+                    binding.tvQuantity.text = (current - 1).toString()
+                } else {
+                    quantityMap[product.id] = 0
+                    notifyItemChanged(adapterPosition)
+                }
+            }
+        }
+    }
 }

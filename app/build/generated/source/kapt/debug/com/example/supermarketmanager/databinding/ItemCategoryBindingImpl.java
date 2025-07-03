@@ -13,22 +13,28 @@ public class ItemCategoryBindingImpl extends ItemCategoryBinding  {
     private static final android.util.SparseIntArray sViewsWithIds;
     static {
         sIncludes = null;
-        sViewsWithIds = null;
+        sViewsWithIds = new android.util.SparseIntArray();
+        sViewsWithIds.put(R.id.ivCategoryIcon, 1);
+        sViewsWithIds.put(R.id.tvCategoryName, 2);
     }
     // views
+    @NonNull
+    private final android.widget.LinearLayout mboundView0;
     // variables
     // values
     // listeners
     // Inverse Binding Event Handlers
 
     public ItemCategoryBindingImpl(@Nullable androidx.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
-        this(bindingComponent, root, mapBindings(bindingComponent, root, 1, sIncludes, sViewsWithIds));
+        this(bindingComponent, root, mapBindings(bindingComponent, root, 3, sIncludes, sViewsWithIds));
     }
     private ItemCategoryBindingImpl(androidx.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
         super(bindingComponent, root, 0
-            , (android.widget.TextView) bindings[0]
+            , (android.widget.ImageView) bindings[1]
+            , (android.widget.TextView) bindings[2]
             );
-        this.tvCategoryName.setTag(null);
+        this.mboundView0 = (android.widget.LinearLayout) bindings[0];
+        this.mboundView0.setTag(null);
         setRootTag(root);
         // listeners
         invalidateAll();

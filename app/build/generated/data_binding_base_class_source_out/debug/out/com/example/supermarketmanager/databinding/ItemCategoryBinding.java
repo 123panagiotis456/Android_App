@@ -4,6 +4,7 @@ package com.example.supermarketmanager.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,11 +16,15 @@ import java.lang.Object;
 
 public abstract class ItemCategoryBinding extends ViewDataBinding {
   @NonNull
+  public final ImageView ivCategoryIcon;
+
+  @NonNull
   public final TextView tvCategoryName;
 
   protected ItemCategoryBinding(Object _bindingComponent, View _root, int _localFieldCount,
-      TextView tvCategoryName) {
+      ImageView ivCategoryIcon, TextView tvCategoryName) {
     super(_bindingComponent, _root, _localFieldCount);
+    this.ivCategoryIcon = ivCategoryIcon;
     this.tvCategoryName = tvCategoryName;
   }
 

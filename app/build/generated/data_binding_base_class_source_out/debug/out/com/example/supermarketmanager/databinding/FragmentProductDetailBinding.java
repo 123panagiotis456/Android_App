@@ -4,10 +4,14 @@ package com.example.supermarketmanager.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import com.example.supermarketmanager.R;
@@ -16,24 +20,89 @@ import java.lang.Object;
 
 public abstract class FragmentProductDetailBinding extends ViewDataBinding {
   @NonNull
-  public final ImageView ivProduct;
+  public final LinearLayout bottomBar;
 
   @NonNull
-  public final TextView tvDesc;
+  public final Button btnAddDetail;
 
   @NonNull
-  public final TextView tvName;
+  public final ImageButton btnDecreaseDetail;
 
   @NonNull
-  public final TextView tvPrice;
+  public final ImageButton btnIncreaseDetail;
+
+  @NonNull
+  public final LinearLayout dgPriceCard;
+
+  @NonNull
+  public final ImageView ivDetailImage;
+
+  @NonNull
+  public final TextView labelDescription;
+
+  @NonNull
+  public final TextView labelingredients;
+
+  @NonNull
+  public final TextView labelnutritionalInfo;
+
+  @NonNull
+  public final Toolbar toolbar;
+
+  @NonNull
+  public final TextView tvDetailDescription;
+
+  @NonNull
+  public final TextView tvDetailName;
+
+  @NonNull
+  public final TextView tvDetailOffer;
+
+  @NonNull
+  public final TextView tvDetailPrice;
+
+  @NonNull
+  public final TextView tvDetailQuantity;
+
+  @NonNull
+  public final TextView tvDetailSubtitle;
+
+  @NonNull
+  public final TextView tvDetailUnitInfo;
+
+  @NonNull
+  public final TextView tvDetailingredients;
+
+  @NonNull
+  public final TextView tvDetailnutritionalInfo;
 
   protected FragmentProductDetailBinding(Object _bindingComponent, View _root, int _localFieldCount,
-      ImageView ivProduct, TextView tvDesc, TextView tvName, TextView tvPrice) {
+      LinearLayout bottomBar, Button btnAddDetail, ImageButton btnDecreaseDetail,
+      ImageButton btnIncreaseDetail, LinearLayout dgPriceCard, ImageView ivDetailImage,
+      TextView labelDescription, TextView labelingredients, TextView labelnutritionalInfo,
+      Toolbar toolbar, TextView tvDetailDescription, TextView tvDetailName, TextView tvDetailOffer,
+      TextView tvDetailPrice, TextView tvDetailQuantity, TextView tvDetailSubtitle,
+      TextView tvDetailUnitInfo, TextView tvDetailingredients, TextView tvDetailnutritionalInfo) {
     super(_bindingComponent, _root, _localFieldCount);
-    this.ivProduct = ivProduct;
-    this.tvDesc = tvDesc;
-    this.tvName = tvName;
-    this.tvPrice = tvPrice;
+    this.bottomBar = bottomBar;
+    this.btnAddDetail = btnAddDetail;
+    this.btnDecreaseDetail = btnDecreaseDetail;
+    this.btnIncreaseDetail = btnIncreaseDetail;
+    this.dgPriceCard = dgPriceCard;
+    this.ivDetailImage = ivDetailImage;
+    this.labelDescription = labelDescription;
+    this.labelingredients = labelingredients;
+    this.labelnutritionalInfo = labelnutritionalInfo;
+    this.toolbar = toolbar;
+    this.tvDetailDescription = tvDetailDescription;
+    this.tvDetailName = tvDetailName;
+    this.tvDetailOffer = tvDetailOffer;
+    this.tvDetailPrice = tvDetailPrice;
+    this.tvDetailQuantity = tvDetailQuantity;
+    this.tvDetailSubtitle = tvDetailSubtitle;
+    this.tvDetailUnitInfo = tvDetailUnitInfo;
+    this.tvDetailingredients = tvDetailingredients;
+    this.tvDetailnutritionalInfo = tvDetailnutritionalInfo;
   }
 
   @NonNull

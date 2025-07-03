@@ -16,6 +16,6 @@ class MainActivity : AppCompatActivity() {
 
     // Συνδέουμε το BottomNav με το NavController
     val navController = findNavController(R.id.nav_host_fragment)
-    binding.bottomNav.setupWithNavController(navController)
+//    binding.bottomNav.setupWithNavController(navController)
   }
 }

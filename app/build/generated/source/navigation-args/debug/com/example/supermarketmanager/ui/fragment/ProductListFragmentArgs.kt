@@ -5,20 +5,24 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.NavArgs
 import java.lang.IllegalArgumentException
 import kotlin.Int
+import kotlin.String
 import kotlin.jvm.JvmStatic
 
 public data class ProductListFragmentArgs(
-  public val categoryId: Int
+  public val categoryId: Int = -1,
+  public val categoryName: String = "Κατηγορία",
 ) : NavArgs {
   public fun toBundle(): Bundle {
     val result = Bundle()
     result.putInt("categoryId", this.categoryId)
+    result.putString("categoryName", this.categoryName)
     return result
   }
 
   public fun toSavedStateHandle(): SavedStateHandle {
     val result = SavedStateHandle()
     result.set("categoryId", this.categoryId)
+    result.set("categoryName", this.categoryName)
     return result
   }
 
@@ -30,9 +34,18 @@ public data class ProductListFragmentArgs(
       if (bundle.containsKey("categoryId")) {
         __categoryId = bundle.getInt("categoryId")
       } else {
-        throw IllegalArgumentException("Required argument \"categoryId\" is missing and does not have an android:defaultValue")
+        __categoryId = -1
       }
-      return ProductListFragmentArgs(__categoryId)
+      val __categoryName : String?
+      if (bundle.containsKey("categoryName")) {
+        __categoryName = bundle.getString("categoryName")
+        if (__categoryName == null) {
+          throw IllegalArgumentException("Argument \"categoryName\" is marked as non-null but was passed a null value.")
+        }
+      } else {
+        __categoryName = "Κατηγορία"
+      }
+      return ProductListFragmentArgs(__categoryId, __categoryName)
     }
 
     @JvmStatic
@@ -44,9 +57,18 @@ public data class ProductListFragmentArgs(
           throw IllegalArgumentException("Argument \"categoryId\" of type integer does not support null values")
         }
       } else {
-        throw IllegalArgumentException("Required argument \"categoryId\" is missing and does not have an android:defaultValue")
+        __categoryId = -1
       }
-      return ProductListFragmentArgs(__categoryId)
+      val __categoryName : String?
+      if (savedStateHandle.contains("categoryName")) {
+        __categoryName = savedStateHandle["categoryName"]
+        if (__categoryName == null) {
+          throw IllegalArgumentException("Argument \"categoryName\" is marked as non-null but was passed a null value")
+        }
+      } else {
+        __categoryName = "Κατηγορία"
+      }
+      return ProductListFragmentArgs(__categoryId, __categoryName)
     }
   }
 }

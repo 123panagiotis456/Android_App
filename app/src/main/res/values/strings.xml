@@ -7,4 +7,20 @@
     <string name="title_wishlist">Wishlist</string>
     <string name="title_purchase_history">History</string>
     <string name="remove">Remove</string>
+    <string name="category_image">Category image</string>
+    <string name="search">Αναζήτηση</string>
+    <string name="toolbar_title">PEPE MARKET</string>
+    <string name="product_image">Εικόνα προϊόντος</string>
+    <string name="add_product">Προσθήκη προϊόντος</string>
+    <string name="cd_product_image">Εικόνα προϊόντος</string>
+    <string name="detail_offer">1+1 Δώρο</string>
+    <string name="label_description">Περιγραφή</string>
+    <string name="label_nutritional_values">Διατροφική Αξία</string>
+    <string name="label_ingredients">Συστατικά</string>
+    <string name="cd_decrease">Μείωση</string>
+    <string name="cd_increase">Αύξηση</string>
+    <string name="btn_add">Προσθήκη</string>
+    <string name="quantity_placeholder">1</string>
+    <string name="shopping_icon">Προσθήκη</string>
+
 </resources>

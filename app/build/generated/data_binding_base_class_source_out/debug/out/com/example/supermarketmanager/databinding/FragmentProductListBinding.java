@@ -4,8 +4,12 @@ package com.example.supermarketmanager.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,12 +19,42 @@ import java.lang.Object;
 
 public abstract class FragmentProductListBinding extends ViewDataBinding {
   @NonNull
+  public final LinearLayout cartBanner;
+
+  @NonNull
+  public final ProgressBar progressBar;
+
+  @NonNull
   public final RecyclerView rvProducts;
 
+  @NonNull
+  public final Toolbar toolbar;
+
+  @NonNull
+  public final TextView toolbarTitle;
+
+  @NonNull
+  public final TextView tvCartQuantity;
+
+  @NonNull
+  public final TextView tvCartTotal;
+
+  @NonNull
+  public final TextView tvRemainingAmount;
+
   protected FragmentProductListBinding(Object _bindingComponent, View _root, int _localFieldCount,
-      RecyclerView rvProducts) {
+      LinearLayout cartBanner, ProgressBar progressBar, RecyclerView rvProducts, Toolbar toolbar,
+      TextView toolbarTitle, TextView tvCartQuantity, TextView tvCartTotal,
+      TextView tvRemainingAmount) {
     super(_bindingComponent, _root, _localFieldCount);
+    this.cartBanner = cartBanner;
+    this.progressBar = progressBar;
     this.rvProducts = rvProducts;
+    this.toolbar = toolbar;
+    this.toolbarTitle = toolbarTitle;
+    this.tvCartQuantity = tvCartQuantity;
+    this.tvCartTotal = tvCartTotal;
+    this.tvRemainingAmount = tvRemainingAmount;
   }
 
   @NonNull

@@ -10,10 +10,9 @@ import com.example.supermarketmanager.databinding.FragmentCategoryListBindingImp
 import com.example.supermarketmanager.databinding.FragmentProductDetailBindingImpl;
 import com.example.supermarketmanager.databinding.FragmentProductListBindingImpl;
 import com.example.supermarketmanager.databinding.FragmentPurchaseHistoryBindingImpl;
-import com.example.supermarketmanager.databinding.FragmentShoppingListBindingImpl;
+import com.example.supermarketmanager.databinding.FragmentShoppingCartBindingImpl;
 import com.example.supermarketmanager.databinding.FragmentWishlistBindingImpl;
 import com.example.supermarketmanager.databinding.ItemCategoryBindingImpl;
-import com.example.supermarketmanager.databinding.ItemProductBindingImpl;
 import com.example.supermarketmanager.databinding.ItemPurchaseHistoryBindingImpl;
 import com.example.supermarketmanager.databinding.ItemShoppingListItemBindingImpl;
 import com.example.supermarketmanager.databinding.ItemWishlistItemBindingImpl;
@@ -36,31 +35,28 @@ public class DataBinderMapperImpl extends DataBinderMapper {
 
   private static final int LAYOUT_FRAGMENTPURCHASEHISTORY = 4;
 
-  private static final int LAYOUT_FRAGMENTSHOPPINGLIST = 5;
+  private static final int LAYOUT_FRAGMENTSHOPPINGCART = 5;
 
   private static final int LAYOUT_FRAGMENTWISHLIST = 6;
 
   private static final int LAYOUT_ITEMCATEGORY = 7;
 
-  private static final int LAYOUT_ITEMPRODUCT = 8;
+  private static final int LAYOUT_ITEMPURCHASEHISTORY = 8;
 
-  private static final int LAYOUT_ITEMPURCHASEHISTORY = 9;
+  private static final int LAYOUT_ITEMSHOPPINGLISTITEM = 9;
 
-  private static final int LAYOUT_ITEMSHOPPINGLISTITEM = 10;
+  private static final int LAYOUT_ITEMWISHLISTITEM = 10;
 
-  private static final int LAYOUT_ITEMWISHLISTITEM = 11;
-
-  private static final SparseIntArray INTERNAL_LAYOUT_ID_LOOKUP = new SparseIntArray(11);
+  private static final SparseIntArray INTERNAL_LAYOUT_ID_LOOKUP = new SparseIntArray(10);
 
   static {
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.example.supermarketmanager.R.layout.fragment_category_list, LAYOUT_FRAGMENTCATEGORYLIST);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.example.supermarketmanager.R.layout.fragment_product_detail, LAYOUT_FRAGMENTPRODUCTDETAIL);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.example.supermarketmanager.R.layout.fragment_product_list, LAYOUT_FRAGMENTPRODUCTLIST);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.example.supermarketmanager.R.layout.fragment_purchase_history, LAYOUT_FRAGMENTPURCHASEHISTORY);
-    INTERNAL_LAYOUT_ID_LOOKUP.put(com.example.supermarketmanager.R.layout.fragment_shopping_list, LAYOUT_FRAGMENTSHOPPINGLIST);
+    INTERNAL_LAYOUT_ID_LOOKUP.put(com.example.supermarketmanager.R.layout.fragment_shopping_cart, LAYOUT_FRAGMENTSHOPPINGCART);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.example.supermarketmanager.R.layout.fragment_wishlist, LAYOUT_FRAGMENTWISHLIST);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.example.supermarketmanager.R.layout.item_category, LAYOUT_ITEMCATEGORY);
-    INTERNAL_LAYOUT_ID_LOOKUP.put(com.example.supermarketmanager.R.layout.item_product, LAYOUT_ITEMPRODUCT);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.example.supermarketmanager.R.layout.item_purchase_history, LAYOUT_ITEMPURCHASEHISTORY);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.example.supermarketmanager.R.layout.item_shopping_list_item, LAYOUT_ITEMSHOPPINGLISTITEM);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.example.supermarketmanager.R.layout.item_wishlist_item, LAYOUT_ITEMWISHLISTITEM);
@@ -99,11 +95,11 @@ public class DataBinderMapperImpl extends DataBinderMapper {
           }
           throw new IllegalArgumentException("The tag for fragment_purchase_history is invalid. Received: " + tag);
         }
-        case  LAYOUT_FRAGMENTSHOPPINGLIST: {
-          if ("layout/fragment_shopping_list_0".equals(tag)) {
-            return new FragmentShoppingListBindingImpl(component, view);
+        case  LAYOUT_FRAGMENTSHOPPINGCART: {
+          if ("layout/fragment_shopping_cart_0".equals(tag)) {
+            return new FragmentShoppingCartBindingImpl(component, view);
           }
-          throw new IllegalArgumentException("The tag for fragment_shopping_list is invalid. Received: " + tag);
+          throw new IllegalArgumentException("The tag for fragment_shopping_cart is invalid. Received: " + tag);
         }
         case  LAYOUT_FRAGMENTWISHLIST: {
           if ("layout/fragment_wishlist_0".equals(tag)) {
@@ -116,12 +112,6 @@ public class DataBinderMapperImpl extends DataBinderMapper {
             return new ItemCategoryBindingImpl(component, view);
           }
           throw new IllegalArgumentException("The tag for item_category is invalid. Received: " + tag);
-        }
-        case  LAYOUT_ITEMPRODUCT: {
-          if ("layout/item_product_0".equals(tag)) {
-            return new ItemProductBindingImpl(component, view);
-          }
-          throw new IllegalArgumentException("The tag for item_product is invalid. Received: " + tag);
         }
         case  LAYOUT_ITEMPURCHASEHISTORY: {
           if ("layout/item_purchase_history_0".equals(tag)) {
@@ -194,17 +184,16 @@ public class DataBinderMapperImpl extends DataBinderMapper {
   }
 
   private static class InnerLayoutIdLookup {
-    static final HashMap<String, Integer> sKeys = new HashMap<String, Integer>(11);
+    static final HashMap<String, Integer> sKeys = new HashMap<String, Integer>(10);
 
     static {
       sKeys.put("layout/fragment_category_list_0", com.example.supermarketmanager.R.layout.fragment_category_list);
       sKeys.put("layout/fragment_product_detail_0", com.example.supermarketmanager.R.layout.fragment_product_detail);
       sKeys.put("layout/fragment_product_list_0", com.example.supermarketmanager.R.layout.fragment_product_list);
       sKeys.put("layout/fragment_purchase_history_0", com.example.supermarketmanager.R.layout.fragment_purchase_history);
-      sKeys.put("layout/fragment_shopping_list_0", com.example.supermarketmanager.R.layout.fragment_shopping_list);
+      sKeys.put("layout/fragment_shopping_cart_0", com.example.supermarketmanager.R.layout.fragment_shopping_cart);
       sKeys.put("layout/fragment_wishlist_0", com.example.supermarketmanager.R.layout.fragment_wishlist);
       sKeys.put("layout/item_category_0", com.example.supermarketmanager.R.layout.item_category);
-      sKeys.put("layout/item_product_0", com.example.supermarketmanager.R.layout.item_product);
       sKeys.put("layout/item_purchase_history_0", com.example.supermarketmanager.R.layout.item_purchase_history);
       sKeys.put("layout/item_shopping_list_item_0", com.example.supermarketmanager.R.layout.item_shopping_list_item);
       sKeys.put("layout/item_wishlist_item_0", com.example.supermarketmanager.R.layout.item_wishlist_item);
