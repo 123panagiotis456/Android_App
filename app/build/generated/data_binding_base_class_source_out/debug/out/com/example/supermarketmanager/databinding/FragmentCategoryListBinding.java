@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,16 +14,18 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.supermarketmanager.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.lang.Deprecated;
 import java.lang.Object;
 
 public abstract class FragmentCategoryListBinding extends ViewDataBinding {
   @NonNull
-  public final ImageView btnHistory;
+  public final LinearLayout btnCart;
 
   @NonNull
-  public final FloatingActionButton fabHistory;
+  public final LinearLayout btnHistory;
+
+  @NonNull
+  public final LinearLayout btnWishlist;
 
   @NonNull
   public final RecyclerView rvCategories;
@@ -37,11 +40,12 @@ public abstract class FragmentCategoryListBinding extends ViewDataBinding {
   public final TextView toolbarTitle;
 
   protected FragmentCategoryListBinding(Object _bindingComponent, View _root, int _localFieldCount,
-      ImageView btnHistory, FloatingActionButton fabHistory, RecyclerView rvCategories,
-      Toolbar toolbar, ImageView toolbarIcon, TextView toolbarTitle) {
+      LinearLayout btnCart, LinearLayout btnHistory, LinearLayout btnWishlist,
+      RecyclerView rvCategories, Toolbar toolbar, ImageView toolbarIcon, TextView toolbarTitle) {
     super(_bindingComponent, _root, _localFieldCount);
+    this.btnCart = btnCart;
     this.btnHistory = btnHistory;
-    this.fabHistory = fabHistory;
+    this.btnWishlist = btnWishlist;
     this.rvCategories = rvCategories;
     this.toolbar = toolbar;
     this.toolbarIcon = toolbarIcon;

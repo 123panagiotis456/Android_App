@@ -19,13 +19,14 @@
 
         <!-- To shopping cart -->
         <action
-            android:id="@+id/action_categoryListFragment_to_shoppingCartFragment"
+            android:id="@+id/action_categoryListFragment_to_ShoppingCartFragment"
             app:destination="@id/shoppingCartFragment" />
 
         <!-- ✅ NEW: to purchase history -->
         <action
             android:id="@+id/action_categoryListFragment_to_purchaseHistoryFragment"
             app:destination="@id/purchaseHistoryFragment" />
+
     </fragment>
 
     <!-- ──────────────────────────

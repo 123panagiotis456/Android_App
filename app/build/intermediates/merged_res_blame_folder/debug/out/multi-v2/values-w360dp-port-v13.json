@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.supermarketmanager.app-mergeDebugResources-2:/values-w360dp-port-v13/values-w360dp-port-v13.xml",
+            "outputFile": "com.example.supermarketmanager.app-mergeDebugResources-54:/values-w360dp-port-v13/values-w360dp-port-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\caches\\transforms-4\\af70b4df85dae056f12a38b07826fa7a\\transformed\\material-1.11.0\\res\\values-w360dp-port-v13\\values-w360dp-port-v13.xml",
+                    "source": "C:\\Users\\panag\\.gradle\\caches\\transforms-4\\af70b4df85dae056f12a38b07826fa7a\\transformed\\material-1.11.0\\res\\values-w360dp-port-v13\\values-w360dp-port-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",

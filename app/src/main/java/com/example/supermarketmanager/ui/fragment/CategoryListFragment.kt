@@ -47,7 +47,9 @@ class CategoryListFragment : Fragment() {
         binding.btnHistory.setOnClickListener {
             findNavController().navigate(R.id.action_categoryListFragment_to_purchaseHistoryFragment)
         }
-
+        binding.btnCart.setOnClickListener {
+            findNavController().navigate(R.id.action_categoryListFragment_to_ShoppingCartFragment)
+        }
 
         (requireActivity() as? AppCompatActivity)?.apply {
             setSupportActionBar(binding.toolbar)
@@ -63,14 +65,8 @@ class CategoryListFragment : Fragment() {
         }
 
         vm.loadAllCategories()
-        super.onViewCreated(view, savedInstanceState)
 
-        val shoppingIcon = view.findViewById<ImageView>(R.id.toolbar_icon)
 
-        shoppingIcon.setOnClickListener {
-            // Μετάβαση στο καλάθι
-            findNavController().navigate(R.id.action_categoryListFragment_to_shoppingCartFragment)
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

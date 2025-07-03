@@ -3140,9 +3140,9 @@ id action_bar_root
 id action_bar_spinner
 id action_bar_subtitle
 id action_bar_title
+id action_categoryListFragment_to_ShoppingCartFragment
 id action_categoryListFragment_to_productListFragment
 id action_categoryListFragment_to_purchaseHistoryFragment
-id action_categoryListFragment_to_shoppingCartFragment
 id action_container
 id action_context_bar
 id action_divider
@@ -3182,6 +3182,7 @@ id bottomBar
 id bounce
 id btnAdd
 id btnAddDetail
+id btnCart
 id btnDecrease
 id btnDecreaseDetail
 id btnDelete
@@ -3191,6 +3192,7 @@ id btnIncrease
 id btnIncreaseDetail
 id btnOrder
 id btnRemove
+id btnWishlist
 id buttonPanel
 id cancel_button
 id cartBanner
@@ -3266,7 +3268,6 @@ id enterAlwaysCollapsed
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
-id fabHistory
 id fade
 id fill
 id fill_horizontal
