@@ -18,6 +18,8 @@ public class FragmentCategoryListBindingImpl extends FragmentCategoryListBinding
         sViewsWithIds.put(R.id.toolbar_icon, 2);
         sViewsWithIds.put(R.id.toolbar_title, 3);
         sViewsWithIds.put(R.id.rvCategories, 4);
+        sViewsWithIds.put(R.id.fabHistory, 5);
+        sViewsWithIds.put(R.id.btnHistory, 6);
     }
     // views
     @NonNull
@@ -28,10 +30,12 @@ public class FragmentCategoryListBindingImpl extends FragmentCategoryListBinding
     // Inverse Binding Event Handlers
 
     public FragmentCategoryListBindingImpl(@Nullable androidx.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
-        this(bindingComponent, root, mapBindings(bindingComponent, root, 5, sIncludes, sViewsWithIds));
+        this(bindingComponent, root, mapBindings(bindingComponent, root, 7, sIncludes, sViewsWithIds));
     }
     private FragmentCategoryListBindingImpl(androidx.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
         super(bindingComponent, root, 0
+            , (android.widget.ImageView) bindings[6]
+            , (com.google.android.material.floatingactionbutton.FloatingActionButton) bindings[5]
             , (androidx.recyclerview.widget.RecyclerView) bindings[4]
             , (androidx.appcompat.widget.Toolbar) bindings[1]
             , (android.widget.ImageView) bindings[2]

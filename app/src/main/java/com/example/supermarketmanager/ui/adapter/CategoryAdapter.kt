@@ -7,7 +7,7 @@ import com.example.supermarketmanager.data.entities.CategoryEntity
 import com.example.supermarketmanager.databinding.ItemCategoryBinding
 
 class CategoryAdapter(
-    private val onClick: (CategoryEntity) -> Unit // 🔁 Πέρασμα ολόκληρης κατηγορίας
+    private val onClick: (CategoryEntity) -> Unit
 ) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     private var categories: List<CategoryEntity> = emptyList()

@@ -4,23 +4,41 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/categoryListFragment">
 
+    <!-- ──────────────────────────
+         Category list (start screen)
+         ────────────────────────── -->
     <fragment
         android:id="@+id/categoryListFragment"
         android:name="com.example.supermarketmanager.ui.fragment.CategoryListFragment"
         android:label="@string/title_categories">
 
-        <!-- Υπάρχουσα μετάβαση -->
+        <!-- To product list -->
         <action
             android:id="@+id/action_categoryListFragment_to_productListFragment"
-            app:destination="@id/productListFragment"
-            app:popUpToInclusive="false" />
+            app:destination="@id/productListFragment" />
 
-        <!-- Νέα μετάβαση προς καλάθι -->
+        <!-- To shopping cart -->
         <action
             android:id="@+id/action_categoryListFragment_to_shoppingCartFragment"
             app:destination="@id/shoppingCartFragment" />
+
+        <!-- ✅ NEW: to purchase history -->
+        <action
+            android:id="@+id/action_categoryListFragment_to_purchaseHistoryFragment"
+            app:destination="@id/purchaseHistoryFragment" />
     </fragment>
 
+    <!-- ──────────────────────────
+         Purchase history
+         ────────────────────────── -->
+    <fragment
+        android:id="@+id/purchaseHistoryFragment"
+        android:name="com.example.supermarketmanager.ui.fragment.PurchaseHistoryFragment"
+        android:label="@string/title_purchase_history" />
+
+    <!-- ──────────────────────────
+         Product list (per category)
+         ────────────────────────── -->
     <fragment
         android:id="@+id/productListFragment"
         android:name="com.example.supermarketmanager.ui.fragment.ProductListFragment"
@@ -43,6 +61,9 @@
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
+    <!-- ──────────────────────────
+         Product detail
+         ────────────────────────── -->
     <fragment
         android:id="@+id/productDetailFragment"
         android:name="com.example.supermarketmanager.ui.fragment.ProductDetailFragment"
@@ -52,25 +73,20 @@
             app:argType="integer" />
     </fragment>
 
-    <fragment
-        android:id="@+id/shoppingListFragment"
-        android:name="com.example.supermarketmanager.ui.fragment.ShoppingCartFragment"
-        android:label="@string/title_shopping_list" />
-
-    <fragment
-        android:id="@+id/wishlistFragment"
-        android:name="com.example.supermarketmanager.ui.fragment.WishlistFragment"
-        android:label="@string/title_wishlist" />
-
-    <fragment
-        android:id="@+id/purchaseHistoryFragment"
-        android:name="com.example.supermarketmanager.ui.fragment.PurchaseHistoryFragment"
-        android:label="@string/title_purchase_history" />
-
-    <!-- ✅ Νέο Fragment για καλάθι -->
+    <!-- ──────────────────────────
+         Shopping cart
+         ────────────────────────── -->
     <fragment
         android:id="@+id/shoppingCartFragment"
         android:name="com.example.supermarketmanager.ui.fragment.ShoppingCartFragment"
         android:label="Καλάθι" />
+
+    <!-- ──────────────────────────
+         Wishlist
+         ────────────────────────── -->
+    <fragment
+        android:id="@+id/wishlistFragment"
+        android:name="com.example.supermarketmanager.ui.fragment.WishlistFragment"
+        android:label="@string/title_wishlist" />
 
 </navigation>

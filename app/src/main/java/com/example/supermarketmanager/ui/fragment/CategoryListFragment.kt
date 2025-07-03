@@ -44,6 +44,11 @@ class CategoryListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.btnHistory.setOnClickListener {
+            findNavController().navigate(R.id.action_categoryListFragment_to_purchaseHistoryFragment)
+        }
+
+
         (requireActivity() as? AppCompatActivity)?.apply {
             setSupportActionBar(binding.toolbar)
             supportActionBar?.title = "PEPE MARKET"

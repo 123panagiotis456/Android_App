@@ -10,9 +10,12 @@ import androidx.room.RoomSQLiteQuery;
 import androidx.room.util.CursorUtil;
 import androidx.room.util.DBUtil;
 import androidx.sqlite.db.SupportSQLiteStatement;
+import com.example.supermarketmanager.data.entities.Converters;
 import com.example.supermarketmanager.data.entities.PurchaseHistoryEntity;
 import java.lang.Class;
+import java.lang.Double;
 import java.lang.Exception;
+import java.lang.Integer;
 import java.lang.Object;
 import java.lang.Override;
 import java.lang.String;
@@ -32,22 +35,41 @@ public final class PurchaseHistoryDao_Impl implements PurchaseHistoryDao {
 
   private final EntityInsertionAdapter<PurchaseHistoryEntity> __insertionAdapterOfPurchaseHistoryEntity;
 
+  private final Converters __converters = new Converters();
+
   public PurchaseHistoryDao_Impl(@NonNull final RoomDatabase __db) {
     this.__db = __db;
     this.__insertionAdapterOfPurchaseHistoryEntity = new EntityInsertionAdapter<PurchaseHistoryEntity>(__db) {
       @Override
       @NonNull
       protected String createQuery() {
-        return "INSERT OR REPLACE INTO `purchase_history` (`id`,`shoppingListId`,`timestamp`,`totalCost`) VALUES (nullif(?, 0),?,?,?)";
+        return "INSERT OR REPLACE INTO `purchase_history` (`id`,`timestamp`,`totalCost`,`productIds`,`prices`,`quantities`) VALUES (nullif(?, 0),?,?,?,?,?)";
       }
 
       @Override
       protected void bind(@NonNull final SupportSQLiteStatement statement,
           @NonNull final PurchaseHistoryEntity entity) {
         statement.bindLong(1, entity.getId());
-        statement.bindLong(2, entity.getShoppingListId());
-        statement.bindLong(3, entity.getTimestamp());
-        statement.bindDouble(4, entity.getTotalCost());
+        statement.bindLong(2, entity.getTimestamp());
+        statement.bindDouble(3, entity.getTotalCost());
+        final String _tmp = __converters.fromIntList(entity.getProductIds());
+        if (_tmp == null) {
+          statement.bindNull(4);
+        } else {
+          statement.bindString(4, _tmp);
+        }
+        final String _tmp_1 = __converters.fromDoubleList(entity.getPrices());
+        if (_tmp_1 == null) {
+          statement.bindNull(5);
+        } else {
+          statement.bindString(5, _tmp_1);
+        }
+        final String _tmp_2 = __converters.fromIntList(entity.getQuantities());
+        if (_tmp_2 == null) {
+          statement.bindNull(6);
+        } else {
+          statement.bindString(6, _tmp_2);
+        }
       }
     };
   }
@@ -83,21 +105,45 @@ public final class PurchaseHistoryDao_Impl implements PurchaseHistoryDao {
         final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
         try {
           final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
-          final int _cursorIndexOfShoppingListId = CursorUtil.getColumnIndexOrThrow(_cursor, "shoppingListId");
           final int _cursorIndexOfTimestamp = CursorUtil.getColumnIndexOrThrow(_cursor, "timestamp");
           final int _cursorIndexOfTotalCost = CursorUtil.getColumnIndexOrThrow(_cursor, "totalCost");
+          final int _cursorIndexOfProductIds = CursorUtil.getColumnIndexOrThrow(_cursor, "productIds");
+          final int _cursorIndexOfPrices = CursorUtil.getColumnIndexOrThrow(_cursor, "prices");
+          final int _cursorIndexOfQuantities = CursorUtil.getColumnIndexOrThrow(_cursor, "quantities");
           final List<PurchaseHistoryEntity> _result = new ArrayList<PurchaseHistoryEntity>(_cursor.getCount());
           while (_cursor.moveToNext()) {
             final PurchaseHistoryEntity _item;
             final int _tmpId;
             _tmpId = _cursor.getInt(_cursorIndexOfId);
-            final int _tmpShoppingListId;
-            _tmpShoppingListId = _cursor.getInt(_cursorIndexOfShoppingListId);
             final long _tmpTimestamp;
             _tmpTimestamp = _cursor.getLong(_cursorIndexOfTimestamp);
             final double _tmpTotalCost;
             _tmpTotalCost = _cursor.getDouble(_cursorIndexOfTotalCost);
-            _item = new PurchaseHistoryEntity(_tmpId,_tmpShoppingListId,_tmpTimestamp,_tmpTotalCost);
+            final List<Integer> _tmpProductIds;
+            final String _tmp;
+            if (_cursor.isNull(_cursorIndexOfProductIds)) {
+              _tmp = null;
+            } else {
+              _tmp = _cursor.getString(_cursorIndexOfProductIds);
+            }
+            _tmpProductIds = __converters.toIntList(_tmp);
+            final List<Double> _tmpPrices;
+            final String _tmp_1;
+            if (_cursor.isNull(_cursorIndexOfPrices)) {
+              _tmp_1 = null;
+            } else {
+              _tmp_1 = _cursor.getString(_cursorIndexOfPrices);
+            }
+            _tmpPrices = __converters.toDoubleList(_tmp_1);
+            final List<Integer> _tmpQuantities;
+            final String _tmp_2;
+            if (_cursor.isNull(_cursorIndexOfQuantities)) {
+              _tmp_2 = null;
+            } else {
+              _tmp_2 = _cursor.getString(_cursorIndexOfQuantities);
+            }
+            _tmpQuantities = __converters.toIntList(_tmp_2);
+            _item = new PurchaseHistoryEntity(_tmpId,_tmpTimestamp,_tmpTotalCost,_tmpProductIds,_tmpPrices,_tmpQuantities);
             _result.add(_item);
           }
           return _result;

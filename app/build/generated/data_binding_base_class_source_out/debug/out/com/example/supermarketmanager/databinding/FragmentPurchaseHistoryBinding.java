@@ -4,8 +4,11 @@ package com.example.supermarketmanager.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,10 +20,23 @@ public abstract class FragmentPurchaseHistoryBinding extends ViewDataBinding {
   @NonNull
   public final RecyclerView rvHistory;
 
+  @NonNull
+  public final Toolbar toolbarHistory;
+
+  @NonNull
+  public final ImageView toolbarIconHistory;
+
+  @NonNull
+  public final TextView toolbarTitleHistory;
+
   protected FragmentPurchaseHistoryBinding(Object _bindingComponent, View _root,
-      int _localFieldCount, RecyclerView rvHistory) {
+      int _localFieldCount, RecyclerView rvHistory, Toolbar toolbarHistory,
+      ImageView toolbarIconHistory, TextView toolbarTitleHistory) {
     super(_bindingComponent, _root, _localFieldCount);
     this.rvHistory = rvHistory;
+    this.toolbarHistory = toolbarHistory;
+    this.toolbarIconHistory = toolbarIconHistory;
+    this.toolbarTitleHistory = toolbarTitleHistory;
   }
 
   @NonNull

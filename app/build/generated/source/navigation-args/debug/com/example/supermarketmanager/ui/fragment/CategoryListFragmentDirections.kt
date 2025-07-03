@@ -30,5 +30,8 @@ public class CategoryListFragmentDirections private constructor() {
 
     public fun actionCategoryListFragmentToShoppingCartFragment(): NavDirections =
         ActionOnlyNavDirections(R.id.action_categoryListFragment_to_shoppingCartFragment)
+
+    public fun actionCategoryListFragmentToPurchaseHistoryFragment(): NavDirections =
+        ActionOnlyNavDirections(R.id.action_categoryListFragment_to_purchaseHistoryFragment)
   }
 }

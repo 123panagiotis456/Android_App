@@ -13,10 +13,17 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.supermarketmanager.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.lang.Deprecated;
 import java.lang.Object;
 
 public abstract class FragmentCategoryListBinding extends ViewDataBinding {
+  @NonNull
+  public final ImageView btnHistory;
+
+  @NonNull
+  public final FloatingActionButton fabHistory;
+
   @NonNull
   public final RecyclerView rvCategories;
 
@@ -30,8 +37,11 @@ public abstract class FragmentCategoryListBinding extends ViewDataBinding {
   public final TextView toolbarTitle;
 
   protected FragmentCategoryListBinding(Object _bindingComponent, View _root, int _localFieldCount,
-      RecyclerView rvCategories, Toolbar toolbar, ImageView toolbarIcon, TextView toolbarTitle) {
+      ImageView btnHistory, FloatingActionButton fabHistory, RecyclerView rvCategories,
+      Toolbar toolbar, ImageView toolbarIcon, TextView toolbarTitle) {
     super(_bindingComponent, _root, _localFieldCount);
+    this.btnHistory = btnHistory;
+    this.fabHistory = fabHistory;
     this.rvCategories = rvCategories;
     this.toolbar = toolbar;
     this.toolbarIcon = toolbarIcon;

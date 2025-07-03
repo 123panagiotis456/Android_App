@@ -4,16 +4,16 @@
         "source": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-6:\\drawable\\offer_red_bg.xml"
     },
     {
-        "merged": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-merged_res-4:\\mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-6:\\mipmap-mdpi\\ic_launcher_round.webp"
+        "merged": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-merged_res-4:\\drawable_ic_arrow_back.xml.flat",
+        "source": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-6:\\drawable\\ic_arrow_back.xml"
     },
     {
         "merged": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-merged_res-4:\\drawable_ic_fruits.xml.flat",
         "source": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-6:\\drawable\\ic_fruits.xml"
     },
     {
-        "merged": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-merged_res-4:\\drawable_ic_arrow_back.xml.flat",
-        "source": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-6:\\drawable\\ic_arrow_back.xml"
+        "merged": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-merged_res-4:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-6:\\mipmap-mdpi\\ic_launcher_round.webp"
     },
     {
         "merged": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-merged_res-4:\\drawable_ic_shopping.xml.flat",
@@ -44,20 +44,16 @@
         "source": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-6:\\drawable\\ic_favorite.xml"
     },
     {
-        "merged": "com.example.supermarketmanager.app-merged_res-4:/layout_fragment_shopping_cart.xml.flat",
-        "source": "com.example.supermarketmanager.app-main-6:/layout/fragment_shopping_cart.xml"
-    },
-    {
-        "merged": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-merged_res-4:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-6:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+        "merged": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-merged_res-4:\\drawable_ic_categories.xml.flat",
+        "source": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-6:\\drawable\\ic_categories.xml"
     },
     {
         "merged": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-merged_res-4:\\menu_menu_category.xml.flat",
         "source": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-6:\\menu\\menu_category.xml"
     },
     {
-        "merged": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-merged_res-4:\\drawable_ic_categories.xml.flat",
-        "source": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-6:\\drawable\\ic_categories.xml"
+        "merged": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-merged_res-4:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-6:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
     },
     {
         "merged": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-merged_res-4:\\drawable_ic_vegetables.xml.flat",
@@ -156,6 +152,10 @@
         "source": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-6:\\drawable\\ic_favorite_border.xml"
     },
     {
+        "merged": "com.example.supermarketmanager.app-merged_res-4:/layout_fragment_purchase_history.xml.flat",
+        "source": "com.example.supermarketmanager.app-main-6:/layout/fragment_purchase_history.xml"
+    },
+    {
         "merged": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-merged_res-4:\\mipmap-mdpi_ic_launcher.webp.flat",
         "source": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-6:\\mipmap-mdpi\\ic_launcher.webp"
     },
@@ -228,6 +228,10 @@
         "source": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-6:\\mipmap-xxxhdpi\\ic_launcher.webp"
     },
     {
+        "merged": "com.example.supermarketmanager.app-merged_res-4:/layout_fragment_category_list.xml.flat",
+        "source": "com.example.supermarketmanager.app-main-6:/layout/fragment_category_list.xml"
+    },
+    {
         "merged": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-merged_res-4:\\drawable_placeholder_image.xml.flat",
         "source": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-6:\\drawable\\placeholder_image.xml"
     },
@@ -256,12 +260,12 @@
         "source": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-6:\\mipmap-hdpi\\ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-merged_res-4:\\layout_fragment_wishlist.xml.flat",
-        "source": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-6:\\layout\\fragment_wishlist.xml"
-    },
-    {
         "merged": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-merged_res-4:\\navigation_nav_graph.xml.flat",
         "source": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-6:\\navigation\\nav_graph.xml"
+    },
+    {
+        "merged": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-merged_res-4:\\layout_fragment_wishlist.xml.flat",
+        "source": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-6:\\layout\\fragment_wishlist.xml"
     },
     {
         "merged": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-merged_res-4:\\mipmap-hdpi_ic_launcher_round.webp.flat",

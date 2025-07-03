@@ -3141,6 +3141,7 @@ id action_bar_spinner
 id action_bar_subtitle
 id action_bar_title
 id action_categoryListFragment_to_productListFragment
+id action_categoryListFragment_to_purchaseHistoryFragment
 id action_categoryListFragment_to_shoppingCartFragment
 id action_container
 id action_context_bar
@@ -3185,6 +3186,7 @@ id btnDecrease
 id btnDecreaseDetail
 id btnDelete
 id btnFavorite
+id btnHistory
 id btnIncrease
 id btnIncreaseDetail
 id btnOrder
@@ -3264,6 +3266,7 @@ id enterAlwaysCollapsed
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
+id fabHistory
 id fade
 id fill
 id fill_horizontal
@@ -3560,9 +3563,12 @@ id titleDividerNoCustom
 id title_template
 id toggle
 id toolbar
+id toolbarHistory
 id toolbarTitle
 id toolbar_icon
+id toolbar_icon_history
 id toolbar_title
+id toolbar_title_history
 id top
 id topFrame
 id topPanel
@@ -3896,6 +3902,7 @@ string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
 string favorite
 string hide_bottom_view_on_scroll_behavior
+string history_icon
 string icon_content_description
 string item_view_role_description
 string label_description
@@ -4026,6 +4033,7 @@ string title_products
 string title_purchase_history
 string title_shopping_list
 string title_wishlist
+string toolbar_history_title
 string toolbar_title
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light

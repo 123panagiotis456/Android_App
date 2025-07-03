@@ -55,5 +55,26 @@
             android:padding="8dp"
             android:clipToPadding="false"
             tools:listitem="@layout/item_category" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabHistory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_history"
+            android:contentDescription="@string/history_icon"
+            app:tint="@android:color/white" />
+        <ImageView
+            android:id="@+id/btnHistory"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_history"
+            android:contentDescription="@string/title_purchase_history"
+            android:tint="@android:color/white" />
     </LinearLayout>
+
 </layout>

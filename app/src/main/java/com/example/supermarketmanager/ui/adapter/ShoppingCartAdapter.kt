@@ -11,7 +11,7 @@ import com.example.supermarketmanager.data.models.ShoppingCartItem
 
 class ShoppingCartAdapter(
     private val items: MutableList<ShoppingCartItem> = mutableListOf(),
-    private val onAddClick: (ShoppingCartItem) -> Unit // ✅ ΠΡΕΠΕΙ ΝΑ ΥΠΑΡΧΕΙ ΑΥΤΟ
+    private val onAddClick: (ShoppingCartItem) -> Unit
 ) : RecyclerView.Adapter<ShoppingCartAdapter.CartViewHolder>() {
 
 

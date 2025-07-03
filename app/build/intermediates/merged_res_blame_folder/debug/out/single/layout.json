@@ -36,12 +36,12 @@
         "source": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-6:\\layout\\item_product.xml"
     },
     {
-        "merged": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-mergeDebugResources-3:\\layout\\item_purchase_history.xml",
-        "source": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-6:\\layout\\item_purchase_history.xml"
+        "merged": "com.example.supermarketmanager.app-mergeDebugResources-3:/layout/fragment_purchase_history.xml",
+        "source": "com.example.supermarketmanager.app-main-6:/layout/fragment_purchase_history.xml"
     },
     {
-        "merged": "com.example.supermarketmanager.app-mergeDebugResources-3:/layout/fragment_shopping_cart.xml",
-        "source": "com.example.supermarketmanager.app-main-6:/layout/fragment_shopping_cart.xml"
+        "merged": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-mergeDebugResources-3:\\layout\\item_purchase_history.xml",
+        "source": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-6:\\layout\\item_purchase_history.xml"
     },
     {
         "merged": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-mergeDebugResources-3:\\layout\\item_cart.xml",
@@ -50,6 +50,10 @@
     {
         "merged": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-mergeDebugResources-3:\\layout\\item_wishlist_item.xml",
         "source": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-6:\\layout\\item_wishlist_item.xml"
+    },
+    {
+        "merged": "com.example.supermarketmanager.app-mergeDebugResources-3:/layout/fragment_category_list.xml",
+        "source": "com.example.supermarketmanager.app-main-6:/layout/fragment_category_list.xml"
     },
     {
         "merged": "C:\\Users\\p4tr10t\\scoop\\apps\\gradle\\current\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-mergeDebugResources-3:\\layout\\fragment_wishlist.xml",

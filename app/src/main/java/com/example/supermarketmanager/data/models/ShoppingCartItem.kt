@@ -1,9 +1,11 @@
 package com.example.supermarketmanager.data.models
 
+import androidx.room.PrimaryKey
 import com.example.supermarketmanager.data.entities.ShoppingListItemEntity
 
 
 data class ShoppingCartItem(
+    @PrimaryKey(autoGenerate = true)
     val id: Int,
     val productId: Int,
     val quantity: Int,

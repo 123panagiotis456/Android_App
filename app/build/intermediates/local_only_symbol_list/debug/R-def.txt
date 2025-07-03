@@ -53,6 +53,7 @@ drawable rounded_border
 drawable rounded_button_background
 drawable shopping_basket
 id action_categoryListFragment_to_productListFragment
+id action_categoryListFragment_to_purchaseHistoryFragment
 id action_categoryListFragment_to_shoppingCartFragment
 id action_productListFragment_to_productDetailFragment
 id action_search
@@ -63,6 +64,7 @@ id btnDecrease
 id btnDecreaseDetail
 id btnDelete
 id btnFavorite
+id btnHistory
 id btnIncrease
 id btnIncreaseDetail
 id btnOrder
@@ -70,6 +72,7 @@ id btnRemove
 id cartBanner
 id categoryListFragment
 id dg_price_card
+id fabHistory
 id ivAdd
 id ivCategoryIcon
 id ivDetailImage
@@ -93,9 +96,12 @@ id rvWishlist
 id shoppingCartFragment
 id shoppingListFragment
 id toolbar
+id toolbarHistory
 id toolbarTitle
 id toolbar_icon
+id toolbar_icon_history
 id toolbar_title
+id toolbar_title_history
 id topFrame
 id tvCartQuantity
 id tvCartTotal
@@ -154,6 +160,7 @@ string cd_increase
 string cd_product_image
 string detail_offer
 string favorite
+string history_icon
 string label_description
 string label_ingredients
 string label_nutritional_values
@@ -168,5 +175,6 @@ string title_products
 string title_purchase_history
 string title_shopping_list
 string title_wishlist
+string toolbar_history_title
 string toolbar_title
 style Theme.SupermarketManager

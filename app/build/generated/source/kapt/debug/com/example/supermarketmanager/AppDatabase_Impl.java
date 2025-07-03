@@ -60,9 +60,9 @@ public final class AppDatabase_Impl extends AppDatabase {
         db.execSQL("CREATE INDEX IF NOT EXISTS `index_shopping_list_productId` ON `shopping_list` (`productId`)");
         db.execSQL("CREATE TABLE IF NOT EXISTS `wishlist_items` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `productId` INTEGER NOT NULL, FOREIGN KEY(`productId`) REFERENCES `products`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )");
         db.execSQL("CREATE INDEX IF NOT EXISTS `index_wishlist_items_productId` ON `wishlist_items` (`productId`)");
-        db.execSQL("CREATE TABLE IF NOT EXISTS `purchase_history` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `shoppingListId` INTEGER NOT NULL, `timestamp` INTEGER NOT NULL, `totalCost` REAL NOT NULL)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `purchase_history` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `timestamp` INTEGER NOT NULL, `totalCost` REAL NOT NULL, `productIds` TEXT NOT NULL, `prices` TEXT NOT NULL, `quantities` TEXT NOT NULL)");
         db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1968688a95025c1ca8d041ae94a5f84d')");
+        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7b2b506c7fc070b3f500e8eaa3146e8f')");
       }
 
       @Override
@@ -181,11 +181,13 @@ public final class AppDatabase_Impl extends AppDatabase {
                   + " Expected:\n" + _infoWishlistItems + "\n"
                   + " Found:\n" + _existingWishlistItems);
         }
-        final HashMap<String, TableInfo.Column> _columnsPurchaseHistory = new HashMap<String, TableInfo.Column>(4);
+        final HashMap<String, TableInfo.Column> _columnsPurchaseHistory = new HashMap<String, TableInfo.Column>(6);
         _columnsPurchaseHistory.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsPurchaseHistory.put("shoppingListId", new TableInfo.Column("shoppingListId", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsPurchaseHistory.put("timestamp", new TableInfo.Column("timestamp", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsPurchaseHistory.put("totalCost", new TableInfo.Column("totalCost", "REAL", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsPurchaseHistory.put("productIds", new TableInfo.Column("productIds", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsPurchaseHistory.put("prices", new TableInfo.Column("prices", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsPurchaseHistory.put("quantities", new TableInfo.Column("quantities", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         final HashSet<TableInfo.ForeignKey> _foreignKeysPurchaseHistory = new HashSet<TableInfo.ForeignKey>(0);
         final HashSet<TableInfo.Index> _indicesPurchaseHistory = new HashSet<TableInfo.Index>(0);
         final TableInfo _infoPurchaseHistory = new TableInfo("purchase_history", _columnsPurchaseHistory, _foreignKeysPurchaseHistory, _indicesPurchaseHistory);
@@ -197,7 +199,7 @@ public final class AppDatabase_Impl extends AppDatabase {
         }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "1968688a95025c1ca8d041ae94a5f84d", "d8aae16a5a315af47ac35714abbd9dbb");
+    }, "7b2b506c7fc070b3f500e8eaa3146e8f", "be07ad9dc4e430e8ddc5b082fc2f0062");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(config.context).name(config.name).callback(_openCallback).build();
     final SupportSQLiteOpenHelper _helper = config.sqliteOpenHelperFactory.create(_sqliteConfig);
     return _helper;

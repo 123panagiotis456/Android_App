@@ -1,8 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-    <data/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvHistory"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data />
+
+    <!-- Root container -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#262626"
+        tools:context=".ui.purchasehistory.PurchaseHistoryFragment">
+
+        <!-- Dark toolbar -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarHistory"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#1E1E1E"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <!-- Toolbar content in a FrameLayout for easy centering -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!-- Left icon (clickable if you want to handle it) -->
+                <ImageView
+                    android:id="@+id/toolbar_icon_history"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="start|center_vertical"
+                    android:src="@drawable/ic_history"
+                    android:contentDescription="@string/history_icon"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+                <!-- Centered title -->
+                <TextView
+                    android:id="@+id/toolbar_title_history"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/toolbar_history_title"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textSize="20sp" />
+            </FrameLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+        <!-- History list -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvHistory"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:padding="8dp"
+            tools:listitem="@layout/itempurchasehistory" />
+
+
+
+    </LinearLayout>
+
+
 </layout>
