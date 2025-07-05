@@ -43,7 +43,7 @@ public final class PurchaseHistoryDao_Impl implements PurchaseHistoryDao {
       @Override
       @NonNull
       protected String createQuery() {
-        return "INSERT OR REPLACE INTO `purchase_history` (`id`,`timestamp`,`totalCost`,`productIds`,`prices`,`quantities`) VALUES (nullif(?, 0),?,?,?,?,?)";
+        return "INSERT OR ABORT INTO `purchase_history` (`id`,`timestamp`,`totalCost`,`productIds`,`prices`,`quantities`) VALUES (nullif(?, 0),?,?,?,?,?)";
       }
 
       @Override
@@ -75,7 +75,7 @@ public final class PurchaseHistoryDao_Impl implements PurchaseHistoryDao {
   }
 
   @Override
-  public Object insertHistory(final PurchaseHistoryEntity history,
+  public Object insert(final PurchaseHistoryEntity purchaseHistoryEntity,
       final Continuation<? super Unit> $completion) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
@@ -83,7 +83,7 @@ public final class PurchaseHistoryDao_Impl implements PurchaseHistoryDao {
       public Unit call() throws Exception {
         __db.beginTransaction();
         try {
-          __insertionAdapterOfPurchaseHistoryEntity.insert(history);
+          __insertionAdapterOfPurchaseHistoryEntity.insert(purchaseHistoryEntity);
           __db.setTransactionSuccessful();
           return Unit.INSTANCE;
         } finally {
@@ -95,7 +95,7 @@ public final class PurchaseHistoryDao_Impl implements PurchaseHistoryDao {
 
   @Override
   public Object getAll(final Continuation<? super List<PurchaseHistoryEntity>> $completion) {
-    final String _sql = "SELECT * FROM purchase_history";
+    final String _sql = "SELECT * FROM purchase_history ORDER BY timestamp DESC";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
     return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<List<PurchaseHistoryEntity>>() {

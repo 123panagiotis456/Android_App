@@ -14,30 +14,34 @@ public class FragmentPurchaseHistoryBindingImpl extends FragmentPurchaseHistoryB
     static {
         sIncludes = null;
         sViewsWithIds = new android.util.SparseIntArray();
-        sViewsWithIds.put(R.id.toolbarHistory, 1);
-        sViewsWithIds.put(R.id.toolbar_icon_history, 2);
-        sViewsWithIds.put(R.id.toolbar_title_history, 3);
-        sViewsWithIds.put(R.id.rvHistory, 4);
+        sViewsWithIds.put(R.id.toolbar, 1);
+        sViewsWithIds.put(R.id.toolbar_title, 2);
+        sViewsWithIds.put(R.id.recyclerViewPurchaseHistory, 3);
+        sViewsWithIds.put(R.id.btnCart, 4);
+        sViewsWithIds.put(R.id.btnHistory, 5);
+        sViewsWithIds.put(R.id.btnWishlist, 6);
     }
     // views
     @NonNull
-    private final android.widget.LinearLayout mboundView0;
+    private final android.widget.FrameLayout mboundView0;
     // variables
     // values
     // listeners
     // Inverse Binding Event Handlers
 
     public FragmentPurchaseHistoryBindingImpl(@Nullable androidx.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
-        this(bindingComponent, root, mapBindings(bindingComponent, root, 5, sIncludes, sViewsWithIds));
+        this(bindingComponent, root, mapBindings(bindingComponent, root, 7, sIncludes, sViewsWithIds));
     }
     private FragmentPurchaseHistoryBindingImpl(androidx.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
         super(bindingComponent, root, 0
-            , (androidx.recyclerview.widget.RecyclerView) bindings[4]
+            , (android.widget.LinearLayout) bindings[4]
+            , (android.widget.LinearLayout) bindings[5]
+            , (android.widget.LinearLayout) bindings[6]
+            , (androidx.recyclerview.widget.RecyclerView) bindings[3]
             , (androidx.appcompat.widget.Toolbar) bindings[1]
-            , (android.widget.ImageView) bindings[2]
-            , (android.widget.TextView) bindings[3]
+            , (android.widget.TextView) bindings[2]
             );
-        this.mboundView0 = (android.widget.LinearLayout) bindings[0];
+        this.mboundView0 = (android.widget.FrameLayout) bindings[0];
         this.mboundView0.setTag(null);
         setRootTag(root);
         // listeners

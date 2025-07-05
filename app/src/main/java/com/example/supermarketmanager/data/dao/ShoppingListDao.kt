@@ -23,18 +23,11 @@ interface ShoppingListDao {
     @Query("DELETE FROM shopping_list")
     suspend fun clear()
 
-    @Query(
-        """
-        SELECT shopping_list.*, 
-               products.name, 
-               products.pricePerUnit, 
-               products.unit, 
-               products.imageDrawable, 
-               products.offer 
-        FROM shopping_list
-        INNER JOIN products ON shopping_list.productId = products.id
-        """
-    )
+    @Query("""
+    SELECT shopping_list.*, products.name, products.pricePerUnit, products.unit, products.imageDrawable, products.offer
+    FROM shopping_list
+    INNER JOIN products ON shopping_list.productId = products.id
+""")
     fun getItemsWithProductDetails(): Flow<List<ShoppingCartItem>>
 
     // ✅ Προσθήκες για update ποσότητας
@@ -43,4 +36,5 @@ interface ShoppingListDao {
 
     @Query("UPDATE shopping_list SET quantity = :newQuantity WHERE productId = :productId")
     suspend fun updateQuantity(productId: Int, newQuantity: Int)
+
 }
