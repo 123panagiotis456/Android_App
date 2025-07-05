@@ -53,6 +53,7 @@ drawable ic_wishlist
 drawable milk_carton_svgrepo_com
 drawable offer_background
 drawable offer_red_bg
+drawable pepemarket
 drawable placeholder_image
 drawable quantity_box_bg
 drawable quantity_button_bg
@@ -106,6 +107,7 @@ id rvProducts
 id rvWishlist
 id shoppingCartFragment
 id shoppingListFragment
+id splash_logo
 id toolbar
 id toolbarTitle
 id toolbar_icon
@@ -136,6 +138,7 @@ id tvTitle
 id tvTotalCost
 id wishlistFragment
 layout activity_main
+layout activity_splash
 layout fragment_category_list
 layout fragment_product_detail
 layout fragment_product_list
@@ -182,3 +185,4 @@ string title_wishlist
 string toolbar_history_title
 string toolbar_title
 style Theme.SupermarketManager
+style Theme.SupermarketManager.Splash

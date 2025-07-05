@@ -959,6 +959,7 @@ attr popupMenuBackground
 attr popupMenuStyle
 attr popupTheme
 attr popupWindowStyle
+attr postSplashScreenTheme
 attr prefixText
 attr prefixTextAppearance
 attr prefixTextColor
@@ -1042,6 +1043,7 @@ attr spanCount
 attr spinBars
 attr spinnerDropDownItemStyle
 attr spinnerStyle
+attr splashScreenIconSize
 attr splitLayoutDirection
 attr splitMinSmallestWidth
 attr splitMinWidth
@@ -1277,6 +1279,10 @@ attr windowFixedWidthMinor
 attr windowMinWidthMajor
 attr windowMinWidthMinor
 attr windowNoTitle
+attr windowSplashScreenAnimatedIcon
+attr windowSplashScreenAnimationDuration
+attr windowSplashScreenBackground
+attr windowSplashScreenIconBackgroundColor
 attr yearSelectedStyle
 attr yearStyle
 attr yearTodayStyle
@@ -2858,6 +2864,13 @@ dimen notification_subtext_size
 dimen notification_top_pad
 dimen notification_top_pad_large_text
 dimen sliding_pane_detail_pane_width
+dimen splashscreen_icon_mask_size_no_background
+dimen splashscreen_icon_mask_size_with_background
+dimen splashscreen_icon_mask_stroke_no_background
+dimen splashscreen_icon_mask_stroke_with_background
+dimen splashscreen_icon_size
+dimen splashscreen_icon_size_no_background
+dimen splashscreen_icon_size_with_background
 dimen tooltip_corner_radius
 dimen tooltip_horizontal_padding
 dimen tooltip_margin
@@ -2967,6 +2980,8 @@ drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
 drawable category_image
 drawable circle_black
+drawable compat_splash_screen
+drawable compat_splash_screen_no_icon_background
 drawable design_fab_background
 drawable design_ic_visibility
 drawable design_ic_visibility_off
@@ -3008,6 +3023,7 @@ drawable ic_shopping
 drawable ic_snacks
 drawable ic_vegetables
 drawable ic_wishlist
+drawable icon_background
 drawable m3_avd_hide_password
 drawable m3_avd_show_password
 drawable m3_bottom_sheet_drag_handle
@@ -3083,6 +3099,7 @@ drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable offer_background
 drawable offer_red_bg
+drawable pepemarket
 drawable placeholder_image
 drawable quantity_box_bg
 drawable quantity_button_bg
@@ -3518,6 +3535,8 @@ id snap
 id snapMargins
 id spacer
 id special_effects_controller_view_tag
+id splash_logo
+id splashscreen_icon_view
 id spline
 id split_action_bar
 id spread
@@ -3637,6 +3656,7 @@ integer bottom_sheet_slide_duration
 integer cancel_button_image_alpha
 integer config_navAnimTime
 integer config_tooltipAnimTime
+integer default_icon_animation_duration
 integer design_snackbar_text_max_lines
 integer design_tab_indicator_anim_duration_ms
 integer hide_password_duration
@@ -3746,6 +3766,7 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_main
+layout activity_splash
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
@@ -3836,6 +3857,7 @@ layout notification_template_part_time
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
+layout splash_screen_view
 layout support_simple_spinner_dropdown_item
 menu bottom_nav_menu
 menu menu_category
@@ -4159,6 +4181,9 @@ style Base_Theme_MaterialComponents_Light_Dialog_Bridge
 style Base_Theme_MaterialComponents_Light_Dialog_FixedSize
 style Base_Theme_MaterialComponents_Light_Dialog_MinWidth
 style Base_Theme_MaterialComponents_Light_DialogWhenLarge
+style Base_Theme_SplashScreen
+style Base_Theme_SplashScreen_DayNight
+style Base_Theme_SplashScreen_Light
 style Base_ThemeOverlay_AppCompat
 style Base_ThemeOverlay_AppCompat_ActionBar
 style Base_ThemeOverlay_AppCompat_Dark
@@ -4326,6 +4351,10 @@ style Base_Widget_MaterialComponents_Snackbar
 style Base_Widget_MaterialComponents_TextInputEditText
 style Base_Widget_MaterialComponents_TextInputLayout
 style Base_Widget_MaterialComponents_TextView
+style Base_v21_Theme_SplashScreen
+style Base_v21_Theme_SplashScreen_Light
+style Base_v27_Theme_SplashScreen
+style Base_v27_Theme_SplashScreen_Light
 style CardView
 style CardView_Dark
 style CardView_Light
@@ -4664,7 +4693,11 @@ style Theme_MaterialComponents_Light_NoActionBar
 style Theme_MaterialComponents_Light_NoActionBar_Bridge
 style Theme_MaterialComponents_NoActionBar
 style Theme_MaterialComponents_NoActionBar_Bridge
+style Theme_SplashScreen
+style Theme_SplashScreen_Common
+style Theme_SplashScreen_IconBackground
 style Theme_SupermarketManager
+style Theme_SupermarketManager_Splash
 style ThemeOverlay_AppCompat
 style ThemeOverlay_AppCompat_ActionBar
 style ThemeOverlay_AppCompat_Dark
