@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_categoryListFragment_to_purchaseHistoryFragment"
             app:destination="@id/purchaseHistoryFragment" />
+        <action
+            android:id="@+id/action_categoryListFragment_to_WishlistFragment"
+            app:destination="@id/wishlistFragment" />
 
     </fragment>
 

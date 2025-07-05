@@ -3077,6 +3077,8 @@ drawable notify_panel_notification_icon_bg
 drawable offer_background
 drawable offer_red_bg
 drawable placeholder_image
+drawable quantity_box_bg
+drawable quantity_button_bg
 drawable quantity_circle
 drawable rounded_black
 drawable rounded_border
@@ -3141,6 +3143,7 @@ id action_bar_spinner
 id action_bar_subtitle
 id action_bar_title
 id action_categoryListFragment_to_ShoppingCartFragment
+id action_categoryListFragment_to_WishlistFragment
 id action_categoryListFragment_to_productListFragment
 id action_categoryListFragment_to_purchaseHistoryFragment
 id action_container
@@ -3310,10 +3313,8 @@ id invisible
 id inward
 id italic
 id item_touch_helper_previous_elevation
-id ivAdd
 id ivCategoryIcon
 id ivDetailImage
-id ivImage
 id ivProductImage
 id jumpToEnd
 id jumpToStart
@@ -3450,6 +3451,7 @@ id progressBar
 id progress_circular
 id progress_horizontal
 id purchaseHistoryFragment
+id quantityBox
 id quantityLayout
 id radio
 id ratio
@@ -3595,16 +3597,11 @@ id tvDetailSubtitle
 id tvDetailUnitInfo
 id tvDetailingredients
 id tvDetailnutritionalInfo
-id tvName
-id tvOffer
-id tvPrice
-id tvPricePerUnit
 id tvProductDescription
 id tvProductName
 id tvProductOffer
 id tvProductPrice
 id tvQuantity
-id tvQuantityCircle
 id tvRemainingAmount
 id tvStoreName
 id tvTitle

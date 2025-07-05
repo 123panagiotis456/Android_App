@@ -3,25 +3,27 @@ package com.example.supermarketmanager.ui.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.example.supermarketmanager.R
 import com.example.supermarketmanager.data.models.ShoppingCartItem
 
 class ShoppingCartAdapter(
     private val items: MutableList<ShoppingCartItem> = mutableListOf(),
-    private val onAddClick: (ShoppingCartItem) -> Unit
+    private val onIncreaseClick: (ShoppingCartItem) -> Unit,
+    private val onDecreaseClick: (ShoppingCartItem) -> Unit
 ) : RecyclerView.Adapter<ShoppingCartAdapter.CartViewHolder>() {
 
-
     class CartViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val nameText: TextView = view.findViewById(R.id.tvName)
-        val priceText: TextView = view.findViewById(R.id.tvPrice)
-        val pricePerUnitText: TextView = view.findViewById(R.id.tvPricePerUnit)
-        val imageView: ImageView = view.findViewById(R.id.ivImage)
-        val offerText: TextView = view.findViewById(R.id.tvOffer)
-        val addButton: ImageView = view.findViewById(R.id.ivAdd)
+        val nameText: TextView = view.findViewById(R.id.tvProductName)
+        val priceText: TextView = view.findViewById(R.id.tvProductPrice)
+        val descriptionText: TextView = view.findViewById(R.id.tvProductDescription)
+        val imageView: ImageView = view.findViewById(R.id.ivProductImage)
+        val offerText: TextView = view.findViewById(R.id.tvProductOffer)
+        val quantityText: TextView = view.findViewById(R.id.tvQuantity)
+        val btnIncrease: ImageButton = view.findViewById(R.id.btnIncrease)
+        val btnDecrease: ImageButton = view.findViewById(R.id.btnDecrease)
+        // val pricePerUnitText: TextView = view.findViewById(R.id.tvProductPricePerUnit) // Αν το προσθέσεις στο XML
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
@@ -34,7 +36,7 @@ class ShoppingCartAdapter(
         val item = items[position]
         holder.nameText.text = item.name
         holder.priceText.text = "€%.2f".format(item.pricePerUnit * item.quantity)
-        holder.pricePerUnitText.text = "%.2f€/ %s".format(item.pricePerUnit, item.unit)
+        holder.quantityText.text = item.quantity.toString()
 
         item.imageDrawable?.let {
             val context = holder.itemView.context
@@ -50,9 +52,13 @@ class ShoppingCartAdapter(
             holder.offerText.visibility = View.GONE
         }
 
-        // Κουμπί προσθήκης
-        holder.addButton.setOnClickListener {
-            onAddClick(item)
+        // Κουμπί αύξησης
+        holder.btnIncrease.setOnClickListener {
+            onIncreaseClick(item)
+        }
+        // Κουμπί μείωσης
+        holder.btnDecrease.setOnClickListener {
+            onDecreaseClick(item)
         }
     }
 
@@ -64,5 +70,4 @@ class ShoppingCartAdapter(
         notifyDataSetChanged()
     }
     fun currentItems(): List<ShoppingCartItem> = items.toList()
-
 }

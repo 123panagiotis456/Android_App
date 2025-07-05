@@ -8,8 +8,8 @@
         "source": "C:\\Users\\panag\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-58:\\layout\\item_purchase_history.xml"
     },
     {
-        "merged": "com.example.supermarketmanager.app-mergeDebugResources-55:/layout/fragment_category_list.xml",
-        "source": "com.example.supermarketmanager.app-main-58:/layout/fragment_category_list.xml"
+        "merged": "com.example.supermarketmanager.app-mergeDebugResources-55:/layout/item_cart.xml",
+        "source": "com.example.supermarketmanager.app-main-58:/layout/item_cart.xml"
     },
     {
         "merged": "C:\\Users\\panag\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-mergeDebugResources-55:\\layout\\fragment_product_list.xml",

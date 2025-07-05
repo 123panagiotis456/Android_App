@@ -33,22 +33,31 @@ class ShoppingCartFragment : Fragment() {
 
         adapter = ShoppingCartAdapter(
             mutableListOf(),
-            onAddClick = { item ->
-                // Παράδειγμα λογικής όταν πατηθεί το "+"
+            onIncreaseClick = { item ->
                 val newQuantity = item.quantity + 1
                 val updatedItem = item.copy(quantity = newQuantity)
-
                 val updatedList = adapter.currentItems().map {
                     if (it.id == item.id) updatedItem else it
                 }
-
                 adapter.updateData(updatedList)
-
-                // Αν θέλεις να ενημερώνεται και η βάση:
                 vm.updateCartItemQuantity(item.productId, newQuantity)
+            },
+            onDecreaseClick = { item ->
+                // Μείωσε ποσότητα αν είναι πάνω από 1
+                if (item.quantity > 1) {
+                    val newQuantity = item.quantity - 1
+                    val updatedItem = item.copy(quantity = newQuantity)
+                    val updatedList = adapter.currentItems().map {
+                        if (it.id == item.id) updatedItem else it
+                    }
+                    adapter.updateData(updatedList)
+                    vm.updateCartItemQuantity(item.productId, newQuantity)
+                } else {
+                    // Εδώ μπορείς να διαγράψεις το προϊόν αν θες (π.χ. αφαίρεση από το καλάθι)
+                    // vm.removeFromCart(item.productId)
+                }
             }
         )
-
 
         binding.recyclerViewCart.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.recyclerViewCart.adapter = adapter

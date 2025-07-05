@@ -72,9 +72,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Παράγγειλε"
-                    android:backgroundTint="#FF6F00"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold"
+                    android:backgroundTint="#00D69D"
+                    android:textColor="@color/black"
                     android:layout_marginEnd="4dp" />
 
                 <Button
@@ -83,8 +82,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Διαγραφή"
-                    android:backgroundTint="#2C2C2E"
-                    android:textColor="@android:color/white"
+                    android:backgroundTint="#FF0101"
+                    android:textColor="#FFFFFF"
                     android:layout_marginStart="4dp" />
             </LinearLayout>
         </LinearLayout>
