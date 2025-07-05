@@ -1312,6 +1312,7 @@ color accent_material_dark
 color accent_material_light
 color androidx_core_ripple_material_light
 color androidx_core_secondary_text_default_material_light
+color background
 color background_floating_material_dark
 color background_floating_material_light
 color background_material_dark
@@ -1332,6 +1333,9 @@ color cardview_dark_background
 color cardview_light_background
 color cardview_shadow_end_color
 color cardview_shadow_start_color
+color colorAccent
+color colorPrimary
+color colorPrimaryDark
 color design_bottom_navigation_shadow_color
 color design_box_stroke_color
 color design_dark_default_color_background
@@ -1378,6 +1382,9 @@ color error_color_material_dark
 color error_color_material_light
 color foreground_material_dark
 color foreground_material_light
+color gray_dark
+color gray_light
+color gray_medium
 color green
 color highlighted_text_material_dark
 color highlighted_text_material_light
@@ -3194,6 +3201,7 @@ id btnHistory
 id btnIncrease
 id btnIncreaseDetail
 id btnOrder
+id btnReaddToCart
 id btnRemove
 id btnWishlist
 id buttonPanel
@@ -3457,6 +3465,7 @@ id radio
 id ratio
 id rectangles
 id recyclerViewCart
+id recyclerViewPurchaseHistory
 id report_drawn
 id reverseSawtooth
 id right
@@ -3467,7 +3476,6 @@ id rounded
 id row_index_key
 id rtl
 id rvCategories
-id rvHistory
 id rvProducts
 id rvWishlist
 id save_non_transition_alpha
@@ -3566,12 +3574,9 @@ id titleDividerNoCustom
 id title_template
 id toggle
 id toolbar
-id toolbarHistory
 id toolbarTitle
 id toolbar_icon
-id toolbar_icon_history
 id toolbar_title
-id toolbar_title_history
 id top
 id topFrame
 id topPanel
@@ -3587,7 +3592,6 @@ id triangle
 id tvCartQuantity
 id tvCartTotal
 id tvCategoryName
-id tvDate
 id tvDetailDescription
 id tvDetailName
 id tvDetailOffer
@@ -3601,11 +3605,13 @@ id tvProductDescription
 id tvProductName
 id tvProductOffer
 id tvProductPrice
+id tvProductsDetails
+id tvPurchaseDate
 id tvQuantity
 id tvRemainingAmount
 id tvStoreName
 id tvTitle
-id tvTotal
+id tvTotalCost
 id unchecked
 id uniform
 id unlabeled

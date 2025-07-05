@@ -9,4 +9,15 @@
     <color name="card_category_bg">#1F1F1F</color> <!-- ή όποιο χρώμα background θέλεις -->
     <string name="back">Back</string>
     <color name="green">#00D69D</color>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <!-- Grayscale -->
+    <color name="gray_light">#E0E0E0</color>
+    <color name="gray_medium">#9E9E9E</color>
+    <color name="gray_dark">#424242</color>
+
+    <!-- Background -->
+    <color name="background">#F5F5F5</color>
 </resources>

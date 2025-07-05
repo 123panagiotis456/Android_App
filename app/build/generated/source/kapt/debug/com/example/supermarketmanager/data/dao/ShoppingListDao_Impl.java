@@ -255,15 +255,9 @@ public final class ShoppingListDao_Impl implements ShoppingListDao {
   @Override
   public Flow<List<ShoppingCartItem>> getItemsWithProductDetails() {
     final String _sql = "\n"
-            + "        SELECT shopping_list.*, \n"
-            + "               products.name, \n"
-            + "               products.pricePerUnit, \n"
-            + "               products.unit, \n"
-            + "               products.imageDrawable, \n"
-            + "               products.offer \n"
-            + "        FROM shopping_list\n"
-            + "        INNER JOIN products ON shopping_list.productId = products.id\n"
-            + "        ";
+            + "    SELECT shopping_list.*, products.name, products.pricePerUnit, products.unit, products.imageDrawable, products.offer\n"
+            + "    FROM shopping_list\n"
+            + "    INNER JOIN products ON shopping_list.productId = products.id\n";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     return CoroutinesRoom.createFlow(__db, false, new String[] {"shopping_list",
         "products"}, new Callable<List<ShoppingCartItem>>() {

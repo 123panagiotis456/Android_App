@@ -1,0 +1,130 @@
+
+                                                        
+
+            
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#262626" android:tag="layout/fragment_product_list_0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- Toolbar -->
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#1E1E1E"
+                app:navigationIcon="@drawable/ic_arrow_back"
+                app:navigationContentDescription="@string/back"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:titleTextColor="@android:color/white">
+
+                <TextView
+                    android:id="@+id/toolbarTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Όνομα Κατηγορίας"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:padding="12dp" />
+            </androidx.appcompat.widget.Toolbar>
+
+            <!-- RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvProducts"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:padding="8dp"
+                android:clipToPadding="false" />
+        </LinearLayout>
+
+        <!-- Καλάθι - εμφανίζεται μόνο όταν υπάρχει τουλάχιστον 1 προϊόν -->
+        <LinearLayout
+            android:id="@+id/cartBanner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:padding="12dp"
+            android:background="#1E1E1E"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:elevation="8dp">
+
+            <TextView
+                android:id="@+id/tvRemainingAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="18,24€ ακόμα για να συμπληρώσεις το ποσό ελ. παραγγελίας."
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:gravity="center" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_marginTop="6dp"
+                android:progress="0"
+                android:max="100"
+                android:progressTint="#00D19A"
+                android:backgroundTint="#505050" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="12dp"
+
+                android:layout_marginBottom="4dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="#00D19A"
+                android:clipToPadding="false"
+                android:background="@drawable/rounded_border">
+
+                <TextView
+                    android:id="@+id/tvCartQuantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:background="@drawable/rounded_button_background"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:layout_marginEnd="16dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Καλάθι"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvCartTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1,76€"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </FrameLayout>
+         

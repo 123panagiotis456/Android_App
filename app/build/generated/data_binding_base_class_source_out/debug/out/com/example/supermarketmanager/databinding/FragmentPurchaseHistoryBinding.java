@@ -4,7 +4,7 @@ package com.example.supermarketmanager.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,25 +18,33 @@ import java.lang.Object;
 
 public abstract class FragmentPurchaseHistoryBinding extends ViewDataBinding {
   @NonNull
-  public final RecyclerView rvHistory;
+  public final LinearLayout btnCart;
 
   @NonNull
-  public final Toolbar toolbarHistory;
+  public final LinearLayout btnHistory;
 
   @NonNull
-  public final ImageView toolbarIconHistory;
+  public final LinearLayout btnWishlist;
 
   @NonNull
-  public final TextView toolbarTitleHistory;
+  public final RecyclerView recyclerViewPurchaseHistory;
+
+  @NonNull
+  public final Toolbar toolbar;
+
+  @NonNull
+  public final TextView toolbarTitle;
 
   protected FragmentPurchaseHistoryBinding(Object _bindingComponent, View _root,
-      int _localFieldCount, RecyclerView rvHistory, Toolbar toolbarHistory,
-      ImageView toolbarIconHistory, TextView toolbarTitleHistory) {
+      int _localFieldCount, LinearLayout btnCart, LinearLayout btnHistory, LinearLayout btnWishlist,
+      RecyclerView recyclerViewPurchaseHistory, Toolbar toolbar, TextView toolbarTitle) {
     super(_bindingComponent, _root, _localFieldCount);
-    this.rvHistory = rvHistory;
-    this.toolbarHistory = toolbarHistory;
-    this.toolbarIconHistory = toolbarIconHistory;
-    this.toolbarTitleHistory = toolbarTitleHistory;
+    this.btnCart = btnCart;
+    this.btnHistory = btnHistory;
+    this.btnWishlist = btnWishlist;
+    this.recyclerViewPurchaseHistory = recyclerViewPurchaseHistory;
+    this.toolbar = toolbar;
+    this.toolbarTitle = toolbarTitle;
   }
 
   @NonNull

@@ -32,7 +32,7 @@ public abstract interface ShoppingListDao {
     public abstract java.lang.Object clear(@org.jetbrains.annotations.NotNull
     kotlin.coroutines.Continuation<? super kotlin.Unit> $completion);
     
-    @androidx.room.Query(value = "\n        SELECT shopping_list.*, \n               products.name, \n               products.pricePerUnit, \n               products.unit, \n               products.imageDrawable, \n               products.offer \n        FROM shopping_list\n        INNER JOIN products ON shopping_list.productId = products.id\n        ")
+    @androidx.room.Query(value = "\n    SELECT shopping_list.*, products.name, products.pricePerUnit, products.unit, products.imageDrawable, products.offer\n    FROM shopping_list\n    INNER JOIN products ON shopping_list.productId = products.id\n")
     @org.jetbrains.annotations.NotNull
     public abstract kotlinx.coroutines.flow.Flow<java.util.List<com.example.supermarketmanager.data.models.ShoppingCartItem>> getItemsWithProductDetails();
     

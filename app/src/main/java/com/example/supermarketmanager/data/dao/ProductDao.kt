@@ -42,4 +42,10 @@ interface ProductDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(products: List<ProductEntity>)
+
+    @Query("SELECT * FROM products WHERE id IN (:ids)")
+    suspend fun getByIdList(ids: List<Int>): List<ProductEntity>
+
+
+
 }
