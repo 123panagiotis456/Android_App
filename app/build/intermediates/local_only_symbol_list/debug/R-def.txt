@@ -62,11 +62,14 @@ drawable rounded_border
 drawable rounded_button_background
 drawable shopping_basket
 id action_categoryListFragment_to_ShoppingCartFragment
-id action_categoryListFragment_to_WishlistFragment
+id action_categoryListFragment_to_productDetailFragment
 id action_categoryListFragment_to_productListFragment
 id action_categoryListFragment_to_purchaseHistoryFragment
+id action_categoryListFragment_to_wishlistFragment
 id action_productListFragment_to_productDetailFragment
 id action_search
+id action_wishlistFragment_to_productDetailFragment
+id backIcon
 id bottomBar
 id btnAdd
 id btnAddDetail
@@ -82,6 +85,7 @@ id btnOrder
 id btnReaddToCart
 id btnRemove
 id btnWishlist
+id btnproduct
 id cartBanner
 id categoryListFragment
 id dg_price_card
@@ -117,9 +121,9 @@ id tvCategoryName
 id tvDetailDescription
 id tvDetailName
 id tvDetailOffer
+id tvDetailOfferh
 id tvDetailPrice
 id tvDetailQuantity
-id tvDetailSubtitle
 id tvDetailUnitInfo
 id tvDetailingredients
 id tvDetailnutritionalInfo

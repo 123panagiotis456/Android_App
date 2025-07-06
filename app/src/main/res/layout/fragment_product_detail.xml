@@ -67,18 +67,6 @@
                 android:padding="12dp">
 
                 <TextView
-                    android:id="@+id/tvDetailOffer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/offer_background"
-                    android:padding="4dp"
-                    android:textColor="#FFFFFF"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:visibility="gone" />
-
-                <TextView
                     android:id="@+id/tvDetailName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -86,14 +74,12 @@
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tvDetailSubtitle"
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:textColor="#CCCCCC"
-                    android:textSize="14sp" />
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@android:color/white" />
 
                 <TextView
                     android:id="@+id/tvDetailPrice"
@@ -180,6 +166,29 @@
 
                 <TextView
                     android:id="@+id/tvDetailingredients"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="#CCCCCC"
+                    android:textSize="14sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@android:color/white" />
+                <TextView
+                    android:id="@+id/tvDetailOfferh"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Προσφορά"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvDetailOffer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"

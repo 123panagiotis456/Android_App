@@ -2,6 +2,7 @@ package com.example.supermarketmanager.data.repository
 
 import com.example.supermarketmanager.data.dao.WishlistDao
 import com.example.supermarketmanager.data.entities.WishlistItemEntity
+import com.example.supermarketmanager.data.models.WishlistProductItem
 
 class WishlistRepository(private val wishlistDao: WishlistDao) {
 
@@ -28,5 +29,9 @@ class WishlistRepository(private val wishlistDao: WishlistDao) {
     suspend fun getAllFavorites(): List<WishlistItemEntity> {
         return wishlistDao.getAll()
     }
-}
 
+    // **ΑΥΤΗ ΕΙΝΑΙ Η ΣΥΝΑΡΤΗΣΗ ΠΟΥ ΧΡΕΙΑΖΕΣΑΙ**
+    suspend fun getWishlistWithProducts(): List<WishlistProductItem> {
+        return wishlistDao.getWishlistWithProducts()
+    }
+}

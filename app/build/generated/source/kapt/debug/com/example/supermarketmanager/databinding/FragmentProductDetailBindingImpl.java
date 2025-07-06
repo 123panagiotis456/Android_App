@@ -18,17 +18,17 @@ public class FragmentProductDetailBindingImpl extends FragmentProductDetailBindi
         sViewsWithIds.put(R.id.ivDetailImage, 2);
         sViewsWithIds.put(R.id.btnFavorite, 3);
         sViewsWithIds.put(R.id.dg_price_card, 4);
-        sViewsWithIds.put(R.id.tvDetailOffer, 5);
-        sViewsWithIds.put(R.id.tvDetailName, 6);
-        sViewsWithIds.put(R.id.tvDetailSubtitle, 7);
-        sViewsWithIds.put(R.id.tvDetailPrice, 8);
-        sViewsWithIds.put(R.id.tvDetailUnitInfo, 9);
-        sViewsWithIds.put(R.id.labelDescription, 10);
-        sViewsWithIds.put(R.id.tvDetailDescription, 11);
-        sViewsWithIds.put(R.id.labelnutritionalInfo, 12);
-        sViewsWithIds.put(R.id.tvDetailnutritionalInfo, 13);
-        sViewsWithIds.put(R.id.labelingredients, 14);
-        sViewsWithIds.put(R.id.tvDetailingredients, 15);
+        sViewsWithIds.put(R.id.tvDetailName, 5);
+        sViewsWithIds.put(R.id.tvDetailPrice, 6);
+        sViewsWithIds.put(R.id.tvDetailUnitInfo, 7);
+        sViewsWithIds.put(R.id.labelDescription, 8);
+        sViewsWithIds.put(R.id.tvDetailDescription, 9);
+        sViewsWithIds.put(R.id.labelnutritionalInfo, 10);
+        sViewsWithIds.put(R.id.tvDetailnutritionalInfo, 11);
+        sViewsWithIds.put(R.id.labelingredients, 12);
+        sViewsWithIds.put(R.id.tvDetailingredients, 13);
+        sViewsWithIds.put(R.id.tvDetailOfferh, 14);
+        sViewsWithIds.put(R.id.tvDetailOffer, 15);
         sViewsWithIds.put(R.id.bottomBar, 16);
         sViewsWithIds.put(R.id.btnDecreaseDetail, 17);
         sViewsWithIds.put(R.id.tvDetailQuantity, 18);
@@ -55,19 +55,19 @@ public class FragmentProductDetailBindingImpl extends FragmentProductDetailBindi
             , (android.widget.ImageButton) bindings[19]
             , (android.widget.LinearLayout) bindings[4]
             , (android.widget.ImageView) bindings[2]
-            , (android.widget.TextView) bindings[10]
-            , (android.widget.TextView) bindings[14]
-            , (android.widget.TextView) bindings[12]
-            , (androidx.appcompat.widget.Toolbar) bindings[1]
-            , (android.widget.TextView) bindings[11]
-            , (android.widget.TextView) bindings[6]
-            , (android.widget.TextView) bindings[5]
             , (android.widget.TextView) bindings[8]
+            , (android.widget.TextView) bindings[12]
+            , (android.widget.TextView) bindings[10]
+            , (androidx.appcompat.widget.Toolbar) bindings[1]
+            , (android.widget.TextView) bindings[9]
+            , (android.widget.TextView) bindings[5]
+            , (android.widget.TextView) bindings[15]
+            , (android.widget.TextView) bindings[14]
+            , (android.widget.TextView) bindings[6]
             , (android.widget.TextView) bindings[18]
             , (android.widget.TextView) bindings[7]
-            , (android.widget.TextView) bindings[9]
-            , (android.widget.TextView) bindings[15]
             , (android.widget.TextView) bindings[13]
+            , (android.widget.TextView) bindings[11]
             );
         this.mboundView0 = (android.widget.FrameLayout) bindings[0];
         this.mboundView0.setTag(null);

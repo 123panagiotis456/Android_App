@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.example.supermarketmanager.R
 import com.example.supermarketmanager.AppDatabase
 import com.example.supermarketmanager.data.entities.WishlistItemEntity
@@ -21,7 +20,6 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
     private var _binding: FragmentProductDetailBinding? = null
     private val binding get() = _binding!!
 
-    private val args: ProductDetailFragmentArgs by navArgs()
     private val vm: ProductViewModel by viewModels()
 
     private var quantity = 1
@@ -33,7 +31,7 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
 
         val context = requireContext()
         val wishlistDao = AppDatabase.getInstance(context).wishlistDao()
-        val productId = args.productId
+        val productId = arguments?.getInt("productId") ?: -1
 
         // Back arrow toolbar
         (requireActivity() as AppCompatActivity).supportActionBar?.apply {
@@ -98,7 +96,6 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
             binding.tvDetailDescription.text = product.description ?: ""
             binding.tvDetailPrice.text = "${product.pricePerUnit} €"
             binding.tvDetailUnitInfo.text = "Τιμή ανά ${product.unit}"
-            binding.tvDetailSubtitle.text = product.description
 
             if (!product.offer.isNullOrBlank()) {
                 binding.tvDetailOffer.visibility = View.VISIBLE

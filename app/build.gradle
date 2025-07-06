@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'                             // ενεργοποίηση Kotlin annotation processing
-    id 'androidx.navigation.safeargs.kotlin'      // Safe Args plugin
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {

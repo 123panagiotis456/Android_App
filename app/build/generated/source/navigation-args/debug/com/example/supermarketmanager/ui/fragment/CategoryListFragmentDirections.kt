@@ -23,6 +23,19 @@ public class CategoryListFragmentDirections private constructor() {
       }
   }
 
+  private data class ActionCategoryListFragmentToProductDetailFragment(
+    public val productId: Int,
+  ) : NavDirections {
+    public override val actionId: Int = R.id.action_categoryListFragment_to_productDetailFragment
+
+    public override val arguments: Bundle
+      get() {
+        val result = Bundle()
+        result.putInt("productId", this.productId)
+        return result
+      }
+  }
+
   public companion object {
     public fun actionCategoryListFragmentToProductListFragment(categoryId: Int = -1,
         categoryName: String = "Κατηγορία"): NavDirections =
@@ -35,6 +48,9 @@ public class CategoryListFragmentDirections private constructor() {
         ActionOnlyNavDirections(R.id.action_categoryListFragment_to_purchaseHistoryFragment)
 
     public fun actionCategoryListFragmentToWishlistFragment(): NavDirections =
-        ActionOnlyNavDirections(R.id.action_categoryListFragment_to_WishlistFragment)
+        ActionOnlyNavDirections(R.id.action_categoryListFragment_to_wishlistFragment)
+
+    public fun actionCategoryListFragmentToProductDetailFragment(productId: Int): NavDirections =
+        ActionCategoryListFragmentToProductDetailFragment(productId)
   }
 }

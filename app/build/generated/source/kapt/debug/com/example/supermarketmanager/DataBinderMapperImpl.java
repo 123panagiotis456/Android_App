@@ -11,10 +11,8 @@ import com.example.supermarketmanager.databinding.FragmentProductDetailBindingIm
 import com.example.supermarketmanager.databinding.FragmentProductListBindingImpl;
 import com.example.supermarketmanager.databinding.FragmentPurchaseHistoryBindingImpl;
 import com.example.supermarketmanager.databinding.FragmentShoppingCartBindingImpl;
-import com.example.supermarketmanager.databinding.FragmentWishlistBindingImpl;
 import com.example.supermarketmanager.databinding.ItemCategoryBindingImpl;
 import com.example.supermarketmanager.databinding.ItemShoppingListItemBindingImpl;
-import com.example.supermarketmanager.databinding.ItemWishlistItemBindingImpl;
 import java.lang.IllegalArgumentException;
 import java.lang.Integer;
 import java.lang.Object;
@@ -36,15 +34,11 @@ public class DataBinderMapperImpl extends DataBinderMapper {
 
   private static final int LAYOUT_FRAGMENTSHOPPINGCART = 5;
 
-  private static final int LAYOUT_FRAGMENTWISHLIST = 6;
+  private static final int LAYOUT_ITEMCATEGORY = 6;
 
-  private static final int LAYOUT_ITEMCATEGORY = 7;
+  private static final int LAYOUT_ITEMSHOPPINGLISTITEM = 7;
 
-  private static final int LAYOUT_ITEMSHOPPINGLISTITEM = 8;
-
-  private static final int LAYOUT_ITEMWISHLISTITEM = 9;
-
-  private static final SparseIntArray INTERNAL_LAYOUT_ID_LOOKUP = new SparseIntArray(9);
+  private static final SparseIntArray INTERNAL_LAYOUT_ID_LOOKUP = new SparseIntArray(7);
 
   static {
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.example.supermarketmanager.R.layout.fragment_category_list, LAYOUT_FRAGMENTCATEGORYLIST);
@@ -52,10 +46,8 @@ public class DataBinderMapperImpl extends DataBinderMapper {
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.example.supermarketmanager.R.layout.fragment_product_list, LAYOUT_FRAGMENTPRODUCTLIST);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.example.supermarketmanager.R.layout.fragment_purchase_history, LAYOUT_FRAGMENTPURCHASEHISTORY);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.example.supermarketmanager.R.layout.fragment_shopping_cart, LAYOUT_FRAGMENTSHOPPINGCART);
-    INTERNAL_LAYOUT_ID_LOOKUP.put(com.example.supermarketmanager.R.layout.fragment_wishlist, LAYOUT_FRAGMENTWISHLIST);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.example.supermarketmanager.R.layout.item_category, LAYOUT_ITEMCATEGORY);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.example.supermarketmanager.R.layout.item_shopping_list_item, LAYOUT_ITEMSHOPPINGLISTITEM);
-    INTERNAL_LAYOUT_ID_LOOKUP.put(com.example.supermarketmanager.R.layout.item_wishlist_item, LAYOUT_ITEMWISHLISTITEM);
   }
 
   @Override
@@ -97,12 +89,6 @@ public class DataBinderMapperImpl extends DataBinderMapper {
           }
           throw new IllegalArgumentException("The tag for fragment_shopping_cart is invalid. Received: " + tag);
         }
-        case  LAYOUT_FRAGMENTWISHLIST: {
-          if ("layout/fragment_wishlist_0".equals(tag)) {
-            return new FragmentWishlistBindingImpl(component, view);
-          }
-          throw new IllegalArgumentException("The tag for fragment_wishlist is invalid. Received: " + tag);
-        }
         case  LAYOUT_ITEMCATEGORY: {
           if ("layout/item_category_0".equals(tag)) {
             return new ItemCategoryBindingImpl(component, view);
@@ -114,12 +100,6 @@ public class DataBinderMapperImpl extends DataBinderMapper {
             return new ItemShoppingListItemBindingImpl(component, view);
           }
           throw new IllegalArgumentException("The tag for item_shopping_list_item is invalid. Received: " + tag);
-        }
-        case  LAYOUT_ITEMWISHLISTITEM: {
-          if ("layout/item_wishlist_item_0".equals(tag)) {
-            return new ItemWishlistItemBindingImpl(component, view);
-          }
-          throw new IllegalArgumentException("The tag for item_wishlist_item is invalid. Received: " + tag);
         }
       }
     }
@@ -174,7 +154,7 @@ public class DataBinderMapperImpl extends DataBinderMapper {
   }
 
   private static class InnerLayoutIdLookup {
-    static final HashMap<String, Integer> sKeys = new HashMap<String, Integer>(9);
+    static final HashMap<String, Integer> sKeys = new HashMap<String, Integer>(7);
 
     static {
       sKeys.put("layout/fragment_category_list_0", com.example.supermarketmanager.R.layout.fragment_category_list);
@@ -182,10 +162,8 @@ public class DataBinderMapperImpl extends DataBinderMapper {
       sKeys.put("layout/fragment_product_list_0", com.example.supermarketmanager.R.layout.fragment_product_list);
       sKeys.put("layout/fragment_purchase_history_0", com.example.supermarketmanager.R.layout.fragment_purchase_history);
       sKeys.put("layout/fragment_shopping_cart_0", com.example.supermarketmanager.R.layout.fragment_shopping_cart);
-      sKeys.put("layout/fragment_wishlist_0", com.example.supermarketmanager.R.layout.fragment_wishlist);
       sKeys.put("layout/item_category_0", com.example.supermarketmanager.R.layout.item_category);
       sKeys.put("layout/item_shopping_list_item_0", com.example.supermarketmanager.R.layout.item_shopping_list_item);
-      sKeys.put("layout/item_wishlist_item_0", com.example.supermarketmanager.R.layout.item_wishlist_item);
     }
   }
 }

@@ -62,13 +62,13 @@ public abstract class FragmentProductDetailBinding extends ViewDataBinding {
   public final TextView tvDetailOffer;
 
   @NonNull
+  public final TextView tvDetailOfferh;
+
+  @NonNull
   public final TextView tvDetailPrice;
 
   @NonNull
   public final TextView tvDetailQuantity;
-
-  @NonNull
-  public final TextView tvDetailSubtitle;
 
   @NonNull
   public final TextView tvDetailUnitInfo;
@@ -84,8 +84,8 @@ public abstract class FragmentProductDetailBinding extends ViewDataBinding {
       ImageButton btnFavorite, ImageButton btnIncreaseDetail, LinearLayout dgPriceCard,
       ImageView ivDetailImage, TextView labelDescription, TextView labelingredients,
       TextView labelnutritionalInfo, Toolbar toolbar, TextView tvDetailDescription,
-      TextView tvDetailName, TextView tvDetailOffer, TextView tvDetailPrice,
-      TextView tvDetailQuantity, TextView tvDetailSubtitle, TextView tvDetailUnitInfo,
+      TextView tvDetailName, TextView tvDetailOffer, TextView tvDetailOfferh,
+      TextView tvDetailPrice, TextView tvDetailQuantity, TextView tvDetailUnitInfo,
       TextView tvDetailingredients, TextView tvDetailnutritionalInfo) {
     super(_bindingComponent, _root, _localFieldCount);
     this.bottomBar = bottomBar;
@@ -102,9 +102,9 @@ public abstract class FragmentProductDetailBinding extends ViewDataBinding {
     this.tvDetailDescription = tvDetailDescription;
     this.tvDetailName = tvDetailName;
     this.tvDetailOffer = tvDetailOffer;
+    this.tvDetailOfferh = tvDetailOfferh;
     this.tvDetailPrice = tvDetailPrice;
     this.tvDetailQuantity = tvDetailQuantity;
-    this.tvDetailSubtitle = tvDetailSubtitle;
     this.tvDetailUnitInfo = tvDetailUnitInfo;
     this.tvDetailingredients = tvDetailingredients;
     this.tvDetailnutritionalInfo = tvDetailnutritionalInfo;

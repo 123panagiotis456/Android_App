@@ -50,6 +50,10 @@ class CategoryListFragment : Fragment() {
         binding.btnCart.setOnClickListener {
             findNavController().navigate(R.id.action_categoryListFragment_to_ShoppingCartFragment)
         }
+        binding.btnWishlist.setOnClickListener {
+            findNavController().navigate(R.id.action_categoryListFragment_to_wishlistFragment)
+        }
+
 
         (requireActivity() as? AppCompatActivity)?.apply {
             setSupportActionBar(binding.toolbar)

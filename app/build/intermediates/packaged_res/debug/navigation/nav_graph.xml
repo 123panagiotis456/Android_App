@@ -4,45 +4,40 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/categoryListFragment">
 
-    <!-- ──────────────────────────
-         Category list (start screen)
-         ────────────────────────── -->
+    <!-- Category list (start screen) -->
     <fragment
         android:id="@+id/categoryListFragment"
         android:name="com.example.supermarketmanager.ui.fragment.CategoryListFragment"
         android:label="@string/title_categories">
 
-        <!-- To product list -->
         <action
             android:id="@+id/action_categoryListFragment_to_productListFragment"
             app:destination="@id/productListFragment" />
 
-        <!-- To shopping cart -->
         <action
             android:id="@+id/action_categoryListFragment_to_ShoppingCartFragment"
             app:destination="@id/shoppingCartFragment" />
 
-        <!-- ✅ NEW: to purchase history -->
         <action
             android:id="@+id/action_categoryListFragment_to_purchaseHistoryFragment"
             app:destination="@id/purchaseHistoryFragment" />
+
         <action
-            android:id="@+id/action_categoryListFragment_to_WishlistFragment"
+            android:id="@+id/action_categoryListFragment_to_wishlistFragment"
             app:destination="@id/wishlistFragment" />
 
+        <action
+            android:id="@+id/action_categoryListFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
     </fragment>
 
-    <!-- ──────────────────────────
-         Purchase history
-         ────────────────────────── -->
+    <!-- Purchase history -->
     <fragment
         android:id="@+id/purchaseHistoryFragment"
         android:name="com.example.supermarketmanager.ui.fragment.PurchaseHistoryFragment"
         android:label="@string/title_purchase_history" />
 
-    <!-- ──────────────────────────
-         Product list (per category)
-         ────────────────────────── -->
+    <!-- Product list (per category) -->
     <fragment
         android:id="@+id/productListFragment"
         android:name="com.example.supermarketmanager.ui.fragment.ProductListFragment"
@@ -65,9 +60,7 @@
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
-    <!-- ──────────────────────────
-         Product detail
-         ────────────────────────── -->
+    <!-- Product detail -->
     <fragment
         android:id="@+id/productDetailFragment"
         android:name="com.example.supermarketmanager.ui.fragment.ProductDetailFragment"
@@ -77,20 +70,22 @@
             app:argType="integer" />
     </fragment>
 
-    <!-- ──────────────────────────
-         Shopping cart
-         ────────────────────────── -->
+    <!-- Shopping cart -->
     <fragment
         android:id="@+id/shoppingCartFragment"
         android:name="com.example.supermarketmanager.ui.fragment.ShoppingCartFragment"
         android:label="Καλάθι" />
 
-    <!-- ──────────────────────────
-         Wishlist
-         ────────────────────────── -->
+    <!-- Wishlist -->
     <fragment
         android:id="@+id/wishlistFragment"
         android:name="com.example.supermarketmanager.ui.fragment.WishlistFragment"
-        android:label="@string/title_wishlist" />
+        android:label="@string/title_wishlist" >
+
+        <!-- Το action πρέπει να είναι εδώ ΜΕΣΑ -->
+        <action
+            android:id="@+id/action_wishlistFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
 
 </navigation>

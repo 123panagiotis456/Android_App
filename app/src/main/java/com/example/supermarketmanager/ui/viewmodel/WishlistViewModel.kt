@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.supermarketmanager.data.entities.WishlistItemEntity
+import com.example.supermarketmanager.data.models.WishlistProductItem
 import com.example.supermarketmanager.data.repository.WishlistRepository
 import kotlinx.coroutines.launch
 
@@ -12,22 +12,23 @@ class WishlistViewModel(
     private val repository: WishlistRepository
 ) : ViewModel() {
 
-    private val _items = MutableLiveData<List<WishlistItemEntity>>()
-    val items: LiveData<List<WishlistItemEntity>> get() = _items
+    private val _items = MutableLiveData<List<WishlistProductItem>>()
+    val items: LiveData<List<WishlistProductItem>> get() = _items
 
     fun loadItems() {
         viewModelScope.launch {
-            _items.value = repository.getAllFavorites()
+            _items.value = repository.getWishlistWithProducts()
         }
     }
 
-    fun removeItem(itemId: Int) {
+    fun removeItem(wishlistId: Int) {
         viewModelScope.launch {
-            repository.removeFromWishlistById(itemId)
-            loadItems() // refresh
+            repository.removeFromWishlistById(wishlistId)
+            loadItems()
         }
     }
 
+    // Προαιρετικά: toggle και έλεγχος favorite (χρησιμοποιείται αν έχεις toggle καρδούλα σε όλα τα προϊόντα)
     fun toggleFavorite(productId: Int, onToggle: (Boolean) -> Unit = {}) {
         viewModelScope.launch {
             val isFav = repository.isFavorite(productId)
@@ -36,6 +37,7 @@ class WishlistViewModel(
             } else {
                 repository.addToWishlist(productId)
             }
+            loadItems() // Update immediately!
             onToggle(!isFav)
         }
     }
@@ -44,4 +46,3 @@ class WishlistViewModel(
         return repository.isFavorite(productId)
     }
 }
-

@@ -3150,9 +3150,10 @@ id action_bar_spinner
 id action_bar_subtitle
 id action_bar_title
 id action_categoryListFragment_to_ShoppingCartFragment
-id action_categoryListFragment_to_WishlistFragment
+id action_categoryListFragment_to_productDetailFragment
 id action_categoryListFragment_to_productListFragment
 id action_categoryListFragment_to_purchaseHistoryFragment
+id action_categoryListFragment_to_wishlistFragment
 id action_container
 id action_context_bar
 id action_divider
@@ -3165,6 +3166,7 @@ id action_mode_close_button
 id action_productListFragment_to_productDetailFragment
 id action_search
 id action_text
+id action_wishlistFragment_to_productDetailFragment
 id actions
 id activity_chooser_view_content
 id add
@@ -3182,6 +3184,7 @@ id auto
 id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
+id backIcon
 id barrier
 id baseline
 id beginOnFirstDraw
@@ -3204,6 +3207,7 @@ id btnOrder
 id btnReaddToCart
 id btnRemove
 id btnWishlist
+id btnproduct
 id buttonPanel
 id cancel_button
 id cartBanner
@@ -3595,9 +3599,9 @@ id tvCategoryName
 id tvDetailDescription
 id tvDetailName
 id tvDetailOffer
+id tvDetailOfferh
 id tvDetailPrice
 id tvDetailQuantity
-id tvDetailSubtitle
 id tvDetailUnitInfo
 id tvDetailingredients
 id tvDetailnutritionalInfo
