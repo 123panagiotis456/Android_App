@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.supermarketmanager.app-mergeDebugResources-54:/values-uz/values-uz.xml",
+            "outputFile": "com.example.supermarketmanager.app-mergeDebugResources-55:/values-uz/values-uz.xml",
             "map": [
                 {
                     "source": "C:\\Users\\panag\\.gradle\\caches\\transforms-4\\763ca8be5de246b06b6cbb458e59be55\\transformed\\navigation-ui-2.5.3\\res\\values-uz\\values-uz.xml",

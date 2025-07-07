@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.supermarketmanager.app-mergeDebugResources-54:/values-zh-rTW/values-zh-rTW.xml",
+            "outputFile": "com.example.supermarketmanager.app-mergeDebugResources-55:/values-zh-rTW/values-zh-rTW.xml",
             "map": [
                 {
                     "source": "C:\\Users\\panag\\.gradle\\caches\\transforms-4\\85c00689d26d3dc9b2bd1f5f4a35fe71\\transformed\\appcompat-1.6.1\\res\\values-zh-rTW\\values-zh-rTW.xml",

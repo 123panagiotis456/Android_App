@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:1:1-23:12
-INJECTED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:1:1-23:12
-INJECTED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:1:1-23:12
-INJECTED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:1:1-23:12
+ADDED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:1:1-26:12
+INJECTED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:1:1-26:12
+INJECTED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:1:1-26:12
+INJECTED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:1:1-26:12
 MERGED from [androidx.databinding:databinding-adapters:8.2.2] C:\Users\panag\.gradle\caches\transforms-4\10fa08cd667d0dbcda276e3573212c5d\transformed\databinding-adapters-8.2.2\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.databinding:databinding-ktx:8.2.2] C:\Users\panag\.gradle\caches\transforms-4\aa0dd1af842beb3c1366fa92afde3e99\transformed\databinding-ktx-8.2.2\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.databinding:databinding-runtime:8.2.2] C:\Users\panag\.gradle\caches\transforms-4\3872424613b00166a01244fd93761b24\transformed\databinding-runtime-8.2.2\AndroidManifest.xml:2:1-7:12
@@ -58,6 +58,7 @@ MERGED from [androidx.core:core:1.12.0] C:\Users\panag\.gradle\caches\transforms
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.6.1] C:\Users\panag\.gradle\caches\transforms-4\0f9a9545a34f6ee58fe5d5e4e8830e77\transformed\lifecycle-runtime-2.6.1\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.lifecycle:lifecycle-livedata-ktx:2.6.1] C:\Users\panag\.gradle\caches\transforms-4\5a8ecf79475b6aa74603fc2f5731dfe9\transformed\lifecycle-livedata-ktx-2.6.1\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1] C:\Users\panag\.gradle\caches\transforms-4\33b6abb8968e74bf106014422200fdb6\transformed\lifecycle-viewmodel-ktx-2.6.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core-splashscreen:1.0.1] C:\Users\panag\.gradle\caches\transforms-4\0a4c62476fe166c553fdff0ada01e5fd\transformed\core-splashscreen-1.0.1\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\panag\.gradle\caches\transforms-4\d4d29b3afd06a07cb78001a8d1c79c79\transformed\cursoradapter-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\panag\.gradle\caches\transforms-4\4d0475ed55ea09f3ec94c4aa6b15dc1c\transformed\cardview-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.github.bumptech.glide:gifdecoder:4.16.0] C:\Users\panag\.gradle\caches\transforms-4\db604fd451e06461dc263234336df464\transformed\gifdecoder-4.16.0\AndroidManifest.xml:2:1-9:12
@@ -84,8 +85,8 @@ MERGED from [androidx.annotation:annotation-experimental:1.3.0] C:\Users\panag\.
 	xmlns:android
 		ADDED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:1:11-69
 application
-ADDED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:4:5-22:19
-INJECTED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:4:5-22:19
+ADDED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:4:5-25:19
+INJECTED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:4:5-25:19
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\panag\.gradle\caches\transforms-4\af70b4df85dae056f12a38b07826fa7a\transformed\material-1.11.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\panag\.gradle\caches\transforms-4\af70b4df85dae056f12a38b07826fa7a\transformed\material-1.11.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.room:room-runtime:2.6.1] C:\Users\panag\.gradle\caches\transforms-4\87caa5e99bd42164224ef395ff8b0d5e\transformed\room-runtime-2.6.1\AndroidManifest.xml:23:5-29:19
@@ -124,22 +125,30 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\pa
 		ADDED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:11:9-56
 	android:name
 		ADDED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:5:9-38
-activity#com.example.supermarketmanager.MainActivity
-ADDED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:13:9-20:20
+activity#com.example.supermarketmanager.SplashActivity
+ADDED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:13:9-21:20
 	android:exported
 		ADDED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:15:13-36
+	android:theme
+		ADDED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:16:13-60
 	android:name
-		ADDED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:14:13-41
+		ADDED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:14:13-43
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:16:13-19:29
+ADDED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:17:13-20:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:17:17-68
+ADDED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:18:17-68
 	android:name
-		ADDED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:17:25-66
+		ADDED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:18:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:18:17-76
+ADDED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:19:17-76
 	android:name
-		ADDED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:18:27-74
+		ADDED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:19:27-74
+activity#com.example.supermarketmanager.MainActivity
+ADDED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:23:9-74
+	android:exported
+		ADDED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:23:48-71
+	android:name
+		ADDED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml:23:19-47
 uses-sdk
 INJECTED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\panag\Downloads\Android\app\src\main\AndroidManifest.xml
@@ -252,6 +261,8 @@ MERGED from [androidx.lifecycle:lifecycle-livedata-ktx:2.6.1] C:\Users\panag\.gr
 MERGED from [androidx.lifecycle:lifecycle-livedata-ktx:2.6.1] C:\Users\panag\.gradle\caches\transforms-4\5a8ecf79475b6aa74603fc2f5731dfe9\transformed\lifecycle-livedata-ktx-2.6.1\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1] C:\Users\panag\.gradle\caches\transforms-4\33b6abb8968e74bf106014422200fdb6\transformed\lifecycle-viewmodel-ktx-2.6.1\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1] C:\Users\panag\.gradle\caches\transforms-4\33b6abb8968e74bf106014422200fdb6\transformed\lifecycle-viewmodel-ktx-2.6.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core-splashscreen:1.0.1] C:\Users\panag\.gradle\caches\transforms-4\0a4c62476fe166c553fdff0ada01e5fd\transformed\core-splashscreen-1.0.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core-splashscreen:1.0.1] C:\Users\panag\.gradle\caches\transforms-4\0a4c62476fe166c553fdff0ada01e5fd\transformed\core-splashscreen-1.0.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\panag\.gradle\caches\transforms-4\d4d29b3afd06a07cb78001a8d1c79c79\transformed\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\panag\.gradle\caches\transforms-4\d4d29b3afd06a07cb78001a8d1c79c79\transformed\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\panag\.gradle\caches\transforms-4\4d0475ed55ea09f3ec94c4aa6b15dc1c\transformed\cardview-1.0.0\AndroidManifest.xml:20:5-44

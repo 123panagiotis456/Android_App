@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_margin="8dp"
+    android:layout_height="wrap_content"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="12dp"
+    android:background="#1E1E1E">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Purchase Date -->
+        <TextView
+            android:id="@+id/tvPurchaseDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="05 Jul 2025 22:14"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:textColor="@android:color/white"
+            android:fontFamily="sans-serif-medium" />
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#555555" />
+
+        <!-- Products Details -->
+        <TextView
+            android:id="@+id/tvProductsDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Milk x2 @ €1.20\nBread x1 @ €1.50"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:textColor="#DDDDDD"
+            android:lineSpacingExtra="4dp" />
+
+        <!-- Total Cost -->
+        <TextView
+            android:id="@+id/tvTotalCost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total: €4.50"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:textStyle="bold"
+            android:textColor="#FFB74D"
+        android:textAlignment="viewEnd"
+        android:layout_marginTop="12dp" />
+
+        <!-- Re-add to Cart button -->
+        <Button
+            android:id="@+id/btnReaddToCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Αγόρασε ξανά"
+            android:textAllCaps="false"
+            android:backgroundTint="#FFB74D"
+        android:textColor="#1E1E1E"
+        android:layout_gravity="end"
+        android:layout_marginTop="16dp"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

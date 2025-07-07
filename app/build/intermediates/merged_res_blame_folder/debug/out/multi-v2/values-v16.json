@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.supermarketmanager.app-mergeDebugResources-54:/values-v16/values-v16.xml",
+            "outputFile": "com.example.supermarketmanager.app-mergeDebugResources-55:/values-v16/values-v16.xml",
             "map": [
                 {
                     "source": "C:\\Users\\panag\\.gradle\\caches\\transforms-4\\85c00689d26d3dc9b2bd1f5f4a35fe71\\transformed\\appcompat-1.6.1\\res\\values-v16\\values-v16.xml",

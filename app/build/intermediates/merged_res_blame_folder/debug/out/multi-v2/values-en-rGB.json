@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.supermarketmanager.app-mergeDebugResources-54:/values-en-rGB/values-en-rGB.xml",
+            "outputFile": "com.example.supermarketmanager.app-mergeDebugResources-55:/values-en-rGB/values-en-rGB.xml",
             "map": [
                 {
                     "source": "C:\\Users\\panag\\.gradle\\caches\\transforms-4\\763ca8be5de246b06b6cbb458e59be55\\transformed\\navigation-ui-2.5.3\\res\\values-en-rGB\\values-en-rGB.xml",
