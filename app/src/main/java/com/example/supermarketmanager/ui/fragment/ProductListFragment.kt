@@ -58,6 +58,12 @@ class ProductListFragment : Fragment() {
         observeViewModel()
         observeCart()
 
+        // --- Προσθήκη ανακατεύθυνσης στο καλάθι ---
+        binding.cartBanner.setOnClickListener {
+            val action = ProductListFragmentDirections.actionProductListFragmentToShoppingCartFragment()
+            findNavController().navigate(action)
+        }
+
         vm.filterProducts(
             categoryId = args.categoryId,
             maxPrice = null,

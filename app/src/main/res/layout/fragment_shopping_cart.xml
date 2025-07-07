@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:text="Καλάθι"
+            android:text="@string/cart1"
             android:textColor="@android:color/white"
             android:textSize="22sp"
             android:textStyle="bold"
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:text="PEPE MARKET"
+            android:text="@string/pepe_market"
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -45,6 +45,18 @@
             android:background="@drawable/rounded_black"
             android:orientation="vertical"
             android:padding="8dp">
+
+            <!-- Εμφάνιση "Το καλάθι είναι άδειο" όταν δεν υπάρχουν προϊόντα -->
+            <TextView
+                android:id="@+id/tvEmptyCart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cart_empty"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:visibility="gone"
+                android:padding="16dp" />
 
             <!-- Grid λίστα προϊόντων -->
             <androidx.recyclerview.widget.RecyclerView
@@ -71,7 +83,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Παράγγειλε"
+                    android:text="@string/Order"
                     android:backgroundTint="#00D69D"
                     android:textColor="@color/black"
                     android:layout_marginEnd="4dp" />
@@ -81,7 +93,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Διαγραφή"
+                    android:text="@string/Delete"
                     android:backgroundTint="#FF0101"
                     android:textColor="#FFFFFF"
                     android:layout_marginStart="4dp" />

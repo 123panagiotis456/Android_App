@@ -24,6 +24,7 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
 
     private var quantity = 1
     private var isFavorite = false
+    private var maxAvailability = 1
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -63,19 +64,8 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
             val item = cart.find { it.productId == productId }
             quantity = item?.quantity ?: 1
             binding.tvDetailQuantity.text = quantity.toString()
-        }
-
-        // Πλήκτρα + και -
-        binding.btnIncreaseDetail.setOnClickListener {
-            quantity++
-            binding.tvDetailQuantity.text = quantity.toString()
-        }
-
-        binding.btnDecreaseDetail.setOnClickListener {
-            if (quantity > 1) {
-                quantity--
-                binding.tvDetailQuantity.text = quantity.toString()
-            }
+            // Αν θες να κάνεις άμεσο update στο κουμπί (σε περίπτωση που αλλάξει quantity από αλλού):
+            binding.btnIncreaseDetail.isEnabled = (quantity < maxAvailability)
         }
 
         // Παρακολούθηση προϊόντος
@@ -84,6 +74,8 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
                 findNavController().popBackStack()
                 return@observe
             }
+
+            maxAvailability = product.availability
 
             val resId = context.resources.getIdentifier(product.imageDrawable, "drawable", context.packageName)
             binding.ivDetailImage.setImageResource(
@@ -97,6 +89,11 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
             binding.tvDetailPrice.text = "${product.pricePerUnit} €"
             binding.tvDetailUnitInfo.text = "Τιμή ανά ${product.unit}"
 
+            // ----------- ΔΙΑΘΕΣΙΜΟΤΗΤΑ -----------
+            binding.tvDetailAvailability.text = "${product.availability}"
+            // -------------------------------------
+
+            // Offer
             if (!product.offer.isNullOrBlank()) {
                 binding.tvDetailOffer.visibility = View.VISIBLE
                 binding.tvDetailOffer.text = product.offer
@@ -104,10 +101,32 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
                 binding.tvDetailOffer.visibility = View.GONE
             }
 
-            binding.btnAddDetail.setOnClickListener {
-                vm.setCartQuantity(product.id, quantity)
-                findNavController().popBackStack()
+            // Ενεργοποίηση/απενεργοποίηση του κουμπιού αύξησης
+            binding.btnIncreaseDetail.isEnabled = (quantity < product.availability)
+        }
+
+        // Πλήκτρα + και -
+        binding.btnIncreaseDetail.setOnClickListener {
+            if (quantity < maxAvailability) {
+                quantity++
+                binding.tvDetailQuantity.text = quantity.toString()
             }
+            // Κλείδωμα αν φτάσει διαθεσιμότητα
+            binding.btnIncreaseDetail.isEnabled = (quantity < maxAvailability)
+        }
+
+        binding.btnDecreaseDetail.setOnClickListener {
+            if (quantity > 1) {
+                quantity--
+                binding.tvDetailQuantity.text = quantity.toString()
+                // Ξαναενεργοποιούμε το κουμπί +
+                binding.btnIncreaseDetail.isEnabled = (quantity < maxAvailability)
+            }
+        }
+
+        binding.btnAddDetail.setOnClickListener {
+            vm.setCartQuantity(productId, quantity)
+            findNavController().popBackStack()
         }
 
         binding.toolbar.setNavigationOnClickListener {

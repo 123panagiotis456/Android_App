@@ -58,6 +58,11 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+
+        <!-- Προσθήκη action προς καλάθι -->
+        <action
+            android:id="@+id/action_productListFragment_to_shoppingCartFragment"
+            app:destination="@id/shoppingCartFragment" />
     </fragment>
 
     <!-- Product detail -->

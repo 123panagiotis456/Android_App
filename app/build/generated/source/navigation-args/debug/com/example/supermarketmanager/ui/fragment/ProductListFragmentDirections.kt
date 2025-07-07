@@ -1,6 +1,7 @@
 package com.example.supermarketmanager.ui.fragment
 
 import android.os.Bundle
+import androidx.navigation.ActionOnlyNavDirections
 import androidx.navigation.NavDirections
 import com.example.supermarketmanager.R
 import kotlin.Int
@@ -22,5 +23,8 @@ public class ProductListFragmentDirections private constructor() {
   public companion object {
     public fun actionProductListFragmentToProductDetailFragment(productId: Int): NavDirections =
         ActionProductListFragmentToProductDetailFragment(productId)
+
+    public fun actionProductListFragmentToShoppingCartFragment(): NavDirections =
+        ActionOnlyNavDirections(R.id.action_productListFragment_to_shoppingCartFragment)
   }
 }

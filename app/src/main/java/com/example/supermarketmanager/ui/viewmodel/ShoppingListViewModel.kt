@@ -35,7 +35,7 @@ class ShoppingListViewModel : ViewModel() {
         if (cartItems.isEmpty()) return@launch
 
         val productIds = cartItems.map { it.productId }
-        val products = productDao.getByIdList(productIds)  // pass list directly
+        val products = productDao.getByIdList(productIds)
         val productMap = products.associateBy { it.id }
 
         val purchasedProductIds = mutableListOf<Int>()
@@ -45,6 +45,13 @@ class ShoppingListViewModel : ViewModel() {
 
         for (item in cartItems) {
             val product = productMap[item.productId] ?: continue
+
+            // --- ΜΕΙΩΣΗ ΔΙΑΘΕΣΙΜΟΤΗΤΑΣ ---
+            if (item.quantity <= product.availability) {
+                productDao.decreaseAvailability(product.id, item.quantity)
+            }
+            // --------------------------------
+
             purchasedProductIds.add(product.id)
             purchasedPrices.add(product.pricePerUnit)
             purchasedQuantities.add(item.quantity)
@@ -62,8 +69,16 @@ class ShoppingListViewModel : ViewModel() {
         purchaseHistoryDao.insert(purchase)
         shoppingListDao.clear()
 
-        loadCartItems()  // Refresh the cart items (now empty)
+        loadCartItems()
     }
+
+    /** Διαγράφει όλα τα προϊόντα από το καλάθι */
+    fun clearCart() = viewModelScope.launch(Dispatchers.IO) {
+        val shoppingListDao = MyApplication.database.shoppingListDao()
+        shoppingListDao.clear()
+        loadCartItems()
+    }
+
     /** Drop all items from a past purchase back into the cart */
     fun readdPurchaseToCart(purchase: PurchaseHistoryEntity) = viewModelScope.launch(Dispatchers.IO) {
         val dao = MyApplication.database.shoppingListDao()

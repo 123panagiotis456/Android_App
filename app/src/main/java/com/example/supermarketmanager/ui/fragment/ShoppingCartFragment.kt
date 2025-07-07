@@ -13,7 +13,6 @@ import com.example.supermarketmanager.databinding.FragmentShoppingCartBinding
 import com.example.supermarketmanager.ui.adapter.ShoppingCartAdapter
 import com.example.supermarketmanager.ui.viewmodel.ProductViewModel
 import com.example.supermarketmanager.ui.viewmodel.ShoppingListViewModel
-import com.example.supermarketmanager.data.models.ShoppingCartItem
 import kotlinx.coroutines.launch
 import android.util.Log
 
@@ -22,7 +21,6 @@ class ShoppingCartFragment : Fragment() {
     private var _binding: FragmentShoppingCartBinding? = null
     private val binding get() = _binding!!
 
-    // ViewModel for product and shopping list operations
     private val vm: ProductViewModel by viewModels()
     private val cartVm: ShoppingListViewModel by viewModels()
     private lateinit var adapter: ShoppingCartAdapter
@@ -48,8 +46,6 @@ class ShoppingCartFragment : Fragment() {
                 if (item.quantity > 1) {
                     val newQuantity = item.quantity - 1
                     vm.updateCartItemQuantity(item.productId, newQuantity)
-                } else {
-                    //vm.removeItemFromCart(item.productId)
                 }
             }
         )
@@ -57,13 +53,24 @@ class ShoppingCartFragment : Fragment() {
         binding.recyclerViewCart.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.recyclerViewCart.adapter = adapter
 
-        // Observe combined cart items
         cartVm.cartItems.observe(viewLifecycleOwner) { items ->
             adapter.updateData(items)
+
+            if (items.isEmpty()) {
+                binding.tvEmptyCart.visibility = View.VISIBLE
+                binding.recyclerViewCart.visibility = View.GONE
+                binding.btnOrder.visibility = View.GONE
+                binding.btnDelete.visibility = View.GONE
+            } else {
+                binding.tvEmptyCart.visibility = View.GONE
+                binding.recyclerViewCart.visibility = View.VISIBLE
+                binding.btnOrder.visibility = View.VISIBLE
+                binding.btnDelete.visibility = View.VISIBLE
+            }
         }
         cartVm.loadCartItems()
 
-        // Order button: save to history then clear cart
+        // Παράγγειλε - εκκαθάριση και μείωση διαθεσιμότητας
         binding.btnOrder.setOnClickListener {
             Log.d("ShoppingCartFragment", "Order button clicked")
             lifecycleScope.launch {
@@ -72,6 +79,14 @@ class ShoppingCartFragment : Fragment() {
                 Toast.makeText(requireContext(), "Η παραγγελία καταχωρήθηκε!", Toast.LENGTH_SHORT).show()
                 cartVm.loadCartItems()
                 Log.d("ShoppingCartFragment", "loadCartItems() called after purchase")
+            }
+        }
+
+        // Διαγραφή καλαθιού
+        binding.btnDelete.setOnClickListener {
+            lifecycleScope.launch {
+                cartVm.clearCart()
+                Toast.makeText(requireContext(), "Το καλάθι διαγράφηκε", Toast.LENGTH_SHORT).show()
             }
         }
     }

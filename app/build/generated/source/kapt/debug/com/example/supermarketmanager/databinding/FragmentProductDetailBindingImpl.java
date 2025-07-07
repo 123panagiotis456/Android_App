@@ -27,13 +27,15 @@ public class FragmentProductDetailBindingImpl extends FragmentProductDetailBindi
         sViewsWithIds.put(R.id.tvDetailnutritionalInfo, 11);
         sViewsWithIds.put(R.id.labelingredients, 12);
         sViewsWithIds.put(R.id.tvDetailingredients, 13);
-        sViewsWithIds.put(R.id.tvDetailOfferh, 14);
-        sViewsWithIds.put(R.id.tvDetailOffer, 15);
-        sViewsWithIds.put(R.id.bottomBar, 16);
-        sViewsWithIds.put(R.id.btnDecreaseDetail, 17);
-        sViewsWithIds.put(R.id.tvDetailQuantity, 18);
-        sViewsWithIds.put(R.id.btnIncreaseDetail, 19);
-        sViewsWithIds.put(R.id.btnAddDetail, 20);
+        sViewsWithIds.put(R.id.labelAvailability, 14);
+        sViewsWithIds.put(R.id.tvDetailAvailability, 15);
+        sViewsWithIds.put(R.id.tvDetailOfferh, 16);
+        sViewsWithIds.put(R.id.tvDetailOffer, 17);
+        sViewsWithIds.put(R.id.bottomBar, 18);
+        sViewsWithIds.put(R.id.btnDecreaseDetail, 19);
+        sViewsWithIds.put(R.id.tvDetailQuantity, 20);
+        sViewsWithIds.put(R.id.btnIncreaseDetail, 21);
+        sViewsWithIds.put(R.id.btnAddDetail, 22);
     }
     // views
     @NonNull
@@ -44,27 +46,29 @@ public class FragmentProductDetailBindingImpl extends FragmentProductDetailBindi
     // Inverse Binding Event Handlers
 
     public FragmentProductDetailBindingImpl(@Nullable androidx.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
-        this(bindingComponent, root, mapBindings(bindingComponent, root, 21, sIncludes, sViewsWithIds));
+        this(bindingComponent, root, mapBindings(bindingComponent, root, 23, sIncludes, sViewsWithIds));
     }
     private FragmentProductDetailBindingImpl(androidx.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
         super(bindingComponent, root, 0
-            , (android.widget.LinearLayout) bindings[16]
-            , (android.widget.Button) bindings[20]
-            , (android.widget.ImageButton) bindings[17]
-            , (android.widget.ImageButton) bindings[3]
+            , (android.widget.LinearLayout) bindings[18]
+            , (android.widget.Button) bindings[22]
             , (android.widget.ImageButton) bindings[19]
+            , (android.widget.ImageButton) bindings[3]
+            , (android.widget.ImageButton) bindings[21]
             , (android.widget.LinearLayout) bindings[4]
             , (android.widget.ImageView) bindings[2]
+            , (android.widget.TextView) bindings[14]
             , (android.widget.TextView) bindings[8]
             , (android.widget.TextView) bindings[12]
             , (android.widget.TextView) bindings[10]
             , (androidx.appcompat.widget.Toolbar) bindings[1]
+            , (android.widget.TextView) bindings[15]
             , (android.widget.TextView) bindings[9]
             , (android.widget.TextView) bindings[5]
-            , (android.widget.TextView) bindings[15]
-            , (android.widget.TextView) bindings[14]
+            , (android.widget.TextView) bindings[17]
+            , (android.widget.TextView) bindings[16]
             , (android.widget.TextView) bindings[6]
-            , (android.widget.TextView) bindings[18]
+            , (android.widget.TextView) bindings[20]
             , (android.widget.TextView) bindings[7]
             , (android.widget.TextView) bindings[13]
             , (android.widget.TextView) bindings[11]

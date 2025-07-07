@@ -81,19 +81,28 @@ class ProductAdapter(
                 binding.tvQuantity.text = quantity.toString()
             }
 
+            // Disable το κουμπί αύξησης αν έχουμε φτάσει το stock
+            binding.btnIncrease.isEnabled = quantity < (product.availability)
+
             // Πάτημα στο αρχικό '+' κουμπί
             binding.btnAdd.setOnClickListener {
-                viewModel.addOneToCart(product.id)
-                quantityMap[product.id] = 1
-                notifyItemChanged(adapterPosition)
+                if (product.availability > 0) {
+                    viewModel.addOneToCart(product.id)
+                    quantityMap[product.id] = 1
+                    notifyItemChanged(adapterPosition)
+                }
             }
 
             // Πάτημα στο ➕
             binding.btnIncrease.setOnClickListener {
                 val current = quantityMap[product.id] ?: 1
-                viewModel.addOneToCart(product.id)
-                quantityMap[product.id] = current + 1
-                binding.tvQuantity.text = (current + 1).toString()
+                if (current < product.availability) {
+                    viewModel.addOneToCart(product.id)
+                    quantityMap[product.id] = current + 1
+                    binding.tvQuantity.text = (current + 1).toString()
+                }
+                // Disable αν φτάσαμε το μέγιστο
+                binding.btnIncrease.isEnabled = ((quantityMap[product.id] ?: 0) < product.availability)
             }
 
             // Πάτημα στο ➖
@@ -107,6 +116,8 @@ class ProductAdapter(
                     quantityMap[product.id] = 0
                     notifyItemChanged(adapterPosition)
                 }
+                // Ενεργοποιούμε πάλι το increase αν πέσαμε κάτω από το διαθέσιμο
+                binding.btnIncrease.isEnabled = ((quantityMap[product.id] ?: 0) < product.availability)
             }
         }
     }

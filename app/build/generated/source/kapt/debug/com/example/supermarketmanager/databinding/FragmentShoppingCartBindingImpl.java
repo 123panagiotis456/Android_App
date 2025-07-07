@@ -16,9 +16,10 @@ public class FragmentShoppingCartBindingImpl extends FragmentShoppingCartBinding
         sViewsWithIds = new android.util.SparseIntArray();
         sViewsWithIds.put(R.id.tvTitle, 1);
         sViewsWithIds.put(R.id.tvStoreName, 2);
-        sViewsWithIds.put(R.id.recyclerViewCart, 3);
-        sViewsWithIds.put(R.id.btnOrder, 4);
-        sViewsWithIds.put(R.id.btnDelete, 5);
+        sViewsWithIds.put(R.id.tvEmptyCart, 3);
+        sViewsWithIds.put(R.id.recyclerViewCart, 4);
+        sViewsWithIds.put(R.id.btnOrder, 5);
+        sViewsWithIds.put(R.id.btnDelete, 6);
     }
     // views
     @NonNull
@@ -29,13 +30,14 @@ public class FragmentShoppingCartBindingImpl extends FragmentShoppingCartBinding
     // Inverse Binding Event Handlers
 
     public FragmentShoppingCartBindingImpl(@Nullable androidx.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
-        this(bindingComponent, root, mapBindings(bindingComponent, root, 6, sIncludes, sViewsWithIds));
+        this(bindingComponent, root, mapBindings(bindingComponent, root, 7, sIncludes, sViewsWithIds));
     }
     private FragmentShoppingCartBindingImpl(androidx.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
         super(bindingComponent, root, 0
+            , (android.widget.Button) bindings[6]
             , (android.widget.Button) bindings[5]
-            , (android.widget.Button) bindings[4]
-            , (androidx.recyclerview.widget.RecyclerView) bindings[3]
+            , (androidx.recyclerview.widget.RecyclerView) bindings[4]
+            , (android.widget.TextView) bindings[3]
             , (android.widget.TextView) bindings[2]
             , (android.widget.TextView) bindings[1]
             );

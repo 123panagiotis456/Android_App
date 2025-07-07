@@ -41,6 +41,9 @@ public abstract class FragmentProductDetailBinding extends ViewDataBinding {
   public final ImageView ivDetailImage;
 
   @NonNull
+  public final TextView labelAvailability;
+
+  @NonNull
   public final TextView labelDescription;
 
   @NonNull
@@ -51,6 +54,9 @@ public abstract class FragmentProductDetailBinding extends ViewDataBinding {
 
   @NonNull
   public final Toolbar toolbar;
+
+  @NonNull
+  public final TextView tvDetailAvailability;
 
   @NonNull
   public final TextView tvDetailDescription;
@@ -82,11 +88,12 @@ public abstract class FragmentProductDetailBinding extends ViewDataBinding {
   protected FragmentProductDetailBinding(Object _bindingComponent, View _root, int _localFieldCount,
       LinearLayout bottomBar, Button btnAddDetail, ImageButton btnDecreaseDetail,
       ImageButton btnFavorite, ImageButton btnIncreaseDetail, LinearLayout dgPriceCard,
-      ImageView ivDetailImage, TextView labelDescription, TextView labelingredients,
-      TextView labelnutritionalInfo, Toolbar toolbar, TextView tvDetailDescription,
-      TextView tvDetailName, TextView tvDetailOffer, TextView tvDetailOfferh,
-      TextView tvDetailPrice, TextView tvDetailQuantity, TextView tvDetailUnitInfo,
-      TextView tvDetailingredients, TextView tvDetailnutritionalInfo) {
+      ImageView ivDetailImage, TextView labelAvailability, TextView labelDescription,
+      TextView labelingredients, TextView labelnutritionalInfo, Toolbar toolbar,
+      TextView tvDetailAvailability, TextView tvDetailDescription, TextView tvDetailName,
+      TextView tvDetailOffer, TextView tvDetailOfferh, TextView tvDetailPrice,
+      TextView tvDetailQuantity, TextView tvDetailUnitInfo, TextView tvDetailingredients,
+      TextView tvDetailnutritionalInfo) {
     super(_bindingComponent, _root, _localFieldCount);
     this.bottomBar = bottomBar;
     this.btnAddDetail = btnAddDetail;
@@ -95,10 +102,12 @@ public abstract class FragmentProductDetailBinding extends ViewDataBinding {
     this.btnIncreaseDetail = btnIncreaseDetail;
     this.dgPriceCard = dgPriceCard;
     this.ivDetailImage = ivDetailImage;
+    this.labelAvailability = labelAvailability;
     this.labelDescription = labelDescription;
     this.labelingredients = labelingredients;
     this.labelnutritionalInfo = labelnutritionalInfo;
     this.toolbar = toolbar;
+    this.tvDetailAvailability = tvDetailAvailability;
     this.tvDetailDescription = tvDetailDescription;
     this.tvDetailName = tvDetailName;
     this.tvDetailOffer = tvDetailOffer;

@@ -3,7 +3,6 @@ package com.example.supermarketmanager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.findNavController
 import com.example.supermarketmanager.databinding.ActivityMainBinding
 

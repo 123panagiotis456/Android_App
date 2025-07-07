@@ -39,15 +39,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|start"
-                android:layout_margin="6dp"
+                android:layout_margin="8dp"
                 android:text="1+1 Δώρο"
-                android:textColor="#FFFFFF"
+                android:textColor="#FF5C70"
                 android:textStyle="bold"
+                android:textSize="15sp"
                 android:background="@drawable/offer_background"
-                android:paddingHorizontal="6dp"
-                android:paddingVertical="2dp"
-                android:textSize="12sp"
-                android:visibility="gone" />
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:visibility="gone"/>
 
         </FrameLayout>
 
@@ -59,7 +61,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
-            android:text="Όνομα προϊόντος"
+            android:text="@string/name"
             android:textColor="#FFFFFF"
             android:textSize="15sp"
             android:maxLines="2"
@@ -76,7 +78,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginTop="4dp"
-            android:text="Σύντομη περιγραφή"
+            android:text="@string/description1"
             android:textColor="#CCCCCC"
             android:textSize="13sp"
             android:maxLines="2"

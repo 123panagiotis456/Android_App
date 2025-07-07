@@ -26,18 +26,22 @@ public abstract class FragmentShoppingCartBinding extends ViewDataBinding {
   public final RecyclerView recyclerViewCart;
 
   @NonNull
+  public final TextView tvEmptyCart;
+
+  @NonNull
   public final TextView tvStoreName;
 
   @NonNull
   public final TextView tvTitle;
 
   protected FragmentShoppingCartBinding(Object _bindingComponent, View _root, int _localFieldCount,
-      Button btnDelete, Button btnOrder, RecyclerView recyclerViewCart, TextView tvStoreName,
-      TextView tvTitle) {
+      Button btnDelete, Button btnOrder, RecyclerView recyclerViewCart, TextView tvEmptyCart,
+      TextView tvStoreName, TextView tvTitle) {
     super(_bindingComponent, _root, _localFieldCount);
     this.btnDelete = btnDelete;
     this.btnOrder = btnOrder;
     this.recyclerViewCart = recyclerViewCart;
+    this.tvEmptyCart = tvEmptyCart;
     this.tvStoreName = tvStoreName;
     this.tvTitle = tvTitle;
   }

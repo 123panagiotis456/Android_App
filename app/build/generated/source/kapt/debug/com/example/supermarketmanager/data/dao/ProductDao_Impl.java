@@ -8,6 +8,7 @@ import androidx.room.CoroutinesRoom;
 import androidx.room.EntityInsertionAdapter;
 import androidx.room.RoomDatabase;
 import androidx.room.RoomSQLiteQuery;
+import androidx.room.SharedSQLiteStatement;
 import androidx.room.util.CursorUtil;
 import androidx.room.util.DBUtil;
 import androidx.room.util.StringUtil;
@@ -36,6 +37,8 @@ public final class ProductDao_Impl implements ProductDao {
   private final RoomDatabase __db;
 
   private final EntityInsertionAdapter<ProductEntity> __insertionAdapterOfProductEntity;
+
+  private final SharedSQLiteStatement __preparedStmtOfDecreaseAvailability;
 
   public ProductDao_Impl(@NonNull final RoomDatabase __db) {
     this.__db = __db;
@@ -90,6 +93,14 @@ public final class ProductDao_Impl implements ProductDao {
         }
       }
     };
+    this.__preparedStmtOfDecreaseAvailability = new SharedSQLiteStatement(__db) {
+      @Override
+      @NonNull
+      public String createQuery() {
+        final String _query = "UPDATE products SET availability = availability - ? WHERE id = ? AND availability >= ?";
+        return _query;
+      }
+    };
   }
 
   @Override
@@ -106,6 +117,36 @@ public final class ProductDao_Impl implements ProductDao {
           return Unit.INSTANCE;
         } finally {
           __db.endTransaction();
+        }
+      }
+    }, $completion);
+  }
+
+  @Override
+  public Object decreaseAvailability(final int productId, final int quantity,
+      final Continuation<? super Unit> $completion) {
+    return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
+      @Override
+      @NonNull
+      public Unit call() throws Exception {
+        final SupportSQLiteStatement _stmt = __preparedStmtOfDecreaseAvailability.acquire();
+        int _argIndex = 1;
+        _stmt.bindLong(_argIndex, quantity);
+        _argIndex = 2;
+        _stmt.bindLong(_argIndex, productId);
+        _argIndex = 3;
+        _stmt.bindLong(_argIndex, quantity);
+        try {
+          __db.beginTransaction();
+          try {
+            _stmt.executeUpdateDelete();
+            __db.setTransactionSuccessful();
+            return Unit.INSTANCE;
+          } finally {
+            __db.endTransaction();
+          }
+        } finally {
+          __preparedStmtOfDecreaseAvailability.release(_stmt);
         }
       }
     }, $completion);

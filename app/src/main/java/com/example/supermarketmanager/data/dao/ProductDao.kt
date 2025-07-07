@@ -46,6 +46,7 @@ interface ProductDao {
     @Query("SELECT * FROM products WHERE id IN (:ids)")
     suspend fun getByIdList(ids: List<Int>): List<ProductEntity>
 
-
-
+    // --- ΝΕΑ ΜΕΘΟΔΟΣ ---
+    @Query("UPDATE products SET availability = availability - :quantity WHERE id = :productId AND availability >= :quantity")
+    suspend fun decreaseAvailability(productId: Int, quantity: Int)
 }
