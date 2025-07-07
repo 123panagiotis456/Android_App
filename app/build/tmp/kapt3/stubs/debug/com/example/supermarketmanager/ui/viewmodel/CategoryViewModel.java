@@ -21,15 +21,9 @@ public final class CategoryViewModel extends androidx.lifecycle.AndroidViewModel
         return null;
     }
     
-    /**
-     * Φόρτωση όλων των κατηγοριών (αρχικά)
-     */
     public final void loadAllCategories() {
     }
     
-    /**
-     * Αναζήτηση με φίλτρο
-     */
     public final void searchCategories(@org.jetbrains.annotations.NotNull
     java.lang.String query) {
     }

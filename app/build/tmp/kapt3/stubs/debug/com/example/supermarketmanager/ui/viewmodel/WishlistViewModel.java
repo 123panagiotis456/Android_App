@@ -17,16 +17,31 @@ public final class WishlistViewModel extends androidx.lifecycle.ViewModel {
         return null;
     }
     
+    /**
+     * Loads all wishlist items with product details.
+     * Handles and logs any exception that may occur.
+     */
     public final void loadItems() {
     }
     
+    /**
+     * Removes an item from the wishlist by its wishlist id.
+     * Updates the LiveData after the operation.
+     */
     public final void removeItem(int wishlistId) {
     }
     
+    /**
+     * Toggles favorite state for a given product.
+     * Calls onToggle callback with the new state.
+     */
     public final void toggleFavorite(int productId, @org.jetbrains.annotations.NotNull
     kotlin.jvm.functions.Function1<? super java.lang.Boolean, kotlin.Unit> onToggle) {
     }
     
+    /**
+     * Checks if a product is favorite. Handles any exception and returns false in error case.
+     */
     @org.jetbrains.annotations.Nullable
     public final java.lang.Object isFavorite(int productId, @org.jetbrains.annotations.NotNull
     kotlin.coroutines.Continuation<? super java.lang.Boolean> $completion) {

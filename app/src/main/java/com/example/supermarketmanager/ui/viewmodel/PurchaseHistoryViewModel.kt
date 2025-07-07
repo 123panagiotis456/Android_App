@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.supermarketmanager.MyApplication
 import com.example.supermarketmanager.data.entities.PurchaseHistoryEntity
 import kotlinx.coroutines.launch
+import android.util.Log
 
 class PurchaseHistoryViewModel : ViewModel() {
 
@@ -15,8 +16,13 @@ class PurchaseHistoryViewModel : ViewModel() {
 
     fun loadPurchaseHistory() {
         viewModelScope.launch {
-            val purchases = MyApplication.database.purchaseHistoryDao().getAll()
-            _purchaseHistory.postValue(purchases)
+            try {
+                val purchases = MyApplication.database.purchaseHistoryDao().getAll()
+                _purchaseHistory.postValue(purchases)
+            } catch (e: Exception) {
+                Log.e("PurchaseHistoryViewModel", "Error loading purchase history", e)
+                _purchaseHistory.postValue(emptyList())
+            }
         }
     }
 }

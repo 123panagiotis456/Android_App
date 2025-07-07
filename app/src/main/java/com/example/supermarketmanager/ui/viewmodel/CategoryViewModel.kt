@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.supermarketmanager.AppDatabase
 import com.example.supermarketmanager.data.entities.CategoryEntity
 import kotlinx.coroutines.launch
+import android.util.Log
 
 class CategoryViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -16,25 +17,31 @@ class CategoryViewModel(application: Application) : AndroidViewModel(application
     private val _categories = MutableLiveData<List<CategoryEntity>>()
     val categories: LiveData<List<CategoryEntity>> = _categories
 
-    private var fullList: List<CategoryEntity> = emptyList() // κρατάμε όλες για το search
+    private var fullList: List<CategoryEntity> = emptyList()
 
-    /** Φόρτωση όλων των κατηγοριών (αρχικά) */
     fun loadAllCategories() {
         viewModelScope.launch {
-            fullList = dao.getAll()
-            _categories.value = fullList
+            try {
+                fullList = dao.getAll()
+                _categories.value = fullList
+            } catch (e: Exception) {
+                Log.e("CategoryViewModel", "Error loading categories", e)
+                _categories.value = emptyList()
+            }
         }
     }
 
-    /** Αναζήτηση με φίλτρο */
     fun searchCategories(query: String) {
-        val filtered = if (query.isBlank()) {
-            fullList
-        } else {
-            fullList.filter { it.name.contains(query, ignoreCase = true) }
+        try {
+            val filtered = if (query.isBlank()) {
+                fullList
+            } else {
+                fullList.filter { it.name.contains(query, ignoreCase = true) }
+            }
+            _categories.value = filtered
+        } catch (e: Exception) {
+            Log.e("CategoryViewModel", "Error searching categories", e)
+            _categories.value = emptyList()
         }
-        _categories.value = filtered
     }
 }
-
-

@@ -15,41 +15,64 @@ class SortBottomSheetDialogFragment(
     private var _binding: BottomSheetSortBinding? = null
     private val binding get() = _binding!!
 
+    // Sorting options enum
     enum class SortOption { DEFAULT, PRICE, DISCOUNT, UNIT_PRICE }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
-        _binding = BottomSheetSortBinding.inflate(inflater, container, false)
-        return binding.root
+    ): View? {
+        // Inflate view with exception handling
+        return try {
+            _binding = BottomSheetSortBinding.inflate(inflater, container, false)
+            binding.root
+        } catch (e: Exception) {
+            e.printStackTrace()
+            super.onCreateView(inflater, container, savedInstanceState)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Floating X: κλείσιμο του sheet
-        binding.btnClose.setOnClickListener { dismiss() }
-
-        binding.btnApply.setOnClickListener {
-            val selected = when (binding.rgSort.checkedRadioButtonId) {
-                binding.rbPrice.id -> SortOption.PRICE
-                else -> SortOption.DEFAULT
+        // Floating X: close the sheet
+        binding.btnClose.setOnClickListener {
+            try {
+                dismiss()
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
-            onApplySort(selected)
-            dismiss()
+        }
+
+        // Apply button: apply selected sorting and close
+        binding.btnApply.setOnClickListener {
+            try {
+                val selected = when (binding.rgSort.checkedRadioButtonId) {
+                    binding.rbPrice.id -> SortOption.PRICE
+                    // You can add more cases for DISCOUNT, UNIT_PRICE if you have radio buttons for them
+                    else -> SortOption.DEFAULT
+                }
+                onApplySort(selected)
+                dismiss()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 
     override fun onStart() {
         super.onStart()
-        dialog?.let {
-            val bottomSheet = it.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
-            bottomSheet?.layoutParams?.height = ViewGroup.LayoutParams.WRAP_CONTENT
-            bottomSheet?.requestLayout()
-            // Κάνε το BottomSheet να ανοίγει ΠΑΝΤΑ fully expanded!
-            bottomSheet?.let { bs ->
-                BottomSheetBehavior.from(bs).state = BottomSheetBehavior.STATE_EXPANDED
+        // Make BottomSheet always fully expanded on open
+        try {
+            dialog?.let {
+                val bottomSheet = it.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+                bottomSheet?.layoutParams?.height = ViewGroup.LayoutParams.WRAP_CONTENT
+                bottomSheet?.requestLayout()
+                bottomSheet?.let { bs ->
+                    BottomSheetBehavior.from(bs).state = BottomSheetBehavior.STATE_EXPANDED
+                }
             }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 

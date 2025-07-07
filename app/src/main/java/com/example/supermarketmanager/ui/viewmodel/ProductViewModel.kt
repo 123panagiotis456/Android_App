@@ -29,115 +29,160 @@ class ProductViewModel : ViewModel() {
 
     // Ένα προϊόν για οθόνη λεπτομερειών
     fun getById(productId: Int): LiveData<ProductEntity?> = liveData {
-        val product = dao.getById(productId)
-        emit(product)
+        try {
+            val product = dao.getById(productId)
+            emit(product)
+        } catch (e: Exception) {
+            Log.e("ProductViewModel", "Error loading product by ID", e)
+            emit(null)
+        }
     }
 
     fun filterProducts(categoryId: Int?, maxPrice: Double?, availableOnly: Boolean?) {
         viewModelScope.launch {
-            val result = if (availableOnly != null) {
-                dao.getFilteredWithAvailability(categoryId, maxPrice, availableOnly)
-            } else {
-                dao.getFilteredWithoutAvailability(categoryId, maxPrice)
+            try {
+                val result = if (availableOnly != null) {
+                    dao.getFilteredWithAvailability(categoryId, maxPrice, availableOnly)
+                } else {
+                    dao.getFilteredWithoutAvailability(categoryId, maxPrice)
+                }
+                Log.d("DBG", "query returned ${result.size} προϊόντα")
+                _products.postValue(result)
+            } catch (e: Exception) {
+                Log.e("ProductViewModel", "Error filtering products", e)
+                _products.postValue(emptyList())
             }
-            Log.d("DBG", "query returned ${result.size} προϊόντα")
-            _products.postValue(result)
         }
     }
 
     fun searchProducts(query: String) {
         viewModelScope.launch {
-            val result = dao.search(query)
-            _products.postValue(result)
+            try {
+                val result = dao.search(query)
+                _products.postValue(result)
+            } catch (e: Exception) {
+                Log.e("ProductViewModel", "Error searching products", e)
+                _products.postValue(emptyList())
+            }
         }
     }
 
     fun addOneToCart(productId: Int) {
         viewModelScope.launch {
-            val currentItems = shoppingListDao.getAll()
-            val existing = currentItems.find { it.productId == productId }
+            try {
+                val currentItems = shoppingListDao.getAll()
+                val existing = currentItems.find { it.productId == productId }
 
-            if (existing != null) {
-                val updated = existing.copy(quantity = existing.quantity + 1)
-                shoppingListDao.update(updated)
-            } else {
-                val newItem = ShoppingListItemEntity(productId = productId, quantity = 1)
-                shoppingListDao.insert(newItem)
+                if (existing != null) {
+                    val updated = existing.copy(quantity = existing.quantity + 1)
+                    shoppingListDao.update(updated)
+                } else {
+                    val newItem = ShoppingListItemEntity(productId = productId, quantity = 1)
+                    shoppingListDao.insert(newItem)
+                }
+            } catch (e: Exception) {
+                Log.e("ProductViewModel", "Error adding one to cart", e)
             }
         }
     }
+
     fun setCartQuantity(productId: Int, quantity: Int) {
         viewModelScope.launch {
-            val currentItems = shoppingListDao.getAll()
-            val existing = currentItems.find { it.productId == productId }
+            try {
+                val currentItems = shoppingListDao.getAll()
+                val existing = currentItems.find { it.productId == productId }
 
-            if (quantity > 0) {
-                if (existing != null) {
-                    shoppingListDao.update(existing.copy(quantity = quantity))
+                if (quantity > 0) {
+                    if (existing != null) {
+                        shoppingListDao.update(existing.copy(quantity = quantity))
+                    } else {
+                        shoppingListDao.insert(
+                            ShoppingListItemEntity(productId = productId, quantity = quantity)
+                        )
+                    }
                 } else {
-                    shoppingListDao.insert(
-                        ShoppingListItemEntity(productId = productId, quantity = quantity)
-                    )
+                    if (existing != null) {
+                        shoppingListDao.delete(existing)
+                    }
                 }
-            } else {
-                if (existing != null) {
-                    shoppingListDao.delete(existing)
-                }
+            } catch (e: Exception) {
+                Log.e("ProductViewModel", "Error setting cart quantity", e)
             }
         }
     }
 
     fun removeOneFromCart(productId: Int) {
         viewModelScope.launch {
-            val currentItems = shoppingListDao.getAll()
-            val existing = currentItems.find { it.productId == productId }
+            try {
+                val currentItems = shoppingListDao.getAll()
+                val existing = currentItems.find { it.productId == productId }
 
-            if (existing != null) {
-                if (existing.quantity > 1) {
-                    val updated = existing.copy(quantity = existing.quantity - 1)
-                    shoppingListDao.update(updated)
-                } else {
-                    shoppingListDao.delete(existing)
+                if (existing != null) {
+                    if (existing.quantity > 1) {
+                        val updated = existing.copy(quantity = existing.quantity - 1)
+                        shoppingListDao.update(updated)
+                    } else {
+                        shoppingListDao.delete(existing)
+                    }
                 }
+            } catch (e: Exception) {
+                Log.e("ProductViewModel", "Error removing one from cart", e)
             }
         }
     }
+
     fun updateCartItemQuantity(productId: Int, newQuantity: Int) {
         viewModelScope.launch {
-            val cartItem = shoppingListDao.getItemByProductId(productId)
-            if (cartItem != null) {
-                shoppingListDao.updateQuantity(productId, newQuantity)
+            try {
+                val cartItem = shoppingListDao.getItemByProductId(productId)
+                if (cartItem != null) {
+                    shoppingListDao.updateQuantity(productId, newQuantity)
+                }
+            } catch (e: Exception) {
+                Log.e("ProductViewModel", "Error updating cart item quantity", e)
             }
         }
     }
 
-    // Ταξινόμηση: Προκαθορισμένη (default)
     fun sortProductsDefault() {
-        _products.value?.let { list ->
-            _products.postValue(list.sortedBy { it.id })
+        try {
+            _products.value?.let { list ->
+                _products.postValue(list.sortedBy { it.id })
+            }
+        } catch (e: Exception) {
+            Log.e("ProductViewModel", "Error sorting products (default)", e)
         }
     }
 
-    // Ταξινόμηση: Τιμή πώλησης (αύξουσα)
     fun sortProductsByPrice() {
-        _products.value?.let { list ->
-            _products.postValue(list.sortedBy { it.pricePerUnit })
+        try {
+            _products.value?.let { list ->
+                _products.postValue(list.sortedBy { it.pricePerUnit })
+            }
+        } catch (e: Exception) {
+            Log.e("ProductViewModel", "Error sorting products by price", e)
         }
     }
 
-    // Ταξινόμηση: Ποσοστό έκπτωσης (όσα έχουν offer πάνω πάνω)
     fun sortProductsByDiscount() {
-        _products.value?.let { list ->
-            _products.postValue(
-                list.sortedByDescending { !it.offer.isNullOrBlank() }
-            )
+        try {
+            _products.value?.let { list ->
+                _products.postValue(
+                    list.sortedByDescending { !it.offer.isNullOrBlank() }
+                )
+            }
+        } catch (e: Exception) {
+            Log.e("ProductViewModel", "Error sorting products by discount", e)
         }
     }
 
-    // Ταξινόμηση: Τιμή μονάδας (βάσει pricePerUnit, αφού δεν έχεις extra πεδίο)
     fun sortProductsByUnitPrice() {
-        _products.value?.let { list ->
-            _products.postValue(list.sortedBy { it.pricePerUnit })
+        try {
+            _products.value?.let { list ->
+                _products.postValue(list.sortedBy { it.pricePerUnit })
+            }
+        } catch (e: Exception) {
+            Log.e("ProductViewModel", "Error sorting products by unit price", e)
         }
     }
 }

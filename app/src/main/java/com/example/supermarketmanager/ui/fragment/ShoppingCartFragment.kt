@@ -29,8 +29,13 @@ class ShoppingCartFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentShoppingCartBinding.inflate(inflater, container, false)
-        return binding.root
+        return try {
+            _binding = FragmentShoppingCartBinding.inflate(inflater, container, false)
+            binding.root
+        } catch (e: Exception) {
+            e.printStackTrace()
+            throw RuntimeException("Could not inflate ShoppingCartFragment layout", e)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,7 +60,6 @@ class ShoppingCartFragment : Fragment() {
 
         cartVm.cartItems.observe(viewLifecycleOwner) { items ->
             adapter.updateData(items)
-
             if (items.isEmpty()) {
                 binding.tvEmptyCart.visibility = View.VISIBLE
                 binding.recyclerViewCart.visibility = View.GONE
@@ -70,23 +74,30 @@ class ShoppingCartFragment : Fragment() {
         }
         cartVm.loadCartItems()
 
-        // Παράγγειλε - εκκαθάριση και μείωση διαθεσιμότητας
         binding.btnOrder.setOnClickListener {
             Log.d("ShoppingCartFragment", "Order button clicked")
             lifecycleScope.launch {
-                cartVm.makePurchase()
-                Log.d("ShoppingCartFragment", "makePurchase() completed")
-                Toast.makeText(requireContext(), "Η παραγγελία καταχωρήθηκε!", Toast.LENGTH_SHORT).show()
-                cartVm.loadCartItems()
-                Log.d("ShoppingCartFragment", "loadCartItems() called after purchase")
+                try {
+                    cartVm.makePurchase()
+                    Toast.makeText(requireContext(), "Η παραγγελία καταχωρήθηκε!", Toast.LENGTH_SHORT).show()
+                    cartVm.loadCartItems()
+                    Log.d("ShoppingCartFragment", "Order completed & cart reloaded")
+                } catch (e: Exception) {
+                    Log.e("ShoppingCartFragment", "Order failed", e)
+                    Toast.makeText(requireContext(), "Παρουσιάστηκε σφάλμα κατά την παραγγελία.", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
-        // Διαγραφή καλαθιού
         binding.btnDelete.setOnClickListener {
             lifecycleScope.launch {
-                cartVm.clearCart()
-                Toast.makeText(requireContext(), "Το καλάθι διαγράφηκε", Toast.LENGTH_SHORT).show()
+                try {
+                    cartVm.clearCart()
+                    Toast.makeText(requireContext(), "Το καλάθι διαγράφηκε", Toast.LENGTH_SHORT).show()
+                } catch (e: Exception) {
+                    Log.e("ShoppingCartFragment", "Cart clear failed", e)
+                    Toast.makeText(requireContext(), "Αποτυχία διαγραφής καλαθιού.", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
