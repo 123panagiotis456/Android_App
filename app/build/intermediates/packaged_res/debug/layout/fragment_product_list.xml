@@ -46,6 +46,39 @@
                 android:clipToPadding="false" />
         </LinearLayout>
 
+        <!-- Floating κουμπί Φίλτρα -->
+        <LinearLayout
+            android:id="@+id/btnFilters"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:background="@drawable/filters_button_bg"
+            android:elevation="8dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:gravity="center_vertical"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="150dp">
+
+            <ImageView
+                android:id="@+id/ivFilters"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_filters"
+                android:tint="@android:color/white"
+                android:contentDescription="@string/filters" />
+
+            <TextView
+                android:id="@+id/tvFilters"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Φίλτρα"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_marginStart="12dp" />
+        </LinearLayout>
+
         <!-- Καλάθι - εμφανίζεται μόνο όταν υπάρχει τουλάχιστον 1 προϊόν -->
         <LinearLayout
             android:id="@+id/cartBanner"
@@ -86,7 +119,6 @@
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:padding="12dp"
-
                 android:layout_marginBottom="4dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
@@ -125,6 +157,21 @@
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
+
+        <!-- Floating κουμπί Χ (πάνω από όλα τα υπόλοιπα) -->
+        <ImageView
+            android:id="@+id/floatingClose"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/circle_bg"
+            android:src="@drawable/ic_close"
+            android:tint="@android:color/white"
+            android:elevation="20dp"
+            android:padding="12dp"
+            android:contentDescription="@string/close"
+            android:visibility="gone" />
 
     </FrameLayout>
          

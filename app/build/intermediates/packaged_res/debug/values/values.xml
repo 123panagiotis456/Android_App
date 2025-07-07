@@ -13,7 +13,7 @@
     <color name="purple_200">#BB86FC</color>
     <color name="purple_500">#6200EE</color>
     <color name="purple_700">#3700B3</color>
-    <color name="teal_200">#03DAC5</color>
+    <color name="teal_200">#00D69D</color>
     <color name="teal_700">#018786</color>
     <color name="white">#FFFFFF</color>
     <string name="add_product">Προσθήκη προϊόντος</string>
@@ -24,8 +24,10 @@
     <string name="cd_decrease">Μείωση</string>
     <string name="cd_increase">Αύξηση</string>
     <string name="cd_product_image">Εικόνα προϊόντος</string>
+    <string name="close">Close</string>
     <string name="detail_offer">1+1 Δώρο</string>
     <string name="favorite">favorite</string>
+    <string name="filters">Φίλτρα</string>
     <string name="history_icon">History</string>
     <string name="label_description">Περιγραφή</string>
     <string name="label_ingredients">Συστατικά</string>
@@ -48,5 +50,6 @@
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorSecondary">@color/teal_200</item>
         <item name="android:statusBarColor" ns1:targetApi="l">@color/purple_700</item>
+        <item name="colorButtonNormal">@android:color/transparent</item>
     </style>
 </resources>

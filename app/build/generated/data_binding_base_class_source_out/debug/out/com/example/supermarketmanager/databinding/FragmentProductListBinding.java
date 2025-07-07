@@ -4,6 +4,7 @@ package com.example.supermarketmanager.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -19,7 +20,16 @@ import java.lang.Object;
 
 public abstract class FragmentProductListBinding extends ViewDataBinding {
   @NonNull
+  public final LinearLayout btnFilters;
+
+  @NonNull
   public final LinearLayout cartBanner;
+
+  @NonNull
+  public final ImageView floatingClose;
+
+  @NonNull
+  public final ImageView ivFilters;
 
   @NonNull
   public final ProgressBar progressBar;
@@ -40,20 +50,28 @@ public abstract class FragmentProductListBinding extends ViewDataBinding {
   public final TextView tvCartTotal;
 
   @NonNull
+  public final TextView tvFilters;
+
+  @NonNull
   public final TextView tvRemainingAmount;
 
   protected FragmentProductListBinding(Object _bindingComponent, View _root, int _localFieldCount,
-      LinearLayout cartBanner, ProgressBar progressBar, RecyclerView rvProducts, Toolbar toolbar,
-      TextView toolbarTitle, TextView tvCartQuantity, TextView tvCartTotal,
+      LinearLayout btnFilters, LinearLayout cartBanner, ImageView floatingClose,
+      ImageView ivFilters, ProgressBar progressBar, RecyclerView rvProducts, Toolbar toolbar,
+      TextView toolbarTitle, TextView tvCartQuantity, TextView tvCartTotal, TextView tvFilters,
       TextView tvRemainingAmount) {
     super(_bindingComponent, _root, _localFieldCount);
+    this.btnFilters = btnFilters;
     this.cartBanner = cartBanner;
+    this.floatingClose = floatingClose;
+    this.ivFilters = ivFilters;
     this.progressBar = progressBar;
     this.rvProducts = rvProducts;
     this.toolbar = toolbar;
     this.toolbarTitle = toolbarTitle;
     this.tvCartQuantity = tvCartQuantity;
     this.tvCartTotal = tvCartTotal;
+    this.tvFilters = tvFilters;
     this.tvRemainingAmount = tvRemainingAmount;
   }
 

@@ -17,11 +17,15 @@ public class FragmentProductListBindingImpl extends FragmentProductListBinding  
         sViewsWithIds.put(R.id.toolbar, 1);
         sViewsWithIds.put(R.id.toolbarTitle, 2);
         sViewsWithIds.put(R.id.rvProducts, 3);
-        sViewsWithIds.put(R.id.cartBanner, 4);
-        sViewsWithIds.put(R.id.tvRemainingAmount, 5);
-        sViewsWithIds.put(R.id.progressBar, 6);
-        sViewsWithIds.put(R.id.tvCartQuantity, 7);
-        sViewsWithIds.put(R.id.tvCartTotal, 8);
+        sViewsWithIds.put(R.id.btnFilters, 4);
+        sViewsWithIds.put(R.id.ivFilters, 5);
+        sViewsWithIds.put(R.id.tvFilters, 6);
+        sViewsWithIds.put(R.id.cartBanner, 7);
+        sViewsWithIds.put(R.id.tvRemainingAmount, 8);
+        sViewsWithIds.put(R.id.progressBar, 9);
+        sViewsWithIds.put(R.id.tvCartQuantity, 10);
+        sViewsWithIds.put(R.id.tvCartTotal, 11);
+        sViewsWithIds.put(R.id.floatingClose, 12);
     }
     // views
     @NonNull
@@ -32,18 +36,22 @@ public class FragmentProductListBindingImpl extends FragmentProductListBinding  
     // Inverse Binding Event Handlers
 
     public FragmentProductListBindingImpl(@Nullable androidx.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
-        this(bindingComponent, root, mapBindings(bindingComponent, root, 9, sIncludes, sViewsWithIds));
+        this(bindingComponent, root, mapBindings(bindingComponent, root, 13, sIncludes, sViewsWithIds));
     }
     private FragmentProductListBindingImpl(androidx.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
         super(bindingComponent, root, 0
             , (android.widget.LinearLayout) bindings[4]
-            , (android.widget.ProgressBar) bindings[6]
+            , (android.widget.LinearLayout) bindings[7]
+            , (android.widget.ImageView) bindings[12]
+            , (android.widget.ImageView) bindings[5]
+            , (android.widget.ProgressBar) bindings[9]
             , (androidx.recyclerview.widget.RecyclerView) bindings[3]
             , (androidx.appcompat.widget.Toolbar) bindings[1]
             , (android.widget.TextView) bindings[2]
-            , (android.widget.TextView) bindings[7]
+            , (android.widget.TextView) bindings[10]
+            , (android.widget.TextView) bindings[11]
+            , (android.widget.TextView) bindings[6]
             , (android.widget.TextView) bindings[8]
-            , (android.widget.TextView) bindings[5]
             );
         this.mboundView0 = (android.widget.FrameLayout) bindings[0];
         this.mboundView0.setTag(null);

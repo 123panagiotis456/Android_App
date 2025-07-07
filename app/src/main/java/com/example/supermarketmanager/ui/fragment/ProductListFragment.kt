@@ -2,7 +2,6 @@ package com.example.supermarketmanager.ui.fragment
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -64,6 +63,27 @@ class ProductListFragment : Fragment() {
             maxPrice = null,
             availableOnly = null
         )
+
+        // Άνοιγμα BottomSheetDialogFragment για φίλτρα (πλέον μόνο το ίδιο το sheet έχει το Χ)
+        binding.btnFilters.setOnClickListener {
+            SortBottomSheetDialogFragment { sortOption ->
+                // Κάνε sort ανάλογα με την επιλογή του χρήστη
+                when (sortOption) {
+                    SortBottomSheetDialogFragment.SortOption.DEFAULT -> {
+                        vm.filterProducts(args.categoryId, null, null)
+                    }
+                    SortBottomSheetDialogFragment.SortOption.PRICE -> {
+                        vm.sortProductsByPrice()
+                    }
+                    SortBottomSheetDialogFragment.SortOption.DISCOUNT -> {
+                        vm.sortProductsByDiscount()
+                    }
+                    SortBottomSheetDialogFragment.SortOption.UNIT_PRICE -> {
+                        vm.sortProductsByUnitPrice()
+                    }
+                }
+            }.show(parentFragmentManager, "SortBottomSheetDialogFragment")
+        }
     }
 
     private fun setupRecyclerView() {

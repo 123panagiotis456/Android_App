@@ -12,6 +12,10 @@
         "source": "C:\\Users\\panag\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-58:\\layout\\fragment_product_list.xml"
     },
     {
+        "merged": "com.example.supermarketmanager.app-mergeDebugResources-55:/layout/bottom_sheet_sort.xml",
+        "source": "com.example.supermarketmanager.app-main-58:/layout/bottom_sheet_sort.xml"
+    },
+    {
         "merged": "C:\\Users\\panag\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-mergeDebugResources-55:\\layout\\fragment_purchase_history.xml",
         "source": "C:\\Users\\panag\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-58:\\layout\\fragment_purchase_history.xml"
     },
@@ -24,16 +28,16 @@
         "source": "C:\\Users\\panag\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-58:\\layout\\fragment_product_detail.xml"
     },
     {
-        "merged": "com.example.supermarketmanager.app-mergeDebugResources-55:/layout/fragment_product_detail.xml",
-        "source": "com.example.supermarketmanager.app-main-58:/layout/fragment_product_detail.xml"
-    },
-    {
         "merged": "C:\\Users\\panag\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-mergeDebugResources-55:\\layout\\fragment_wishlist.xml",
         "source": "C:\\Users\\panag\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-58:\\layout\\fragment_wishlist.xml"
     },
     {
         "merged": "C:\\Users\\panag\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-mergeDebugResources-55:\\layout\\fragment_shopping_cart.xml",
         "source": "C:\\Users\\panag\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-58:\\layout\\fragment_shopping_cart.xml"
+    },
+    {
+        "merged": "C:\\Users\\panag\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-mergeDebugResources-55:\\layout\\bottom_sheet_sort.xml",
+        "source": "C:\\Users\\panag\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-main-58:\\layout\\bottom_sheet_sort.xml"
     },
     {
         "merged": "C:\\Users\\panag\\.gradle\\daemon\\8.6\\com.example.supermarketmanager.app-mergeDebugResources-55:\\layout\\item_category.xml",

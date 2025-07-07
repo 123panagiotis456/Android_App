@@ -111,4 +111,33 @@ class ProductViewModel : ViewModel() {
         }
     }
 
+    // Ταξινόμηση: Προκαθορισμένη (default)
+    fun sortProductsDefault() {
+        _products.value?.let { list ->
+            _products.postValue(list.sortedBy { it.id })
+        }
+    }
+
+    // Ταξινόμηση: Τιμή πώλησης (αύξουσα)
+    fun sortProductsByPrice() {
+        _products.value?.let { list ->
+            _products.postValue(list.sortedBy { it.pricePerUnit })
+        }
+    }
+
+    // Ταξινόμηση: Ποσοστό έκπτωσης (όσα έχουν offer πάνω πάνω)
+    fun sortProductsByDiscount() {
+        _products.value?.let { list ->
+            _products.postValue(
+                list.sortedByDescending { !it.offer.isNullOrBlank() }
+            )
+        }
+    }
+
+    // Ταξινόμηση: Τιμή μονάδας (βάσει pricePerUnit, αφού δεν έχεις extra πεδίο)
+    fun sortProductsByUnitPrice() {
+        _products.value?.let { list ->
+            _products.postValue(list.sortedBy { it.pricePerUnit })
+        }
+    }
 }

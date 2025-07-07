@@ -25,4 +25,6 @@
     <string name="favorite">favorite</string>
     <string name="toolbar_history_title">Order History</string>
     <string name="history_icon">History</string>
+    <string name="filters">Φίλτρα</string>
+    <string name="close">Close</string>
 </resources>
