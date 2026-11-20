@@ -78,4 +78,8 @@
     <string name="wishlist_empty">Δεν έχεις ακόμη αγαπημένα.</string>
     <string name="wishlist_remove_product">Αφαίρεση από τα αγαπημένα: %1$s</string>
     <string name="cart_item_total">Σύνολο προϊόντος</string>
+    <string name="nav_catalog">Κατάλογος</string>
+    <string name="nav_history">Ιστορικό</string>
+    <string name="nav_view_cart">Προβολή καλαθιού · %1$s</string>
+    <string name="nav_cart_quantity">Ποσότητα στο καλάθι: %1$s</string>
 </resources>

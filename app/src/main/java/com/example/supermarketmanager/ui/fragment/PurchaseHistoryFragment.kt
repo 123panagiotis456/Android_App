@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.supermarketmanager.R
 import com.example.supermarketmanager.data.entities.PurchaseHistoryEntity
@@ -38,13 +37,6 @@ class PurchaseHistoryFragment : Fragment(R.layout.fragment_purchase_history) {
             )
         }
         historyViewModel.loadPurchaseHistory()
-
-        binding.btnCart.setOnClickListener {
-            findNavController().navigate(R.id.shoppingCartFragment)
-        }
-        binding.btnWishlist.setOnClickListener {
-            findNavController().navigate(R.id.wishlistFragment)
-        }
     }
 
     private fun readdPurchase(purchase: PurchaseHistoryEntity) {

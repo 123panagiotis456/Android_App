@@ -1,9 +1,13 @@
 package com.example.supermarketmanager.ui.adapter
 
+import android.animation.ValueAnimator
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.example.supermarketmanager.R
 import com.example.supermarketmanager.data.entities.ProductEntity
 import com.example.supermarketmanager.databinding.ItemProductBinding
 import com.example.supermarketmanager.ui.formatEuro
@@ -23,8 +27,10 @@ class ProductAdapter(
         notifyDataSetChanged()
     }
 
-    fun updateQuantity(productId: Int, quantity: Int) {
-        quantityMap[productId] = quantity
+    fun updateQuantities(quantities: Map<Int, Int>) {
+        if (quantityMap == quantities) return
+        quantityMap.clear()
+        quantityMap.putAll(quantities)
         notifyDataSetChanged()
     }
 
@@ -71,57 +77,52 @@ class ProductAdapter(
                 onClick(product)
             }
 
-            // Ποσότητα για το συγκεκριμένο προϊόν
-            val quantity = quantityMap[product.id] ?: 0
+            renderQuantity(product, quantityMap[product.id] ?: 0)
 
-            // Εμφάνιση ανάλογα με ποσότητα
-            if (quantity == 0) {
-                binding.btnAdd.visibility = View.VISIBLE
-                binding.quantityLayout.visibility = View.GONE
-            } else {
-                binding.btnAdd.visibility = View.GONE
-                binding.quantityLayout.visibility = View.VISIBLE
-                binding.tvQuantity.text = quantity.toString()
-            }
-
-            // Disable το κουμπί αύξησης αν έχουμε φτάσει το stock
-            binding.btnAdd.isEnabled = product.availability > 0
-            binding.btnIncrease.isEnabled = quantity < product.availability
-
-            // Πάτημα στο αρχικό '+' κουμπί
             binding.btnAdd.setOnClickListener {
                 if (product.availability > 0) {
                     viewModel.addOneToCart(product.id)
                     quantityMap[product.id] = 1
-                    notifyItemChanged(adapterPosition)
+                    renderQuantity(product, 1, animateControls = true)
                 }
             }
 
-            // Πάτημα στο ➕
             binding.btnIncrease.setOnClickListener {
-                val current = quantityMap[product.id] ?: 1
-                if (current < product.availability) {
-                    viewModel.addOneToCart(product.id)
-                    quantityMap[product.id] = current + 1
-                    binding.tvQuantity.text = (current + 1).toString()
-                }
-                // Disable αν φτάσαμε το μέγιστο
-                binding.btnIncrease.isEnabled = ((quantityMap[product.id] ?: 0) < product.availability)
+                val current = quantityMap[product.id] ?: 0
+                if (current >= product.availability) return@setOnClickListener
+                viewModel.addOneToCart(product.id)
+                quantityMap[product.id] = current + 1
+                renderQuantity(product, current + 1)
             }
 
-            // Πάτημα στο ➖
             binding.btnDecrease.setOnClickListener {
-                val current = quantityMap[product.id] ?: 1
+                val current = quantityMap[product.id] ?: 0
+                if (current == 0) return@setOnClickListener
                 viewModel.removeOneFromCart(product.id)
-                if (current > 1) {
-                    quantityMap[product.id] = current - 1
-                    binding.tvQuantity.text = (current - 1).toString()
-                } else {
-                    quantityMap[product.id] = 0
-                    notifyItemChanged(adapterPosition)
-                }
-                // Ενεργοποιούμε πάλι το increase αν πέσαμε κάτω από το διαθέσιμο
-                binding.btnIncrease.isEnabled = ((quantityMap[product.id] ?: 0) < product.availability)
+                val quantity = current - 1
+                if (quantity == 0) quantityMap.remove(product.id) else quantityMap[product.id] = quantity
+                renderQuantity(product, quantity, animateControls = quantity == 0)
+            }
+        }
+
+        private fun renderQuantity(product: ProductEntity, quantity: Int, animateControls: Boolean = false) {
+            binding.btnAdd.isVisible = quantity == 0
+            binding.quantityLayout.isVisible = quantity > 0
+            binding.btnAdd.isEnabled = product.availability > 0
+            binding.btnIncrease.isEnabled = quantity < product.availability
+            binding.tvQuantity.text = quantity.toString()
+            binding.tvQuantity.contentDescription = binding.root.context.getString(
+                R.string.nav_cart_quantity, binding.tvQuantity.text
+            )
+
+            binding.btnAdd.animate().cancel()
+            binding.quantityLayout.animate().cancel()
+            binding.btnAdd.alpha = 1f
+            binding.quantityLayout.alpha = 1f
+            if (animateControls && (Build.VERSION.SDK_INT < 26 || ValueAnimator.areAnimatorsEnabled())) {
+                val controls = if (quantity > 0) binding.quantityLayout else binding.btnAdd
+                controls.alpha = 0.55f
+                controls.animate().alpha(1f).setDuration(150).start()
             }
         }
     }

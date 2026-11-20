@@ -1,19 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/categoryListFragment"
+        android:id="@id/catalogGraph"
         android:icon="@drawable/ic_categories"
-        android:title="@string/title_categories"/>
+        android:title="@string/nav_catalog" />
     <item
-        android:id="@+id/shoppingListFragment"
-        android:icon="@drawable/ic_shopping"
-        android:title="@string/title_shopping_list"/>
+        android:id="@id/wishlistFragment"
+        android:icon="@drawable/ic_favorite_border"
+        android:title="@string/title_wishlist" />
     <item
-        android:id="@+id/wishlistFragment"
-        android:icon="@drawable/ic_wishlist"
-        android:title="@string/title_wishlist"/>
+        android:id="@id/shoppingCartFragment"
+        android:icon="@drawable/shopping_basket"
+        android:title="@string/cart1" />
     <item
-        android:id="@+id/purchaseHistoryFragment"
+        android:id="@id/purchaseHistoryFragment"
         android:icon="@drawable/ic_history"
-        android:title="@string/title_purchase_history"/>
+        android:title="@string/nav_history" />
 </menu>

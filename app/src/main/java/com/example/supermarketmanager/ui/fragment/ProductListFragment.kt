@@ -6,14 +6,17 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.supermarketmanager.MainActivity
 import com.example.supermarketmanager.R
 import com.example.supermarketmanager.databinding.FragmentProductListBinding
 import com.example.supermarketmanager.ui.adapter.ProductAdapter
+import com.example.supermarketmanager.ui.formatEuro
 import com.example.supermarketmanager.ui.viewmodel.ProductViewModel
 
 class ProductListFragment : Fragment() {
@@ -69,19 +72,7 @@ class ProductListFragment : Fragment() {
         observeViewModel()
         observeCart()
 
-        // Navigate to shopping cart when clicking on cart banner
-        binding.cartBanner.setOnClickListener {
-            val action = ProductListFragmentDirections.actionProductListFragmentToShoppingCartFragment()
-            try {
-                findNavController().navigate(action)
-            } catch (e: IllegalArgumentException) {
-                Log.e(TAG, "Invalid navigation to cart", e)
-                Toast.makeText(requireContext(), "Unable to open cart", Toast.LENGTH_SHORT).show()
-            } catch (e: IllegalStateException) {
-                Log.e(TAG, "Navigation to cart failed", e)
-                Toast.makeText(requireContext(), "Unable to open cart", Toast.LENGTH_SHORT).show()
-            }
-        }
+        binding.cartBanner.setOnClickListener { (requireActivity() as MainActivity).showCart() }
 
         // Load initial products for the selected category
         vm.filterProducts(
@@ -142,30 +133,14 @@ class ProductListFragment : Fragment() {
 
     /** Observes the shopping cart and updates the UI with cart details */
     private fun observeCart() {
-        vm.cartItems.observe(viewLifecycleOwner) { itemList ->
-            val total = itemList.sumOf { it.pricePerUnit * it.quantity }
-
-            // Update product quantities in the adapter
-            for (item in itemList) {
-                adapter.updateQuantity(item.productId, item.quantity)
-            }
-
-            if (itemList.isNotEmpty()) {
-                binding.cartBanner.visibility = View.VISIBLE
-
-                val remaining = (20.0 - total).coerceAtLeast(0.0)
-                val percentage = ((total / 20.0) * 100).coerceAtMost(100.0)
-
-                binding.tvCartQuantity.text = itemList.sumOf { it.quantity }.toString()
-                binding.tvCartTotal.text = String.format("%.2f€", total)
-                binding.tvRemainingAmount.text = if (total < 20.0) {
-                    String.format("%.2f€ ακόμα για να συμπληρώσεις το ποσό ελ. παραγγελίας.", remaining)
-                } else {
-                    "Έφτασες το ελάχιστο ποσό παραγγελίας!"
-                }
-                binding.progressBar.progress = percentage.toInt()
-            } else {
-                binding.cartBanner.visibility = View.GONE
+        vm.cartItems.observe(viewLifecycleOwner) { items ->
+            adapter.updateQuantities(items.groupingBy { it.productId }.fold(0) { sum, item ->
+                sum + item.quantity
+            })
+            binding.cartBanner.isVisible = items.isNotEmpty()
+            if (items.isNotEmpty()) {
+                val total = items.sumOf { it.pricePerUnit * it.quantity }
+                binding.cartBanner.text = getString(R.string.nav_view_cart, requireContext().formatEuro(total))
             }
         }
     }
