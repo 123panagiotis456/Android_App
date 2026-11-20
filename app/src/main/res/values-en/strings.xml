@@ -106,4 +106,7 @@
     <string name="catalog_search">Search products</string>
     <string name="catalog_available_only">In-stock products only</string>
     <string name="purchase_order_paid_total">Paid: %1$s</string>
+    <string name="catalog_filters_title">Sort and filter</string>
+    <string name="catalog_sort_by">Sort by</string>
+    <string name="catalog_price_ascending">Price: low to high</string>
 </resources>

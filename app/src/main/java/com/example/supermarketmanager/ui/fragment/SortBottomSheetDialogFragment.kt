@@ -5,12 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import com.example.supermarketmanager.R
 import com.example.supermarketmanager.databinding.BottomSheetSortBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class SortBottomSheetDialogFragment : BottomSheetDialogFragment() {
+
+    override fun getTheme(): Int = R.style.ThemeOverlay_SupermarketManager_FilterSheet
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -37,7 +40,10 @@ class SortBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        (dialog as? BottomSheetDialog)?.behavior?.state = BottomSheetBehavior.STATE_EXPANDED
+        (dialog as? BottomSheetDialog)?.behavior?.apply {
+            setShouldRemoveExpandedCorners(false)
+            state = BottomSheetBehavior.STATE_EXPANDED
+        }
     }
 
     companion object {
