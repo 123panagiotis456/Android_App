@@ -12,9 +12,11 @@ import java.text.DateFormat
 import java.util.Date
 
 class PurchaseHistoryAdapter(
+    initiallyExpanded: IntArray,
     private val onReaddClick: (PurchaseHistoryEntity) -> Unit
 ) : RecyclerView.Adapter<PurchaseHistoryAdapter.PurchaseViewHolder>() {
 
+    private val expandedPurchases = initiallyExpanded.toMutableSet()
     private var purchases: List<PurchaseHistoryEntity> = emptyList()
     private var productNames: Map<Int, String> = emptyMap()
 
@@ -55,9 +57,28 @@ class PurchaseHistoryAdapter(
             context.getString(R.string.purchase_history_legacy)
         }
 
-        binding.btnReaddToCart.isVisible = hasDetails
+        updateExpansion(binding, purchase.id in expandedPurchases, hasDetails)
+        binding.root.setOnClickListener {
+            val expanded = expandedPurchases.add(purchase.id)
+            if (!expanded) expandedPurchases.remove(purchase.id)
+            updateExpansion(binding, expanded, hasDetails)
+        }
         binding.btnReaddToCart.setOnClickListener { onReaddClick(purchase) }
     }
+
+    private fun updateExpansion(
+        binding: ItemPurchaseHistoryBinding,
+        expanded: Boolean,
+        hasDetails: Boolean
+    ) {
+        binding.tvProductsDetails.isVisible = expanded
+        binding.btnReaddToCart.isVisible = expanded && hasDetails
+        binding.tvOrderDetailsAction.setText(
+            if (expanded) R.string.purchase_history_hide_products else R.string.purchase_history_show_products
+        )
+    }
+
+    fun expandedPurchaseIds(): IntArray = expandedPurchases.toIntArray()
 
     override fun getItemCount(): Int = purchases.size
 

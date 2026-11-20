@@ -22,12 +22,18 @@ class PurchaseHistoryFragment : Fragment(R.layout.fragment_purchase_history) {
 
     private val historyViewModel: PurchaseHistoryViewModel by viewModels()
     private val cartViewModel: ShoppingListViewModel by viewModels()
+    private var historyAdapter: PurchaseHistoryAdapter? = null
+    private var expandedPurchaseIds = intArrayOf()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val binding = FragmentPurchaseHistoryBinding.bind(view)
-        val adapter = PurchaseHistoryAdapter(::readdPurchase)
+        val adapter = PurchaseHistoryAdapter(
+            savedInstanceState?.getIntArray(EXPANDED_PURCHASES) ?: expandedPurchaseIds,
+            ::readdPurchase
+        )
+        historyAdapter = adapter
         binding.recyclerViewPurchaseHistory.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewPurchaseHistory.adapter = adapter
 
@@ -49,6 +55,17 @@ class PurchaseHistoryFragment : Fragment(R.layout.fragment_purchase_history) {
         historyViewModel.loadPurchaseHistory()
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putIntArray(EXPANDED_PURCHASES, historyAdapter?.expandedPurchaseIds() ?: expandedPurchaseIds)
+    }
+
+    override fun onDestroyView() {
+        expandedPurchaseIds = historyAdapter?.expandedPurchaseIds() ?: expandedPurchaseIds
+        historyAdapter = null
+        super.onDestroyView()
+    }
+
     private fun readdPurchase(purchase: PurchaseHistoryEntity) {
         viewLifecycleOwner.lifecycleScope.launch {
             try {
@@ -65,5 +82,8 @@ class PurchaseHistoryFragment : Fragment(R.layout.fragment_purchase_history) {
 
     private fun showMessage(message: Int) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+    private companion object {
+        const val EXPANDED_PURCHASES = "expanded_purchases"
     }
 }
