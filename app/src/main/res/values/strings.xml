@@ -91,6 +91,8 @@
     <string name="purchase_order_stock">Δεν υπάρχει διαθέσιμη ποσότητα για προσθήκη.</string>
     <string name="purchase_order_missing">Η παραγγελία δεν βρέθηκε.</string>
     <string name="purchase_order_unavailable">Μη διαθέσιμο</string>
-    <string name="purchase_order_total">Σύνολο παραγγελίας · %1$s</string>
-    <string name="purchase_order_line">%1$d στην παραγγελία · %2$s / μονάδα</string>
+    <string name="purchase_order_total_label">Σύνολο παραγγελίας</string>
+    <string name="purchase_order_products">Προϊόντα παραγγελίας</string>
+    <string name="purchase_order_quantity">Ποσότητα αγοράς: %1$d</string>
+    <string name="purchase_order_unit_price">%1$s / μονάδα</string>
 </resources>

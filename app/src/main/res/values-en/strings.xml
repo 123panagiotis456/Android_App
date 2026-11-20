@@ -91,6 +91,8 @@
     <string name="purchase_order_stock">There is no available stock to add.</string>
     <string name="purchase_order_missing">Order not found.</string>
     <string name="purchase_order_unavailable">Unavailable</string>
-    <string name="purchase_order_total">Order total · %1$s</string>
-    <string name="purchase_order_line">%1$d in order · %2$s / unit</string>
+    <string name="purchase_order_total_label">Order total</string>
+    <string name="purchase_order_products">Products in this order</string>
+    <string name="purchase_order_quantity">Quantity purchased: %1$d</string>
+    <string name="purchase_order_unit_price">%1$s / unit</string>
 </resources>

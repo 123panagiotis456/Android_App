@@ -46,10 +46,9 @@ class PurchaseOrderFragment : Fragment(R.layout.fragment_purchase_order) {
                     return@launch
                 }
                 binding.orderDate.text = requireContext().formatPurchaseDate(order.purchase.timestamp)
-                binding.orderTotal.text = getString(
-                    R.string.purchase_order_total, requireContext().formatEuro(order.purchase.totalCost)
-                )
+                binding.orderTotal.text = requireContext().formatEuro(order.purchase.totalCost)
                 binding.orderSummary.isVisible = true
+                binding.orderProductsHeading.isVisible = order.lines.isNotEmpty()
                 binding.orderProducts.adapter = OrderLineAdapter(order.lines, ::addProduct)
                 binding.orderStatus.setText(R.string.purchase_history_legacy)
                 binding.orderStatus.isVisible = order.lines.isEmpty()
@@ -97,9 +96,14 @@ class PurchaseOrderFragment : Fragment(R.layout.fragment_purchase_order) {
             val context = binding.root.context
             val name = line.name ?: context.getString(R.string.purchase_history_product, line.productId)
             binding.productName.text = name
-            binding.productPurchase.text = context.getString(
-                R.string.purchase_order_line, line.quantity, context.formatEuro(line.unitPrice)
-            )
+            binding.productPurchase.text =
+                context.getString(R.string.purchase_order_quantity, line.quantity)
+            binding.productPrice.text =
+                context.getString(R.string.purchase_order_unit_price, context.formatEuro(line.unitPrice))
+            val imageId = line.imageDrawable?.let {
+                context.resources.getIdentifier(it, "drawable", context.packageName)
+            } ?: 0
+            binding.productImage.setImageResource(if (imageId != 0) imageId else R.drawable.ic_placeholder)
             binding.productUnavailable.isVisible = !line.inStock
             binding.addProduct.isEnabled = line.inStock
             binding.addProduct.contentDescription = context.getString(R.string.purchase_order_add, name)
