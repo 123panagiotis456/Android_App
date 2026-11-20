@@ -75,4 +75,7 @@
     <string name="cart_clear">Clear cart</string>
     <string name="price_per_kg">per kilogram</string>
     <string name="price_per_item">per item</string>
+    <string name="wishlist_empty">You don’t have any favorites yet.</string>
+    <string name="wishlist_remove_product">Remove from favorites: %1$s</string>
+    <string name="cart_item_total">Item total</string>
 </resources>
