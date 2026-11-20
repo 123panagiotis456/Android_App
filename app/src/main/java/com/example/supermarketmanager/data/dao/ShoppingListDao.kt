@@ -11,6 +11,9 @@ interface ShoppingListDao {
     @Query("SELECT * FROM shopping_list")
     suspend fun getAll(): List<ShoppingListItemEntity>
 
+    @Query("SELECT COALESCE(SUM(quantity), 0) FROM shopping_list WHERE productId = :productId")
+    suspend fun totalQuantity(productId: Int): Long
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(item: ShoppingListItemEntity)
 

@@ -12,23 +12,24 @@ import kotlinx.coroutines.launch
 
 class PurchaseHistoryViewModel : ViewModel() {
 
-    data class History(
-        val purchases: List<PurchaseHistoryEntity>,
-        val productNames: Map<Int, String>
+    data class OrderLine(
+        val productId: Int,
+        val name: String?,
+        val quantity: Int,
+        val unitPrice: Double,
+        val inStock: Boolean
     )
 
-    private val _history = MutableLiveData<Result<History>>()
-    val history: LiveData<Result<History>> = _history
+    data class Order(val purchase: PurchaseHistoryEntity, val lines: List<OrderLine>)
+
+    private val _history = MutableLiveData<Result<List<PurchaseHistoryEntity>>>()
+    val history: LiveData<Result<List<PurchaseHistoryEntity>>> = _history
 
     fun loadPurchaseHistory() {
         viewModelScope.launch {
             try {
-                val database = MyApplication.database
-                val purchases = database.purchaseHistoryDao().getAll()
-                val productIds = purchases.flatMap { it.productIds }.distinct()
-                val productNames = database.productDao().getByIdList(productIds)
-                    .associate { it.id to it.name }
-                _history.value = Result.success(History(purchases, productNames))
+                val purchases = MyApplication.database.purchaseHistoryDao().getAll()
+                _history.value = Result.success(purchases)
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
@@ -36,5 +37,22 @@ class PurchaseHistoryViewModel : ViewModel() {
                 _history.value = Result.failure(e)
             }
         }
+    }
+
+    suspend fun loadOrder(id: Int): Order? {
+        val database = MyApplication.database
+        val purchase = database.purchaseHistoryDao().getById(id) ?: return null
+        val ids = purchase.productIds
+        if (ids.isEmpty() || ids.size != purchase.quantities.size || ids.size != purchase.prices.size) {
+            return Order(purchase, emptyList())
+        }
+        val products = database.productDao().getByIdList(ids.distinct()).associateBy { it.id }
+        return Order(purchase, ids.mapIndexed { index, productId ->
+            val product = products[productId]
+            OrderLine(
+                productId, product?.name, purchase.quantities[index], purchase.prices[index],
+                product != null && product.availability > 0
+            )
+        })
     }
 }

@@ -1,0 +1,55 @@
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.Market.Card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/productName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.Market.ItemTitle"
+                tools:text="Γάλα" />
+
+            <TextView
+                android:id="@+id/productPurchase"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textAppearance="@style/TextAppearance.Market.Secondary"
+                tools:text="2 στην παραγγελία · 1,20 € / μονάδα" />
+
+            <TextView
+                android:id="@+id/productUnavailable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/purchase_order_unavailable"
+                android:textAppearance="@style/TextAppearance.Market.Secondary"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/addProduct"
+            style="@style/Widget.Market.QuantityButton"
+            app:srcCompat="@drawable/ic_add"
+            tools:contentDescription="@string/add_product" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

@@ -57,33 +57,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="@string/purchase_history_show_products"
+            android:text="@string/purchase_order_open"
             android:textColor="@color/market_mint"
             android:textSize="14sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tvProductsDetails"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:lineSpacingExtra="4dp"
-            android:textAppearance="@style/TextAppearance.Market.Secondary"
-            android:visibility="gone"
-            tools:visibility="visible"
-            tools:text="2 × Γάλα · 1,20 € / μονάδα&#10;1 × Ψωμί · 1,50 € / μονάδα" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnReaddToCart"
-            style="@style/Widget.Market.PrimaryButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/purchase_history_readd"
-            android:visibility="gone"
-            tools:visibility="visible"
-            app:icon="@drawable/shopping_basket"
-            app:iconGravity="textStart"
-            app:iconTint="@color/market_primary_text" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
