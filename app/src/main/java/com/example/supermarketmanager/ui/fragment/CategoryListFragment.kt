@@ -60,17 +60,6 @@ class CategoryListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         try {
-            // Set up navigation buttons (history, cart, wishlist)
-            binding.btnHistory.setOnClickListener {
-                safeNavigate(R.id.action_categoryListFragment_to_purchaseHistoryFragment)
-            }
-            binding.btnCart.setOnClickListener {
-                safeNavigate(R.id.action_categoryListFragment_to_ShoppingCartFragment)
-            }
-            binding.btnWishlist.setOnClickListener {
-                safeNavigate(R.id.action_categoryListFragment_to_wishlistFragment)
-            }
-
             // Set up toolbar
             (requireActivity() as? AppCompatActivity)?.apply {
                 setSupportActionBar(binding.toolbar)

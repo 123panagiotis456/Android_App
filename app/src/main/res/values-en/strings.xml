@@ -78,4 +78,8 @@
     <string name="wishlist_empty">You don’t have any favorites yet.</string>
     <string name="wishlist_remove_product">Remove from favorites: %1$s</string>
     <string name="cart_item_total">Item total</string>
+    <string name="nav_catalog">Catalog</string>
+    <string name="nav_history">History</string>
+    <string name="nav_view_cart">View cart · %1$s</string>
+    <string name="nav_cart_quantity">Quantity in cart: %1$s</string>
 </resources>
