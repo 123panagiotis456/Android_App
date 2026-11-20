@@ -6,8 +6,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.supermarketmanager.AppDatabase
-import com.example.supermarketmanager.data.repository.WishlistRepository
 import com.example.supermarketmanager.databinding.FragmentWishlistBinding
 import com.example.supermarketmanager.ui.adapter.WishlistAdapter
 import com.example.supermarketmanager.ui.viewmodel.WishlistViewModel
@@ -19,14 +17,7 @@ class WishlistFragment : Fragment() {
     private var _binding: FragmentWishlistBinding? = null
     private val binding get() = _binding!!
 
-    // ViewModel with factory for dependency injection
-    private val vm: WishlistViewModel by viewModels {
-        WishlistViewModelFactory(
-            WishlistRepository(
-                AppDatabase.getInstance(requireContext()).wishlistDao()
-            )
-        )
-    }
+    private val vm: WishlistViewModel by viewModels { WishlistViewModelFactory() }
 
     private lateinit var adapter: WishlistAdapter
 

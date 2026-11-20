@@ -46,15 +46,9 @@ class ShoppingCartFragment : Fragment() {
 
         adapter = ShoppingCartAdapter(
             mutableListOf(),
-            onIncreaseClick = { item ->
-                val newQuantity = item.quantity + 1
-                vm.updateCartItemQuantity(item.productId, newQuantity)
-            },
+            onIncreaseClick = { item -> vm.addOneToCart(item.productId) },
             onDecreaseClick = { item ->
-                if (item.quantity > 1) {
-                    val newQuantity = item.quantity - 1
-                    vm.updateCartItemQuantity(item.productId, newQuantity)
-                }
+                if (item.quantity > 1) vm.decreaseCartQuantity(item.productId)
             }
         )
 

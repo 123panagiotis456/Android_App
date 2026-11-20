@@ -47,37 +47,15 @@ class WishlistViewModel(
         }
     }
 
-    /**
-     * Toggles favorite state for a given product.
-     * Calls onToggle callback with the new state.
-     */
-    fun toggleFavorite(productId: Int, onToggle: (Boolean) -> Unit = {}) {
-        viewModelScope.launch {
-            try {
-                val isFav = repository.isFavorite(productId)
-                if (isFav) {
-                    repository.removeFromWishlist(productId)
-                } else {
-                    repository.addToWishlist(productId)
-                }
-                loadItems() // Always refresh UI
-                onToggle(!isFav)
-            } catch (e: Exception) {
-                Log.e("WishlistViewModel", "Error toggling favorite", e)
-                onToggle(false)
-            }
+    suspend fun toggleFavorite(productId: Int): Boolean {
+        val favorite = repository.isFavorite(productId)
+        if (favorite) {
+            repository.removeFromWishlist(productId)
+        } else {
+            repository.addToWishlist(productId)
         }
+        return !favorite
     }
 
-    /**
-     * Checks if a product is favorite. Handles any exception and returns false in error case.
-     */
-    suspend fun isFavorite(productId: Int): Boolean {
-        return try {
-            repository.isFavorite(productId)
-        } catch (e: Exception) {
-            Log.e("WishlistViewModel", "Error checking if product is favorite", e)
-            false
-        }
-    }
+    suspend fun isFavorite(productId: Int): Boolean = repository.isFavorite(productId)
 }

@@ -63,4 +63,8 @@
     <string name="order_empty_cart">Το καλάθι είναι άδειο.</string>
     <string name="order_insufficient_stock">Μείωσε την ποσότητα για το προϊόν %1$s. Διαθέσιμα: %2$d.</string>
     <string name="order_failed">Η παραγγελία δεν καταχωρήθηκε. Δοκίμασε ξανά.</string>
+    <string name="wishlist_update_failed">Δεν ήταν δυνατή η ενημέρωση των αγαπημένων.</string>
+    <string name="cart_update_failed">Δεν ήταν δυνατή η ενημέρωση του καλαθιού.</string>
+    <string name="purchase_history_load_failed">Δεν ήταν δυνατή η φόρτωση του ιστορικού αγορών.</string>
+    <string name="purchase_readded">Τα προϊόντα προστέθηκαν ξανά στο καλάθι.</string>
 </resources>

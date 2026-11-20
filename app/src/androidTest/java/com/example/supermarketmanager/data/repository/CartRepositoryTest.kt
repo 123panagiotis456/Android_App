@@ -78,6 +78,23 @@ class CartRepositoryTest {
         assertEquals(3, stock(2))
     }
 
+    @Test
+    fun simultaneousQuantityChangesUseTheLatestQuantity() = runBlocking {
+        seedCart(secondQuantity = 2)
+
+        listOf(
+            async { CartRepository.adjustQuantity(database, 1, 1) },
+            async { CartRepository.adjustQuantity(database, 1, 1) }
+        ).awaitAll()
+        assertEquals(4, database.shoppingListDao().getItemByProductId(1)?.quantity)
+
+        repeat(4) { CartRepository.adjustQuantity(database, 1, -1, minimum = 1) }
+        assertEquals(1, database.shoppingListDao().getItemByProductId(1)?.quantity)
+
+        CartRepository.adjustQuantity(database, 1, -1)
+        assertTrue(database.shoppingListDao().getItemByProductId(1) == null)
+    }
+
     private suspend fun seedCart(secondQuantity: Int) {
         database.categoryDao().insertAll(listOf(CategoryEntity(1, "Food")))
         database.productDao().insertAll(listOf(product(1, "Apple", 2.0), product(2, "Bread", 3.0)))

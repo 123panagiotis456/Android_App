@@ -63,4 +63,8 @@
     <string name="order_empty_cart">Your cart is empty.</string>
     <string name="order_insufficient_stock">Reduce the quantity for %1$s. Available: %2$d.</string>
     <string name="order_failed">The order could not be placed. Please try again.</string>
+    <string name="wishlist_update_failed">Could not update favorites.</string>
+    <string name="cart_update_failed">Could not update the cart.</string>
+    <string name="purchase_history_load_failed">Could not load purchase history.</string>
+    <string name="purchase_readded">The products were added back to your cart.</string>
 </resources>

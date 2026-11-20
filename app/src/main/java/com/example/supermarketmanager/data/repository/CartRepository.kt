@@ -1,22 +1,51 @@
 package com.example.supermarketmanager.data.repository
 
-import android.content.Context
 import androidx.room.withTransaction
 import com.example.supermarketmanager.AppDatabase
+import com.example.supermarketmanager.data.dao.ShoppingListDao
 import com.example.supermarketmanager.data.entities.PurchaseHistoryEntity
 import com.example.supermarketmanager.data.entities.ShoppingListItemEntity
 
 object CartRepository {
-    suspend fun addProductToCart(context: Context, productId: Int) {
-        val dao = AppDatabase.getInstance(context).shoppingListDao()
-        val currentItems = dao.getAll()
-        val existingItem = currentItems.find { it.productId == productId }
+    fun observeItems(database: AppDatabase) =
+        database.shoppingListDao().getItemsWithProductDetails()
 
-        if (existingItem != null) {
-            val updated = existingItem.copy(quantity = existingItem.quantity + 1)
-            dao.update(updated)
-        } else {
-            dao.insert(ShoppingListItemEntity(productId = productId, quantity = 1))
+    suspend fun clear(database: AppDatabase) = database.shoppingListDao().clear()
+
+    suspend fun setQuantity(database: AppDatabase, productId: Int, quantity: Int) {
+        database.withTransaction {
+            database.shoppingListDao().changeQuantity(productId) { quantity }
+        }
+    }
+
+    suspend fun adjustQuantity(database: AppDatabase, productId: Int, delta: Int, minimum: Int = 0) {
+        database.withTransaction {
+            database.shoppingListDao().changeQuantity(productId) { current ->
+                if (current == 0 && delta < 0) 0 else (current + delta).coerceAtLeast(minimum)
+            }
+        }
+    }
+
+    suspend fun readdPurchase(database: AppDatabase, purchase: PurchaseHistoryEntity) {
+        database.withTransaction {
+            val dao = database.shoppingListDao()
+            purchase.productIds.forEachIndexed { index, productId ->
+                val quantity = purchase.quantities[index]
+                dao.changeQuantity(productId) { it + quantity }
+            }
+        }
+    }
+
+    private suspend fun ShoppingListDao.changeQuantity(
+        productId: Int,
+        newQuantity: (Int) -> Int
+    ) {
+        val item = getItemByProductId(productId)
+        val quantity = newQuantity(item?.quantity ?: 0)
+        when {
+            quantity <= 0 -> item?.let { delete(it) }
+            item == null -> insert(ShoppingListItemEntity(productId = productId, quantity = quantity))
+            quantity != item.quantity -> update(item.copy(quantity = quantity))
         }
     }
 
