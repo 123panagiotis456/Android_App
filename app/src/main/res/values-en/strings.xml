@@ -87,7 +87,6 @@
     <string name="purchase_order_title">Order details</string>
     <string name="purchase_order_open">View order</string>
     <string name="purchase_order_add">Add one to cart: %1$s</string>
-    <string name="purchase_order_added">Added to cart.</string>
     <string name="purchase_order_stock">There is no available stock to add.</string>
     <string name="purchase_order_missing">Order not found.</string>
     <string name="purchase_order_unavailable">Unavailable</string>
@@ -95,4 +94,12 @@
     <string name="purchase_order_products">Products in this order</string>
     <string name="purchase_order_quantity">Quantity purchased: %1$d</string>
     <string name="purchase_order_unit_price">%1$s / unit</string>
+    <string name="purchase_order_added_named">%1$s added to your cart.</string>
+    <string name="purchase_order_in_cart">In cart: %1$d</string>
+    <string name="purchase_order_stock_limit">Available stock already in your cart</string>
+    <string name="purchase_order_view_cart">View cart</string>
+    <plurals name="purchase_order_cart_units">
+        <item quantity="one">%d unit in cart</item>
+        <item quantity="other">%d units in cart</item>
+    </plurals>
 </resources>

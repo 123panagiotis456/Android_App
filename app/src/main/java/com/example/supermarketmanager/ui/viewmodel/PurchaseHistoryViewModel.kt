@@ -18,7 +18,7 @@ class PurchaseHistoryViewModel : ViewModel() {
         val imageDrawable: String?,
         val quantity: Int,
         val unitPrice: Double,
-        val inStock: Boolean
+        val availability: Int
     )
 
     data class Order(val purchase: PurchaseHistoryEntity, val lines: List<OrderLine>)
@@ -56,7 +56,7 @@ class PurchaseHistoryViewModel : ViewModel() {
                 imageDrawable = product?.imageDrawable,
                 quantity = purchase.quantities[index],
                 unitPrice = purchase.prices[index],
-                inStock = product != null && product.availability > 0
+                availability = product?.availability ?: 0
             )
         })
     }
