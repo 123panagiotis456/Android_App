@@ -12,6 +12,7 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.supermarketmanager.R
+import com.example.supermarketmanager.data.CartPricing
 import com.example.supermarketmanager.data.repository.CartRepository
 import com.example.supermarketmanager.databinding.FragmentShoppingCartBinding
 import com.example.supermarketmanager.ui.adapter.ShoppingCartAdapter
@@ -49,13 +50,12 @@ class ShoppingCartFragment : Fragment() {
 
         adapter = ShoppingCartAdapter(
             onIncreaseClick = { item -> vm.addOneToCart(item.productId) },
-            onDecreaseClick = { item ->
-                if (item.quantity > 1) vm.decreaseCartQuantity(item.productId)
-            }
+            onDecreaseClick = { item -> vm.removeOneFromCart(item.productId) }
         )
 
         binding.recyclerViewCart.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewCart.adapter = adapter
+        observeCartErrors(vm)
 
         binding.cartToolbar.setNavigationOnClickListener { findNavController().popBackStack() }
         cartVm.cartItems.observe(viewLifecycleOwner) { items ->
@@ -64,7 +64,7 @@ class ShoppingCartFragment : Fragment() {
             binding.recyclerViewCart.isVisible = items.isNotEmpty()
             binding.cartSummary.isVisible = items.isNotEmpty()
             binding.tvCartAmount.text = requireContext().formatEuro(
-                items.sumOf { it.pricePerUnit * it.quantity }
+                CartPricing.total(items)
             )
         }
         binding.btnOrder.setOnClickListener {

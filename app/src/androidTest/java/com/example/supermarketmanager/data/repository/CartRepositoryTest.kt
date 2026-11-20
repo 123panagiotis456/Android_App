@@ -4,11 +4,13 @@ import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.supermarketmanager.AppDatabase
+import com.example.supermarketmanager.data.CartPricing
 import com.example.supermarketmanager.data.entities.CategoryEntity
 import com.example.supermarketmanager.data.entities.ProductEntity
 import com.example.supermarketmanager.data.entities.ShoppingListItemEntity
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -119,6 +121,51 @@ class CartRepositoryTest {
         assertEquals(3L, cartDao.totalQuantity(selectedProduct))
         assertEquals(0L, cartDao.totalQuantity(otherProduct))
         assertEquals(purchase, historyDao.getById(purchase.id))
+    }
+
+    @Test
+    fun promotionsMatchCartAndReceiptAndNamesSurviveCatalogChanges() = runBlocking {
+        database.categoryDao().insertAll(listOf(CategoryEntity(1, "Food")))
+        database.productDao().insertAll(listOf(
+            product(1, "Apple", 2.99).copy(offer = "1+1"),
+            product(2, "Milk", 1.29).copy(offer = "10% off")
+        ))
+        assertTrue(CartRepository.setQuantity(database, 1, 3))
+        assertTrue(CartRepository.setQuantity(database, 2, 1))
+        assertEquals(7.14, CartPricing.total(CartRepository.observeItems(database).first()), 0.0)
+
+        assertTrue(CartRepository.makePurchase(database))
+        val purchase = database.purchaseHistoryDao().getAll().single()
+        assertEquals(7.14, purchase.totalCost, 0.0)
+        assertEquals(mapOf(1 to 5.98, 2 to 1.16), purchase.productIds.zip(purchase.lineTotals).toMap())
+        database.productDao().insertAll(listOf(product(1, "New Apple", 3.99)))
+        assertEquals(purchase, database.purchaseHistoryDao().getById(purchase.id))
+        assertTrue(purchase.productNamesJson.contains("\"Apple\""))
+        assertEquals(292L, CartPricing.lineCents(3.65, 1, "20% off"))
+    }
+
+    @Test
+    fun catalogStaysInCategoryAndIncludesAnyPositiveStock() = runBlocking {
+        database.categoryDao().insertAll(listOf(CategoryEntity(1, "Food"), CategoryEntity(2, "Other")))
+        val dao = database.productDao()
+        dao.insertAll(listOf(
+            product(1, "Apple", 2.99),
+            product(2, "Pear", 1.29).copy(availability = 0),
+            product(3, "Milk", 1.29).copy(categoryId = 2)
+        ))
+        assertEquals(listOf(1), dao.observeCatalog(1, true).first().map { it.id })
+        assertEquals(listOf(1, 2), dao.observeCatalog(1, false).first().map { it.id })
+    }
+
+    @Test
+    fun cartRemovesLastUnitAndRejectsIncreasesBeyondAvailability() = runBlocking {
+        seedCart(secondQuantity = 2)
+        assertTrue(!CartRepository.setQuantity(database, 1, 6))
+        assertTrue(CartRepository.adjustQuantity(database, 1, 3))
+        assertTrue(!CartRepository.adjustQuantity(database, 1, 1))
+        assertTrue(CartRepository.setQuantity(database, 1, 1))
+        assertTrue(CartRepository.adjustQuantity(database, 1, -1))
+        assertEquals(0L, database.shoppingListDao().totalQuantity(1))
     }
 
     private suspend fun seedCart(secondQuantity: Int) {

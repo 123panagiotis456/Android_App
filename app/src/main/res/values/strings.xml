@@ -102,4 +102,8 @@
         <item quantity="one">%d μονάδα στο καλάθι</item>
         <item quantity="other">%d μονάδες στο καλάθι</item>
     </plurals>
+    <string name="back">Πίσω</string>
+    <string name="catalog_search">Αναζήτηση προϊόντος</string>
+    <string name="catalog_available_only">Μόνο διαθέσιμα προϊόντα</string>
+    <string name="purchase_order_paid_total">Πληρώθηκε: %1$s</string>
 </resources>

@@ -4,80 +4,50 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import com.example.supermarketmanager.databinding.BottomSheetSortBinding
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class SortBottomSheetDialogFragment(
-    private val onApplySort: (SortOption) -> Unit
-) : BottomSheetDialogFragment() {
-
-    private var _binding: BottomSheetSortBinding? = null
-    private val binding get() = _binding!!
-
-    // Sorting options enum
-    enum class SortOption { DEFAULT, PRICE, DISCOUNT, UNIT_PRICE }
+class SortBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        // Inflate view with exception handling
-        return try {
-            _binding = BottomSheetSortBinding.inflate(inflater, container, false)
-            binding.root
-        } catch (e: Exception) {
-            e.printStackTrace()
-            super.onCreateView(inflater, container, savedInstanceState)
-        }
-    }
+    ): View = BottomSheetSortBinding.inflate(inflater, container, false).root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // Floating X: close the sheet
-        binding.btnClose.setOnClickListener {
-            try {
-                dismiss()
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
+        val binding = BottomSheetSortBinding.bind(view)
+        if (savedInstanceState == null) {
+            binding.rgSort.check(
+                if (arguments?.getBoolean(BY_PRICE) == true) binding.rbPrice.id else binding.rbDefault.id
+            )
+            binding.availableOnly.isChecked = arguments?.getBoolean(AVAILABLE_ONLY) == true
         }
-
-        // Apply button: apply selected sorting and close
+        binding.btnClose.setOnClickListener { dismiss() }
         binding.btnApply.setOnClickListener {
-            try {
-                val selected = when (binding.rgSort.checkedRadioButtonId) {
-                    binding.rbPrice.id -> SortOption.PRICE
-                    // You can add more cases for DISCOUNT, UNIT_PRICE if you have radio buttons for them
-                    else -> SortOption.DEFAULT
-                }
-                onApplySort(selected)
-                dismiss()
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
+            parentFragmentManager.setFragmentResult(REQUEST, bundleOf(
+                BY_PRICE to (binding.rgSort.checkedRadioButtonId == binding.rbPrice.id),
+                AVAILABLE_ONLY to binding.availableOnly.isChecked
+            ))
+            dismiss()
         }
     }
 
     override fun onStart() {
         super.onStart()
-        // Make BottomSheet always fully expanded on open
-        try {
-            dialog?.let {
-                val bottomSheet = it.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
-                bottomSheet?.layoutParams?.height = ViewGroup.LayoutParams.WRAP_CONTENT
-                bottomSheet?.requestLayout()
-                bottomSheet?.let { bs ->
-                    BottomSheetBehavior.from(bs).state = BottomSheetBehavior.STATE_EXPANDED
-                }
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+        (dialog as? BottomSheetDialog)?.behavior?.state = BottomSheetBehavior.STATE_EXPANDED
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    companion object {
+        const val REQUEST = "catalog_filters"
+        const val BY_PRICE = "by_price"
+        const val AVAILABLE_ONLY = "available_only"
+
+        fun newInstance(byPrice: Boolean, availableOnly: Boolean) =
+            SortBottomSheetDialogFragment().apply {
+                arguments = bundleOf(BY_PRICE to byPrice, AVAILABLE_ONLY to availableOnly)
+            }
     }
 }

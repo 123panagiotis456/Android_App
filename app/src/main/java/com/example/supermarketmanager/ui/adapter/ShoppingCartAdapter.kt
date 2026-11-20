@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.supermarketmanager.R
+import com.example.supermarketmanager.data.CartPricing
 import com.example.supermarketmanager.data.models.ShoppingCartItem
 import com.example.supermarketmanager.databinding.ItemCartBinding
 import com.example.supermarketmanager.ui.formatEuro
@@ -28,7 +29,7 @@ class ShoppingCartAdapter(
         val binding = holder.binding
         val context = binding.root.context
         binding.tvProductName.text = item.name
-        binding.tvProductPrice.text = context.formatEuro(item.pricePerUnit * item.quantity)
+        binding.tvProductPrice.text = context.formatEuro(CartPricing.lineCents(item.pricePerUnit, item.quantity, item.offer) / 100.0)
         binding.tvProductUnitPrice.text =
             "${context.formatEuro(item.pricePerUnit)} ${context.priceUnitLabel(item.unit)}"
         binding.tvQuantity.text = item.quantity.toString()
@@ -41,7 +42,7 @@ class ShoppingCartAdapter(
         binding.ivProductImage.setImageResource(if (imageId != 0) imageId else R.drawable.ic_placeholder)
 
         binding.btnIncrease.setOnClickListener { onIncreaseClick(item) }
-        binding.btnDecrease.isEnabled = item.quantity > 1
+        binding.btnIncrease.isEnabled = item.quantity < item.availability
         binding.btnDecrease.setOnClickListener { onDecreaseClick(item) }
     }
 

@@ -1,5 +1,6 @@
 package com.example.supermarketmanager.data.entities
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
@@ -13,7 +14,9 @@ data class PurchaseHistoryEntity(
     val totalCost: Double,
     val productIds: List<Int>,
     val prices: List<Double>,
-    val quantities: List<Int>
+    val quantities: List<Int>,
+    @ColumnInfo(defaultValue = "''") val productNamesJson: String = "",
+    @ColumnInfo(defaultValue = "''") val lineTotals: List<Double> = emptyList()
 )
 
 class Converters {

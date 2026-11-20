@@ -14,6 +14,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.supermarketmanager.R
+import com.example.supermarketmanager.data.CartPricing
 import com.google.android.material.snackbar.Snackbar
 import com.example.supermarketmanager.databinding.FragmentPurchaseOrderBinding
 import com.example.supermarketmanager.databinding.ItemPurchaseOrderProductBinding
@@ -51,7 +52,7 @@ class PurchaseOrderFragment : Fragment(R.layout.fragment_purchase_order) {
                 R.plurals.purchase_order_cart_units, unitCount, unitCount
             )
             binding.cartCurrentTotal.text = requireContext().formatEuro(
-                items.sumOf { it.pricePerUnit * it.quantity }
+                CartPricing.total(items)
             )
             binding.cartFooter.isVisible = true
         }
@@ -157,6 +158,10 @@ class PurchaseOrderFragment : Fragment(R.layout.fragment_purchase_order) {
                 context.getString(R.string.purchase_order_quantity, line.quantity)
             binding.productPrice.text =
                 context.getString(R.string.purchase_order_unit_price, context.formatEuro(line.unitPrice))
+            binding.productPaidTotal.isVisible = line.paidTotal != null
+            binding.productPaidTotal.text = line.paidTotal?.let {
+                context.getString(R.string.purchase_order_paid_total, context.formatEuro(it))
+            }
             val imageId = line.imageDrawable?.let {
                 context.resources.getIdentifier(it, "drawable", context.packageName)
             } ?: 0

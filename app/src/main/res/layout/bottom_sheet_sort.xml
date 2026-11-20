@@ -14,7 +14,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/circle_bg"
         android:src="@drawable/ic_close"
-        android:tint="@android:color/white"
+        app:tint="@android:color/white"
         android:elevation="10dp"
         android:padding="12dp"
         android:contentDescription="@string/close" />
@@ -77,6 +77,13 @@
 
 
             </RadioGroup>
+
+            <CheckBox
+                android:id="@+id/availableOnly"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="@string/catalog_available_only" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnApply"

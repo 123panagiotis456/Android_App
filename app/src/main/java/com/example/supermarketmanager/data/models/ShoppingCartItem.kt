@@ -13,7 +13,8 @@ data class ShoppingCartItem(
     val pricePerUnit: Double,
     val unit: String,
     val imageDrawable: String?,
-    val offer: String? // ✨ Βεβαιώσου ότι υπάρχει αυτό!
+    val offer: String?,
+    val availability: Int
 )
 
 
