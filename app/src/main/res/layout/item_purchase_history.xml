@@ -1,72 +1,73 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.Market.Card"
     android:layout_width="match_parent"
-    android:layout_margin="8dp"
     android:layout_height="wrap_content"
-    app:cardElevation="4dp"
-    app:cardCornerRadius="12dp"
-    android:background="@color/market_surface">
+    android:layout_marginBottom="12dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:background="@color/market_surface">
+        android:padding="16dp">
 
-        <!-- Purchase Date -->
         <TextView
             android:id="@+id/tvPurchaseDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="05 Jul 2025 22:14"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-            android:textColor="@android:color/white"
-            android:fontFamily="sans-serif-medium" />
-
-        <!-- Divider -->
-        <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/market_outline" />
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.Market.ItemTitle"
+            tools:text="5 Ιουλ 2025, 22:14" />
 
-        <!-- Products Details -->
         <TextView
             android:id="@+id/tvProductsDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Milk x2 @ €1.20\nBread x1 @ €1.50"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-            android:textColor="@color/market_muted"
-            android:lineSpacingExtra="4dp" />
+            android:layout_marginTop="8dp"
+            android:lineSpacingExtra="4dp"
+            android:textAppearance="@style/TextAppearance.Market.Secondary"
+            tools:text="2 × Γάλα · 1,20 € / μονάδα&#10;1 × Ψωμί · 1,50 € / μονάδα" />
 
-        <!-- Total Cost -->
-        <TextView
-            android:id="@+id/tvTotalCost"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="12dp"
+            android:background="@color/market_outline"
+            android:importantForAccessibility="no" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Total: €4.50"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-            android:textStyle="bold"
-            android:textColor="@color/market_muted"
-        android:textAlignment="viewEnd"
-        android:layout_marginTop="12dp" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <!-- Re-add to Cart button -->
-        <Button
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_weight="1"
+                android:labelFor="@id/tvTotalCost"
+                android:text="@string/cart_total_label"
+                android:textAppearance="@style/TextAppearance.Market.ItemTitle" />
+
+            <TextView
+                android:id="@+id/tvTotalCost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.Market.Price"
+                tools:text="3,90 €" />
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnReaddToCart"
-            android:layout_width="wrap_content"
+            style="@style/Widget.Market.PrimaryButton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/buy"
-            android:textAllCaps="false"
-            android:backgroundTint="@color/market_mint"
-            android:textColor="@color/market_on_mint"
-            android:layout_gravity="end"
-            android:layout_marginTop="16dp"
-            android:paddingStart="24dp"
-            android:paddingEnd="24dp" />
+            android:layout_marginTop="8dp"
+            android:text="@string/purchase_history_readd"
+            app:icon="@drawable/shopping_basket"
+            app:iconGravity="textStart"
+            app:iconTint="@color/market_primary_text" />
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

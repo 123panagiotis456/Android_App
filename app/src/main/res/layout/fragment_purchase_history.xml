@@ -1,49 +1,42 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/market_background"
-    tools:context=".ui.fragment.PurchaseHistoryFragment">
+    android:orientation="vertical">
 
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/market_surface"
+        app:title="@string/toolbar_history_title"
+        app:titleTextAppearance="@style/TextAppearance.Market.Title" />
 
-        <!-- Toolbar -->
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/market_surface"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/toolbar_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/purchase_history"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold"
-                    android:textSize="20sp" />
-            </FrameLayout>
-        </androidx.appcompat.widget.Toolbar>
-
-        <!-- RecyclerView: Ιστορικό -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewPurchaseHistory"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:padding="8dp"
+            android:layout_height="match_parent"
             android:clipToPadding="false"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="12dp"
             tools:listitem="@layout/item_purchase_history" />
 
-    </LinearLayout>
-</FrameLayout>
+        <TextView
+            android:id="@+id/tvHistoryStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:accessibilityLiveRegion="polite"
+            android:gravity="center"
+            android:padding="24dp"
+            android:textAppearance="@style/TextAppearance.Market.ItemTitle"
+            android:visibility="gone"
+            tools:text="@string/purchase_history_empty" />
+    </FrameLayout>
+</LinearLayout>
