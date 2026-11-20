@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
         WishlistItemEntity::class,
         PurchaseHistoryEntity::class
     ],
-    version = 5,
+    version = 6,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -48,10 +48,10 @@ abstract class AppDatabase : RoomDatabase() {
                 AppDatabase::class.java,
                 "supermarket-db"
             )
-                .fallbackToDestructiveMigration()
+                .addMigrations(MIGRATION_1_6, MIGRATION_5_6)
                 .addCallback(object : Callback() {
-                    override fun onOpen(db: SupportSQLiteDatabase) {
-                        super.onOpen(db)
+                    override fun onCreate(db: SupportSQLiteDatabase) {
+                        super.onCreate(db)
 
                         CoroutineScope(Dispatchers.IO).launch {
                             val database = getInstance(appContext)

@@ -38,6 +38,7 @@ class PurchaseHistoryAdapter(
                 "• $name x${purchase.quantities[i]} @ €${purchase.prices[i]}"
             }
 
+        holder.binding.btnReaddToCart.isEnabled = purchase.productIds.isNotEmpty()
         holder.binding.btnReaddToCart.setOnClickListener { onReaddClick(purchase) }
     }
 

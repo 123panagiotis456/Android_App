@@ -59,4 +59,8 @@
     <string name="buy">Αγόρασε ξανά</string>
     <string name="name">Όνομα προϊόντος</string>
     <string name="description1">Σύντομη περιγραφή</string>
+    <string name="order_completed">Η παραγγελία καταχωρήθηκε!</string>
+    <string name="order_empty_cart">Το καλάθι είναι άδειο.</string>
+    <string name="order_insufficient_stock">Μείωσε την ποσότητα για το προϊόν %1$s. Διαθέσιμα: %2$d.</string>
+    <string name="order_failed">Η παραγγελία δεν καταχωρήθηκε. Δοκίμασε ξανά.</string>
 </resources>

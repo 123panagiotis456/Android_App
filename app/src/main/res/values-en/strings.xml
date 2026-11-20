@@ -59,4 +59,8 @@
     <string name="buy">Buy again</string>
     <string name="name">Product name</string>
     <string name="description1">Short description</string>
+    <string name="order_completed">Order placed!</string>
+    <string name="order_empty_cart">Your cart is empty.</string>
+    <string name="order_insufficient_stock">Reduce the quantity for %1$s. Available: %2$d.</string>
+    <string name="order_failed">The order could not be placed. Please try again.</string>
 </resources>
