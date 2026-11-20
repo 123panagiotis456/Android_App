@@ -8,11 +8,17 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.supermarketmanager.R
+import com.example.supermarketmanager.data.repository.CartRepository
 import com.example.supermarketmanager.databinding.FragmentShoppingCartBinding
 import com.example.supermarketmanager.ui.adapter.ShoppingCartAdapter
+import com.example.supermarketmanager.ui.formatEuro
 import com.example.supermarketmanager.ui.viewmodel.ProductViewModel
 import com.example.supermarketmanager.ui.viewmodel.ShoppingListViewModel
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 import android.util.Log
 
@@ -42,58 +48,57 @@ class ShoppingCartFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = ShoppingCartAdapter(
-            mutableListOf(),
-            onIncreaseClick = { item ->
-                val newQuantity = item.quantity + 1
-                vm.updateCartItemQuantity(item.productId, newQuantity)
-            },
+            onIncreaseClick = { item -> vm.addOneToCart(item.productId) },
             onDecreaseClick = { item ->
-                if (item.quantity > 1) {
-                    val newQuantity = item.quantity - 1
-                    vm.updateCartItemQuantity(item.productId, newQuantity)
-                }
+                if (item.quantity > 1) vm.decreaseCartQuantity(item.productId)
             }
         )
 
-        binding.recyclerViewCart.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.recyclerViewCart.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewCart.adapter = adapter
 
+        binding.cartToolbar.setNavigationOnClickListener { findNavController().popBackStack() }
         cartVm.cartItems.observe(viewLifecycleOwner) { items ->
             adapter.updateData(items)
-            if (items.isEmpty()) {
-                binding.tvEmptyCart.visibility = View.VISIBLE
-                binding.recyclerViewCart.visibility = View.GONE
-                binding.btnOrder.visibility = View.GONE
-                binding.btnDelete.visibility = View.GONE
-            } else {
-                binding.tvEmptyCart.visibility = View.GONE
-                binding.recyclerViewCart.visibility = View.VISIBLE
-                binding.btnOrder.visibility = View.VISIBLE
-                binding.btnDelete.visibility = View.VISIBLE
-            }
+            binding.tvEmptyCart.isVisible = items.isEmpty()
+            binding.recyclerViewCart.isVisible = items.isNotEmpty()
+            binding.cartSummary.isVisible = items.isNotEmpty()
+            binding.tvCartAmount.text = requireContext().formatEuro(
+                items.sumOf { it.pricePerUnit * it.quantity }
+            )
         }
-        cartVm.loadCartItems()
-
         binding.btnOrder.setOnClickListener {
-            Log.d("ShoppingCartFragment", "Order button clicked")
-            lifecycleScope.launch {
+            binding.btnOrder.isEnabled = false
+            binding.btnDelete.isEnabled = false
+            viewLifecycleOwner.lifecycleScope.launch {
                 try {
-                    cartVm.makePurchase()
-                    Toast.makeText(requireContext(), "Η παραγγελία καταχωρήθηκε!", Toast.LENGTH_SHORT).show()
-                    cartVm.loadCartItems()
-                    Log.d("ShoppingCartFragment", "Order completed & cart reloaded")
+                    val message = if (cartVm.makePurchase()) R.string.order_completed
+                    else R.string.order_empty_cart
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                } catch (e: CartRepository.InsufficientStock) {
+                    val message = getString(R.string.order_insufficient_stock, e.productName, e.available)
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+                } catch (e: CancellationException) {
+                    throw e
                 } catch (e: Exception) {
                     Log.e("ShoppingCartFragment", "Order failed", e)
-                    Toast.makeText(requireContext(), "Παρουσιάστηκε σφάλμα κατά την παραγγελία.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), R.string.order_failed, Toast.LENGTH_SHORT).show()
+                } finally {
+                    _binding?.let {
+                        it.btnOrder.isEnabled = true
+                        it.btnDelete.isEnabled = true
+                    }
                 }
             }
         }
 
         binding.btnDelete.setOnClickListener {
-            lifecycleScope.launch {
+            viewLifecycleOwner.lifecycleScope.launch {
                 try {
                     cartVm.clearCart()
                     Toast.makeText(requireContext(), "Το καλάθι διαγράφηκε", Toast.LENGTH_SHORT).show()
+                } catch (e: CancellationException) {
+                    throw e
                 } catch (e: Exception) {
                     Log.e("ShoppingCartFragment", "Cart clear failed", e)
                     Toast.makeText(requireContext(), "Αποτυχία διαγραφής καλαθιού.", Toast.LENGTH_SHORT).show()

@@ -1,0 +1,9 @@
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/market_ripple">
+    <item android:left="3dp" android:top="3dp" android:right="3dp" android:bottom="3dp">
+        <shape>
+            <solid android:color="@color/market_raised" />
+            <corners android:radius="12dp" />
+        </shape>
+    </item>
+</ripple>

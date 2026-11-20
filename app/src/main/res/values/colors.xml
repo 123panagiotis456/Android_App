@@ -20,4 +20,17 @@
 
     <!-- Background -->
     <color name="background">#F5F5F5</color>
+    <color name="market_background">#171C1A</color>
+    <color name="market_surface">#222A26</color>
+    <color name="market_raised">#303C35</color>
+    <color name="market_outline">#394740</color>
+    <color name="market_text">#F4F8F5</color>
+    <color name="market_muted">#B8C9C0</color>
+    <color name="market_disabled_text">#A0AEA6</color>
+    <color name="market_mint">#80E8BC</color>
+    <color name="market_on_mint">#10271C</color>
+    <color name="market_image_surface">#E9F2ED</color>
+    <color name="market_offer_surface">#472E31</color>
+    <color name="market_offer_text">#FFBEC2</color>
+    <color name="market_ripple">#3380E8BC</color>
 </resources>

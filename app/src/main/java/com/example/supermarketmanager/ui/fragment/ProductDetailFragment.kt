@@ -10,10 +10,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.supermarketmanager.R
-import com.example.supermarketmanager.AppDatabase
-import com.example.supermarketmanager.data.entities.WishlistItemEntity
 import com.example.supermarketmanager.databinding.FragmentProductDetailBinding
+import com.example.supermarketmanager.ui.formatEuro
+import com.example.supermarketmanager.ui.priceUnitLabel
 import com.example.supermarketmanager.ui.viewmodel.ProductViewModel
+import com.example.supermarketmanager.ui.viewmodel.WishlistViewModel
+import com.example.supermarketmanager.ui.viewmodel.WishlistViewModelFactory
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 
 class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
@@ -23,8 +26,9 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
 
     private val vm: ProductViewModel by viewModels()
 
+    private val wishlistVm: WishlistViewModel by viewModels { WishlistViewModelFactory() }
+
     private var quantity = 1
-    private var isFavorite = false
     private var maxAvailability = 1
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,7 +37,6 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
         _binding = FragmentProductDetailBinding.bind(view)
 
         val context = requireContext()
-        val wishlistDao = AppDatabase.getInstance(context).wishlistDao()
         val productId = arguments?.getInt("productId") ?: -1
 
         // Set up the toolbar back arrow
@@ -42,30 +45,28 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
             setDisplayShowTitleEnabled(false)
         }
 
-        // Check if the product is in the favorites list
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             try {
-                isFavorite = wishlistDao.getItemByProductId(productId) != null
-                updateFavoriteIcon()
+                updateFavoriteIcon(wishlistVm.isFavorite(productId))
+            } catch (e: CancellationException) {
+                throw e
             } catch (e: Exception) {
                 Log.e(TAG, "Failed to load favorite status", e)
             }
         }
 
-        binding.btnFavorite.setOnClickListener {
-            lifecycleScope.launch {
+        binding.btnFavorite.setOnClickListener { button ->
+            button.isEnabled = false
+            viewLifecycleOwner.lifecycleScope.launch {
                 try {
-                    if (isFavorite) {
-                        val item = wishlistDao.getItemByProductId(productId)
-                        item?.let { wishlistDao.removeItem(it.id) }
-                    } else {
-                        wishlistDao.addItem(WishlistItemEntity(productId = productId))
-                    }
-                    isFavorite = !isFavorite
-                    updateFavoriteIcon()
+                    updateFavoriteIcon(wishlistVm.toggleFavorite(productId))
+                } catch (e: CancellationException) {
+                    throw e
                 } catch (e: Exception) {
                     Log.e(TAG, "Error updating favorite", e)
-                    Toast.makeText(context, "Error updating favorite", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, R.string.wishlist_update_failed, Toast.LENGTH_SHORT).show()
+                } finally {
+                    button.isEnabled = true
                 }
             }
         }
@@ -99,9 +100,9 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
             binding.tvDetailnutritionalInfo.text = product.nutritionalInfo
             binding.tvDetailingredients.text = product.ingredients
             binding.tvDetailName.text = product.name
-            binding.tvDetailDescription.text = product.description ?: ""
-            binding.tvDetailPrice.text = "${product.pricePerUnit} €"
-            binding.tvDetailUnitInfo.text = "Τιμή ανά ${product.unit}"
+            binding.tvDetailDescription.text = product.description
+            binding.tvDetailPrice.text = context.formatEuro(product.pricePerUnit)
+            binding.tvDetailUnitInfo.text = context.priceUnitLabel(product.unit)
 
             // Display product availability
             binding.tvDetailAvailability.text = "${product.availability}"
@@ -135,14 +136,20 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
             }
         }
 
-        // Add to cart button, update the cart quantity
-        binding.btnAddDetail.setOnClickListener {
-            try {
-                vm.setCartQuantity(productId, quantity)
-                findNavController().popBackStack()
-            } catch (e: Exception) {
-                Log.e(TAG, "Error adding to cart", e)
-                Toast.makeText(context, "Error adding to cart", Toast.LENGTH_SHORT).show()
+        binding.btnAddDetail.setOnClickListener { button ->
+            button.isEnabled = false
+            viewLifecycleOwner.lifecycleScope.launch {
+                try {
+                    vm.setCartQuantity(productId, quantity)
+                    findNavController().popBackStack()
+                } catch (e: CancellationException) {
+                    throw e
+                } catch (e: Exception) {
+                    Log.e(TAG, "Error adding to cart", e)
+                    Toast.makeText(context, R.string.cart_update_failed, Toast.LENGTH_SHORT).show()
+                } finally {
+                    button.isEnabled = true
+                }
             }
         }
 
@@ -160,7 +167,7 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
     /**
      * Updates the favorite button icon depending on favorite status.
      */
-    private fun updateFavoriteIcon() {
+    private fun updateFavoriteIcon(isFavorite: Boolean) {
         val iconRes = if (isFavorite) {
             R.drawable.ic_favorite // filled heart
         } else {

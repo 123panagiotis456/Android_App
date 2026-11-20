@@ -1,103 +1,99 @@
-<?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/market_background"
+    android:orientation="vertical">
 
-    <data />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/cartToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/market_surface"
+        app:navigationContentDescription="@string/cart_back"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:title="@string/cart1"
+        app:titleTextAppearance="@style/TextAppearance.Market.Title" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewCart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="12dp"
+            tools:listitem="@layout/item_cart" />
+
+        <TextView
+            android:id="@+id/tvEmptyCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="24dp"
+            android:text="@string/cart_empty"
+            android:textAppearance="@style/TextAppearance.Market.ItemTitle"
+            android:visibility="gone" />
+    </FrameLayout>
 
     <LinearLayout
+        android:id="@+id/cartSummary"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/market_surface"
         android:orientation="vertical"
-        android:background="#262626"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp">
+        android:paddingHorizontal="20dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="8dp"
+        android:visibility="gone"
+        tools:visibility="visible">
 
-        <!-- Τίτλος -->
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/cart1"
-            android:textColor="@android:color/white"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:paddingBottom="16dp" />
-
-        <!-- Όνομα Σούπερ Μάρκετ -->
-        <TextView
-            android:id="@+id/tvStoreName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/pepe_market"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:paddingBottom="12dp" />
-
-        <!-- Πλαίσιο για προϊόντα -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_black"
-            android:orientation="vertical"
-            android:padding="8dp">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-            <!-- Εμφάνιση "Το καλάθι είναι άδειο" όταν δεν υπάρχουν προϊόντα -->
             <TextView
-                android:id="@+id/tvEmptyCart"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/cart_empty"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:gravity="center"
-                android:visibility="gone"
-                android:padding="16dp" />
+                android:layout_marginEnd="12dp"
+                android:layout_weight="1"
+                android:labelFor="@id/tvCartAmount"
+                android:text="@string/cart_total_label"
+                android:textAppearance="@style/TextAppearance.Market.ItemTitle" />
 
-            <!-- Grid λίστα προϊόντων -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewCart"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tvCartAmount"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
-                android:overScrollMode="never"
-                android:scrollbars="none"
-                android:clipToPadding="false"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"/>
-
-            <!-- Κουμπιά -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:paddingTop="12dp">
-
-                <Button
-                    android:id="@+id/btnOrder"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/Order"
-                    android:backgroundTint="#00D69D"
-                    android:textColor="@color/black"
-                    android:layout_marginEnd="4dp" />
-
-                <Button
-                    android:id="@+id/btnDelete"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/Delete"
-                    android:backgroundTint="#FF0101"
-                    android:textColor="#FFFFFF"
-                    android:layout_marginStart="4dp" />
-            </LinearLayout>
+                android:accessibilityLiveRegion="polite"
+                android:textAppearance="@style/TextAppearance.Market.Price"
+                tools:text="15,67 €" />
         </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnOrder"
+            style="@style/Widget.Market.PrimaryButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@string/cart_place_order" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDelete"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:text="@string/cart_clear"
+            android:textAllCaps="false"
+            android:textColor="@color/market_muted" />
     </LinearLayout>
-</layout>
+</LinearLayout>

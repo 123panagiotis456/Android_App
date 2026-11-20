@@ -30,11 +30,7 @@ interface ShoppingListDao {
 """)
     fun getItemsWithProductDetails(): Flow<List<ShoppingCartItem>>
 
-    // ✅ Προσθήκες για update ποσότητας
-    @Query("SELECT * FROM shopping_list WHERE productId = :productId LIMIT 1")
+    @Query("SELECT * FROM shopping_list WHERE productId = :productId ORDER BY id LIMIT 1")
     suspend fun getItemByProductId(productId: Int): ShoppingListItemEntity?
-
-    @Query("UPDATE shopping_list SET quantity = :newQuantity WHERE productId = :productId")
-    suspend fun updateQuantity(productId: Int, newQuantity: Int)
 
 }

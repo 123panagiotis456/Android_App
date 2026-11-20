@@ -59,4 +59,20 @@
     <string name="buy">Buy again</string>
     <string name="name">Product name</string>
     <string name="description1">Short description</string>
+    <string name="order_completed">Order placed!</string>
+    <string name="order_empty_cart">Your cart is empty.</string>
+    <string name="order_insufficient_stock">Reduce the quantity for %1$s. Available: %2$d.</string>
+    <string name="order_failed">The order could not be placed. Please try again.</string>
+    <string name="wishlist_update_failed">Could not update favorites.</string>
+    <string name="cart_update_failed">Could not update the cart.</string>
+    <string name="purchase_history_load_failed">Could not load purchase history.</string>
+    <string name="purchase_readded">The products were added back to your cart.</string>
+    <string name="quantity_increase">Increase quantity</string>
+    <string name="quantity_decrease">Decrease quantity</string>
+    <string name="cart_back">Back</string>
+    <string name="cart_total_label">Total</string>
+    <string name="cart_place_order">Place order</string>
+    <string name="cart_clear">Clear cart</string>
+    <string name="price_per_kg">per kilogram</string>
+    <string name="price_per_item">per item</string>
 </resources>

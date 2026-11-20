@@ -8,8 +8,9 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.asLiveData
 import com.example.supermarketmanager.MyApplication
 import com.example.supermarketmanager.data.entities.ProductEntity
-import com.example.supermarketmanager.data.entities.ShoppingListItemEntity
+import com.example.supermarketmanager.data.repository.CartRepository
 import com.example.supermarketmanager.data.models.ShoppingCartItem
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 import android.util.Log
 
@@ -17,11 +18,10 @@ class ProductViewModel : ViewModel() {
 
     // DAO references
     private val dao = MyApplication.database.productDao()
-    private val shoppingListDao = MyApplication.database.shoppingListDao()
 
     // Real-time καρότσι
     val cartItems: LiveData<List<ShoppingCartItem>> =
-        shoppingListDao.getItemsWithProductDetails().asLiveData()
+        CartRepository.observeItems(MyApplication.database).asLiveData()
 
     // Λίστα προϊόντων για οθόνη λίστας
     private val _products = MutableLiveData<List<ProductEntity>>()
@@ -67,79 +67,23 @@ class ProductViewModel : ViewModel() {
         }
     }
 
-    fun addOneToCart(productId: Int) {
+    fun addOneToCart(productId: Int) = adjustCartQuantity(productId, 1)
+
+    fun removeOneFromCart(productId: Int) = adjustCartQuantity(productId, -1)
+
+    fun decreaseCartQuantity(productId: Int) = adjustCartQuantity(productId, -1, minimum = 1)
+
+    suspend fun setCartQuantity(productId: Int, quantity: Int) =
+        CartRepository.setQuantity(MyApplication.database, productId, quantity)
+
+    private fun adjustCartQuantity(productId: Int, delta: Int, minimum: Int = 0) {
         viewModelScope.launch {
             try {
-                val currentItems = shoppingListDao.getAll()
-                val existing = currentItems.find { it.productId == productId }
-
-                if (existing != null) {
-                    val updated = existing.copy(quantity = existing.quantity + 1)
-                    shoppingListDao.update(updated)
-                } else {
-                    val newItem = ShoppingListItemEntity(productId = productId, quantity = 1)
-                    shoppingListDao.insert(newItem)
-                }
+                CartRepository.adjustQuantity(MyApplication.database, productId, delta, minimum)
+            } catch (e: CancellationException) {
+                throw e
             } catch (e: Exception) {
-                Log.e("ProductViewModel", "Error adding one to cart", e)
-            }
-        }
-    }
-
-    fun setCartQuantity(productId: Int, quantity: Int) {
-        viewModelScope.launch {
-            try {
-                val currentItems = shoppingListDao.getAll()
-                val existing = currentItems.find { it.productId == productId }
-
-                if (quantity > 0) {
-                    if (existing != null) {
-                        shoppingListDao.update(existing.copy(quantity = quantity))
-                    } else {
-                        shoppingListDao.insert(
-                            ShoppingListItemEntity(productId = productId, quantity = quantity)
-                        )
-                    }
-                } else {
-                    if (existing != null) {
-                        shoppingListDao.delete(existing)
-                    }
-                }
-            } catch (e: Exception) {
-                Log.e("ProductViewModel", "Error setting cart quantity", e)
-            }
-        }
-    }
-
-    fun removeOneFromCart(productId: Int) {
-        viewModelScope.launch {
-            try {
-                val currentItems = shoppingListDao.getAll()
-                val existing = currentItems.find { it.productId == productId }
-
-                if (existing != null) {
-                    if (existing.quantity > 1) {
-                        val updated = existing.copy(quantity = existing.quantity - 1)
-                        shoppingListDao.update(updated)
-                    } else {
-                        shoppingListDao.delete(existing)
-                    }
-                }
-            } catch (e: Exception) {
-                Log.e("ProductViewModel", "Error removing one from cart", e)
-            }
-        }
-    }
-
-    fun updateCartItemQuantity(productId: Int, newQuantity: Int) {
-        viewModelScope.launch {
-            try {
-                val cartItem = shoppingListDao.getItemByProductId(productId)
-                if (cartItem != null) {
-                    shoppingListDao.updateQuantity(productId, newQuantity)
-                }
-            } catch (e: Exception) {
-                Log.e("ProductViewModel", "Error updating cart item quantity", e)
+                Log.e("ProductViewModel", "Error updating cart quantity", e)
             }
         }
     }
