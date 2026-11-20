@@ -87,7 +87,6 @@
     <string name="purchase_order_title">Λεπτομέρειες παραγγελίας</string>
     <string name="purchase_order_open">Προβολή παραγγελίας</string>
     <string name="purchase_order_add">Προσθήκη ενός στο καλάθι: %1$s</string>
-    <string name="purchase_order_added">Προστέθηκε στο καλάθι.</string>
     <string name="purchase_order_stock">Δεν υπάρχει διαθέσιμη ποσότητα για προσθήκη.</string>
     <string name="purchase_order_missing">Η παραγγελία δεν βρέθηκε.</string>
     <string name="purchase_order_unavailable">Μη διαθέσιμο</string>
@@ -95,4 +94,12 @@
     <string name="purchase_order_products">Προϊόντα παραγγελίας</string>
     <string name="purchase_order_quantity">Ποσότητα αγοράς: %1$d</string>
     <string name="purchase_order_unit_price">%1$s / μονάδα</string>
+    <string name="purchase_order_added_named">Το προϊόν «%1$s» προστέθηκε στο καλάθι.</string>
+    <string name="purchase_order_in_cart">Στο καλάθι: %1$d</string>
+    <string name="purchase_order_stock_limit">Μέγιστη διαθέσιμη ποσότητα στο καλάθι</string>
+    <string name="purchase_order_view_cart">Προβολή καλαθιού</string>
+    <plurals name="purchase_order_cart_units">
+        <item quantity="one">%d μονάδα στο καλάθι</item>
+        <item quantity="other">%d μονάδες στο καλάθι</item>
+    </plurals>
 </resources>
