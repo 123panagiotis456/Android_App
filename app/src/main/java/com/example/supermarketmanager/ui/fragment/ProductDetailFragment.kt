@@ -140,8 +140,11 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
             button.isEnabled = false
             viewLifecycleOwner.lifecycleScope.launch {
                 try {
-                    vm.setCartQuantity(productId, quantity)
-                    findNavController().popBackStack()
+                    if (vm.setCartQuantity(productId, quantity)) {
+                        findNavController().popBackStack()
+                    } else {
+                        Toast.makeText(context, R.string.purchase_order_stock, Toast.LENGTH_SHORT).show()
+                    }
                 } catch (e: CancellationException) {
                     throw e
                 } catch (e: Exception) {

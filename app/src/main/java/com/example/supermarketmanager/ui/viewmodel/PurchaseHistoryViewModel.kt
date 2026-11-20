@@ -9,6 +9,7 @@ import com.example.supermarketmanager.MyApplication
 import com.example.supermarketmanager.data.entities.PurchaseHistoryEntity
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
+import org.json.JSONArray
 
 class PurchaseHistoryViewModel : ViewModel() {
 
@@ -18,6 +19,7 @@ class PurchaseHistoryViewModel : ViewModel() {
         val imageDrawable: String?,
         val quantity: Int,
         val unitPrice: Double,
+        val paidTotal: Double?,
         val availability: Int
     )
 
@@ -48,14 +50,16 @@ class PurchaseHistoryViewModel : ViewModel() {
             return Order(purchase, emptyList())
         }
         val products = database.productDao().getByIdList(ids.distinct()).associateBy { it.id }
+        val names = purchase.productNamesJson.takeIf(String::isNotBlank)?.let { JSONArray(it) }
         return Order(purchase, ids.mapIndexed { index, productId ->
             val product = products[productId]
             OrderLine(
                 productId = productId,
-                name = product?.name,
+                name = names?.optString(index)?.takeIf(String::isNotBlank) ?: product?.name,
                 imageDrawable = product?.imageDrawable,
                 quantity = purchase.quantities[index],
                 unitPrice = purchase.prices[index],
+                paidTotal = purchase.lineTotals.getOrNull(index),
                 availability = product?.availability ?: 0
             )
         })

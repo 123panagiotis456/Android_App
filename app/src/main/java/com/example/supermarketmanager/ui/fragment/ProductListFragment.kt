@@ -14,6 +14,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.supermarketmanager.MainActivity
 import com.example.supermarketmanager.R
+import com.example.supermarketmanager.data.CartPricing
 import com.example.supermarketmanager.databinding.FragmentProductListBinding
 import com.example.supermarketmanager.ui.adapter.ProductAdapter
 import com.example.supermarketmanager.ui.formatEuro
@@ -74,32 +75,24 @@ class ProductListFragment : Fragment() {
 
         binding.cartBanner.setOnClickListener { (requireActivity() as MainActivity).showCart() }
 
-        // Load initial products for the selected category
-        vm.filterProducts(
-            categoryId = args.categoryId,
-            maxPrice = null,
-            availableOnly = null,
-        )
-
-        // Show sorting options in a bottom sheet
-        binding.btnFilters.setOnClickListener {
-            SortBottomSheetDialogFragment { sortOption ->
-                when (sortOption) {
-                    SortBottomSheetDialogFragment.SortOption.DEFAULT -> {
-                        vm.filterProducts(args.categoryId, null, null)
-                    }
-                    SortBottomSheetDialogFragment.SortOption.PRICE -> {
-                        vm.sortProductsByPrice()
-                    }
-                    SortBottomSheetDialogFragment.SortOption.DISCOUNT -> {
-                        vm.sortProductsByDiscount()
-                    }
-                    SortBottomSheetDialogFragment.SortOption.UNIT_PRICE -> {
-                        vm.sortProductsByUnitPrice()
-                    }
-                }
-            }.show(parentFragmentManager, "SortBottomSheetDialogFragment")
+        vm.loadCatalog(args.categoryId)
+        observeCartErrors(vm)
+        parentFragmentManager.setFragmentResultListener(
+            SortBottomSheetDialogFragment.REQUEST, viewLifecycleOwner
+        ) { _, result ->
+            vm.applyFilters(
+                result.getBoolean(SortBottomSheetDialogFragment.BY_PRICE),
+                result.getBoolean(SortBottomSheetDialogFragment.AVAILABLE_ONLY)
+            )
         }
+        binding.btnFilters.setOnClickListener {
+            val tag = "catalog_filters"
+            if (parentFragmentManager.findFragmentByTag(tag) == null) {
+                SortBottomSheetDialogFragment.newInstance(vm.byPrice, vm.availableOnly)
+                    .showNow(parentFragmentManager, tag)
+            }
+        }
+
     }
 
     /** Sets up the product RecyclerView with grid layout and adapter */
@@ -139,7 +132,7 @@ class ProductListFragment : Fragment() {
             })
             binding.cartBanner.isVisible = items.isNotEmpty()
             if (items.isNotEmpty()) {
-                val total = items.sumOf { it.pricePerUnit * it.quantity }
+                val total = CartPricing.total(items)
                 binding.cartBanner.text = getString(R.string.nav_view_cart, requireContext().formatEuro(total))
             }
         }
@@ -152,22 +145,16 @@ class ProductListFragment : Fragment() {
         val searchItem = menu.findItem(R.id.action_search)
         val searchView = searchItem.actionView as? SearchView
         searchView?.apply {
-            queryHint = "Αναζήτηση προϊόντος"
+            queryHint = getString(R.string.catalog_search)
+            if (vm.search.isNotEmpty()) {
+                searchItem.expandActionView()
+                setQuery(vm.search, false)
+            }
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?) = false
                 override fun onQueryTextChange(newText: String?): Boolean {
-                    return try {
-                        if (newText.isNullOrBlank()) {
-                            vm.filterProducts(args.categoryId, null, null)
-                        } else {
-                            vm.searchProducts(newText.trim())
-                        }
-                        true
-                    } catch (e: Exception) {
-                        Log.e(TAG, "Product search failed", e)
-                        Toast.makeText(requireContext(), "Search failed", Toast.LENGTH_SHORT).show()
-                        false
-                    }
+                    vm.searchProducts(newText.orEmpty())
+                    return true
                 }
             })
         }

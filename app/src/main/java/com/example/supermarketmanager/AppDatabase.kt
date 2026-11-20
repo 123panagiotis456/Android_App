@@ -17,7 +17,7 @@ import com.example.supermarketmanager.data.entities.*
         WishlistItemEntity::class,
         PurchaseHistoryEntity::class
     ],
-    version = 6,
+    version = 7,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -45,7 +45,7 @@ abstract class AppDatabase : RoomDatabase() {
                 AppDatabase::class.java,
                 "supermarket-db"
             )
-                .addMigrations(MIGRATION_1_6, MIGRATION_5_6)
+                .addMigrations(MIGRATION_1_6, MIGRATION_5_6, MIGRATION_6_7)
                 .addCallback(object : Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         seedDemoData(db)

@@ -20,7 +20,7 @@ class ProductAdapter(
 ) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     private var products: List<ProductEntity> = emptyList()
-    private val quantityMap = mutableMapOf<Int, Int>() // τοπική παρακολούθηση ποσοτήτων
+    private var quantityMap: Map<Int, Int> = emptyMap()
 
     fun submitList(list: List<ProductEntity>) {
         products = list
@@ -29,9 +29,15 @@ class ProductAdapter(
 
     fun updateQuantities(quantities: Map<Int, Int>) {
         if (quantityMap == quantities) return
-        quantityMap.clear()
-        quantityMap.putAll(quantities)
-        notifyDataSetChanged()
+        val previous = quantityMap
+        quantityMap = quantities
+        products.forEachIndexed { index, product ->
+            val before = previous[product.id] ?: 0
+            val after = quantities[product.id] ?: 0
+            if (before != after) {
+                notifyItemChanged(index, (before == 0) != (after == 0))
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -41,6 +47,15 @@ class ProductAdapter(
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         holder.bind(products[position])
+    }
+
+    override fun onBindViewHolder(holder: ProductViewHolder, position: Int, payloads: MutableList<Any>) {
+        if (payloads.isEmpty()) {
+            super.onBindViewHolder(holder, position, payloads)
+        } else {
+            val product = products[position]
+            holder.renderQuantity(product, quantityMap[product.id] ?: 0, payloads.any { it == true })
+        }
     }
 
     override fun getItemCount(): Int = products.size
@@ -82,8 +97,6 @@ class ProductAdapter(
             binding.btnAdd.setOnClickListener {
                 if (product.availability > 0) {
                     viewModel.addOneToCart(product.id)
-                    quantityMap[product.id] = 1
-                    renderQuantity(product, 1, animateControls = true)
                 }
             }
 
@@ -91,21 +104,16 @@ class ProductAdapter(
                 val current = quantityMap[product.id] ?: 0
                 if (current >= product.availability) return@setOnClickListener
                 viewModel.addOneToCart(product.id)
-                quantityMap[product.id] = current + 1
-                renderQuantity(product, current + 1)
             }
 
             binding.btnDecrease.setOnClickListener {
                 val current = quantityMap[product.id] ?: 0
                 if (current == 0) return@setOnClickListener
                 viewModel.removeOneFromCart(product.id)
-                val quantity = current - 1
-                if (quantity == 0) quantityMap.remove(product.id) else quantityMap[product.id] = quantity
-                renderQuantity(product, quantity, animateControls = quantity == 0)
             }
         }
 
-        private fun renderQuantity(product: ProductEntity, quantity: Int, animateControls: Boolean = false) {
+        fun renderQuantity(product: ProductEntity, quantity: Int, animateControls: Boolean = false) {
             binding.btnAdd.isVisible = quantity == 0
             binding.quantityLayout.isVisible = quantity > 0
             binding.btnAdd.isEnabled = product.availability > 0

@@ -1,68 +1,77 @@
 package com.example.supermarketmanager.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
-import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.supermarketmanager.MyApplication
 import com.example.supermarketmanager.data.entities.ProductEntity
 import com.example.supermarketmanager.data.repository.CartRepository
-import com.example.supermarketmanager.data.models.ShoppingCartItem
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
-import android.util.Log
 
-class ProductViewModel : ViewModel() {
+class ProductViewModel(private val savedState: SavedStateHandle) : ViewModel() {
 
-    // DAO references
-    private val dao = MyApplication.database.productDao()
+    private val database = MyApplication.database
+    private val dao = database.productDao()
+    val cartItems = CartRepository.observeItems(database).asLiveData()
 
-    // Real-time καρότσι
-    val cartItems: LiveData<List<ShoppingCartItem>> =
-        CartRepository.observeItems(MyApplication.database).asLiveData()
-
-    // Λίστα προϊόντων για οθόνη λίστας
     private val _products = MutableLiveData<List<ProductEntity>>()
     val products: LiveData<List<ProductEntity>> = _products
+    private val _cartErrors = MutableSharedFlow<CartError>()
+    val cartErrors = _cartErrors.asSharedFlow()
 
-    // Ένα προϊόν για οθόνη λεπτομερειών
-    fun getById(productId: Int): LiveData<ProductEntity?> = liveData {
-        try {
-            val product = dao.getById(productId)
-            emit(product)
-        } catch (e: Exception) {
-            Log.e("ProductViewModel", "Error loading product by ID", e)
-            emit(null)
-        }
+    enum class CartError { STOCK, UPDATE }
+
+    val byPrice: Boolean get() = savedState["by_price"] ?: false
+    val availableOnly: Boolean get() = savedState["available_only"] ?: false
+    val search: String get() = savedState["search"] ?: ""
+    private var categoryId: Int? = null
+    private var catalogJob: Job? = null
+
+    fun getById(productId: Int) = dao.observeById(productId).asLiveData()
+
+    fun loadCatalog(category: Int) {
+        categoryId = category
+        refreshCatalog()
     }
 
-    fun filterProducts(categoryId: Int?, maxPrice: Double?, availableOnly: Boolean?) {
-        viewModelScope.launch {
-            try {
-                val result = if (availableOnly != null) {
-                    dao.getFilteredWithAvailability(categoryId, maxPrice, availableOnly)
-                } else {
-                    dao.getFilteredWithoutAvailability(categoryId, maxPrice)
-                }
-                Log.d("DBG", "query returned ${result.size} προϊόντα")
-                _products.postValue(result)
-            } catch (e: Exception) {
-                Log.e("ProductViewModel", "Error filtering products", e)
-                _products.postValue(emptyList())
-            }
-        }
+    fun applyFilters(byPrice: Boolean, availableOnly: Boolean) {
+        savedState["by_price"] = byPrice
+        savedState["available_only"] = availableOnly
+        refreshCatalog()
     }
 
     fun searchProducts(query: String) {
-        viewModelScope.launch {
+        val trimmed = query.trim()
+        if (search == trimmed) return
+        savedState["search"] = trimmed
+        refreshCatalog()
+    }
+
+    private fun refreshCatalog() {
+        val category = categoryId ?: return
+        catalogJob?.cancel()
+        val sortByPrice = byPrice
+        val onlyAvailable = availableOnly
+        val query = search
+        catalogJob = viewModelScope.launch {
             try {
-                val result = dao.search(query)
-                _products.postValue(result)
+                dao.observeCatalog(category, onlyAvailable).collect { products ->
+                    val matches = products.filter { it.name.contains(query, ignoreCase = true) }
+                    _products.value = if (sortByPrice) matches.sortedBy { it.pricePerUnit } else matches
+                }
+            } catch (e: CancellationException) {
+                throw e
             } catch (e: Exception) {
-                Log.e("ProductViewModel", "Error searching products", e)
-                _products.postValue(emptyList())
+                Log.e("ProductViewModel", "Error loading catalog", e)
+                _products.value = emptyList()
             }
         }
     }
@@ -71,62 +80,21 @@ class ProductViewModel : ViewModel() {
 
     fun removeOneFromCart(productId: Int) = adjustCartQuantity(productId, -1)
 
-    fun decreaseCartQuantity(productId: Int) = adjustCartQuantity(productId, -1, minimum = 1)
-
     suspend fun setCartQuantity(productId: Int, quantity: Int) =
-        CartRepository.setQuantity(MyApplication.database, productId, quantity)
+        CartRepository.setQuantity(database, productId, quantity)
 
-    private fun adjustCartQuantity(productId: Int, delta: Int, minimum: Int = 0) {
+    private fun adjustCartQuantity(productId: Int, delta: Int) {
         viewModelScope.launch {
             try {
-                CartRepository.adjustQuantity(MyApplication.database, productId, delta, minimum)
+                if (!CartRepository.adjustQuantity(database, productId, delta)) {
+                    _cartErrors.emit(CartError.STOCK)
+                }
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
                 Log.e("ProductViewModel", "Error updating cart quantity", e)
+                _cartErrors.emit(CartError.UPDATE)
             }
-        }
-    }
-
-    fun sortProductsDefault() {
-        try {
-            _products.value?.let { list ->
-                _products.postValue(list.sortedBy { it.id })
-            }
-        } catch (e: Exception) {
-            Log.e("ProductViewModel", "Error sorting products (default)", e)
-        }
-    }
-
-    fun sortProductsByPrice() {
-        try {
-            _products.value?.let { list ->
-                _products.postValue(list.sortedBy { it.pricePerUnit })
-            }
-        } catch (e: Exception) {
-            Log.e("ProductViewModel", "Error sorting products by price", e)
-        }
-    }
-
-    fun sortProductsByDiscount() {
-        try {
-            _products.value?.let { list ->
-                _products.postValue(
-                    list.sortedByDescending { !it.offer.isNullOrBlank() }
-                )
-            }
-        } catch (e: Exception) {
-            Log.e("ProductViewModel", "Error sorting products by discount", e)
-        }
-    }
-
-    fun sortProductsByUnitPrice() {
-        try {
-            _products.value?.let { list ->
-                _products.postValue(list.sortedBy { it.pricePerUnit })
-            }
-        } catch (e: Exception) {
-            Log.e("ProductViewModel", "Error sorting products by unit price", e)
         }
     }
 }

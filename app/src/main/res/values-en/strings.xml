@@ -102,4 +102,8 @@
         <item quantity="one">%d unit in cart</item>
         <item quantity="other">%d units in cart</item>
     </plurals>
+    <string name="back">Back</string>
+    <string name="catalog_search">Search products</string>
+    <string name="catalog_available_only">In-stock products only</string>
+    <string name="purchase_order_paid_total">Paid: %1$s</string>
 </resources>

@@ -97,3 +97,10 @@ private fun migrateLegacyPurchaseHistory(db: SupportSQLiteDatabase) {
     db.execSQL("DROP TABLE purchase_history")
     db.execSQL("ALTER TABLE purchase_history_new RENAME TO purchase_history")
 }
+
+internal val MIGRATION_6_7 = object : Migration(6, 7) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL("ALTER TABLE purchase_history ADD COLUMN productNamesJson TEXT NOT NULL DEFAULT ''")
+        db.execSQL("ALTER TABLE purchase_history ADD COLUMN lineTotals TEXT NOT NULL DEFAULT ''")
+    }
+}
