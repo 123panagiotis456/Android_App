@@ -67,4 +67,12 @@
     <string name="cart_update_failed">Δεν ήταν δυνατή η ενημέρωση του καλαθιού.</string>
     <string name="purchase_history_load_failed">Δεν ήταν δυνατή η φόρτωση του ιστορικού αγορών.</string>
     <string name="purchase_readded">Τα προϊόντα προστέθηκαν ξανά στο καλάθι.</string>
+    <string name="quantity_increase">Αύξηση ποσότητας</string>
+    <string name="quantity_decrease">Μείωση ποσότητας</string>
+    <string name="cart_back">Πίσω</string>
+    <string name="cart_total_label">Σύνολο</string>
+    <string name="cart_place_order">Παραγγελία</string>
+    <string name="cart_clear">Άδειασμα καλαθιού</string>
+    <string name="price_per_kg">ανά κιλό</string>
+    <string name="price_per_item">ανά τεμάχιο</string>
 </resources>

@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.supermarketmanager.data.entities.ProductEntity
 import com.example.supermarketmanager.databinding.ItemProductBinding
+import com.example.supermarketmanager.ui.formatEuro
+import com.example.supermarketmanager.ui.priceUnitLabel
 import com.example.supermarketmanager.ui.viewmodel.ProductViewModel
 
 class ProductAdapter(
@@ -44,10 +46,11 @@ class ProductAdapter(
             // Όνομα, περιγραφή, τιμή
             binding.tvProductName.text = product.name
             binding.tvProductDescription.text = product.description
-            binding.tvProductPrice.text = "${product.pricePerUnit} ${product.unit}"
+            val context = binding.root.context
+            binding.tvProductPrice.text = context.formatEuro(product.pricePerUnit)
+            binding.tvProductUnit.text = context.priceUnitLabel(product.unit)
 
             // Εικόνα
-            val context = binding.ivProductImage.context
             val resId = product.imageDrawable?.let {
                 context.resources.getIdentifier(it, "drawable", context.packageName)
             } ?: 0
@@ -82,7 +85,8 @@ class ProductAdapter(
             }
 
             // Disable το κουμπί αύξησης αν έχουμε φτάσει το stock
-            binding.btnIncrease.isEnabled = quantity < (product.availability)
+            binding.btnAdd.isEnabled = product.availability > 0
+            binding.btnIncrease.isEnabled = quantity < product.availability
 
             // Πάτημα στο αρχικό '+' κουμπί
             binding.btnAdd.setOnClickListener {

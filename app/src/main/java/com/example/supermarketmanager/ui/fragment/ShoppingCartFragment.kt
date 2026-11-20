@@ -8,11 +8,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.supermarketmanager.R
 import com.example.supermarketmanager.data.repository.CartRepository
 import com.example.supermarketmanager.databinding.FragmentShoppingCartBinding
 import com.example.supermarketmanager.ui.adapter.ShoppingCartAdapter
+import com.example.supermarketmanager.ui.formatEuro
 import com.example.supermarketmanager.ui.viewmodel.ProductViewModel
 import com.example.supermarketmanager.ui.viewmodel.ShoppingListViewModel
 import kotlinx.coroutines.CancellationException
@@ -45,29 +48,24 @@ class ShoppingCartFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = ShoppingCartAdapter(
-            mutableListOf(),
             onIncreaseClick = { item -> vm.addOneToCart(item.productId) },
             onDecreaseClick = { item ->
                 if (item.quantity > 1) vm.decreaseCartQuantity(item.productId)
             }
         )
 
-        binding.recyclerViewCart.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.recyclerViewCart.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewCart.adapter = adapter
 
+        binding.cartToolbar.setNavigationOnClickListener { findNavController().popBackStack() }
         cartVm.cartItems.observe(viewLifecycleOwner) { items ->
             adapter.updateData(items)
-            if (items.isEmpty()) {
-                binding.tvEmptyCart.visibility = View.VISIBLE
-                binding.recyclerViewCart.visibility = View.GONE
-                binding.btnOrder.visibility = View.GONE
-                binding.btnDelete.visibility = View.GONE
-            } else {
-                binding.tvEmptyCart.visibility = View.GONE
-                binding.recyclerViewCart.visibility = View.VISIBLE
-                binding.btnOrder.visibility = View.VISIBLE
-                binding.btnDelete.visibility = View.VISIBLE
-            }
+            binding.tvEmptyCart.isVisible = items.isEmpty()
+            binding.recyclerViewCart.isVisible = items.isNotEmpty()
+            binding.cartSummary.isVisible = items.isNotEmpty()
+            binding.tvCartAmount.text = requireContext().formatEuro(
+                items.sumOf { it.pricePerUnit * it.quantity }
+            )
         }
         binding.btnOrder.setOnClickListener {
             binding.btnOrder.isEnabled = false

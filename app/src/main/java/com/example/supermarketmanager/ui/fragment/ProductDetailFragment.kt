@@ -11,6 +11,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.supermarketmanager.R
 import com.example.supermarketmanager.databinding.FragmentProductDetailBinding
+import com.example.supermarketmanager.ui.formatEuro
+import com.example.supermarketmanager.ui.priceUnitLabel
 import com.example.supermarketmanager.ui.viewmodel.ProductViewModel
 import com.example.supermarketmanager.ui.viewmodel.WishlistViewModel
 import com.example.supermarketmanager.ui.viewmodel.WishlistViewModelFactory
@@ -98,9 +100,9 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
             binding.tvDetailnutritionalInfo.text = product.nutritionalInfo
             binding.tvDetailingredients.text = product.ingredients
             binding.tvDetailName.text = product.name
-            binding.tvDetailDescription.text = product.description ?: ""
-            binding.tvDetailPrice.text = "${product.pricePerUnit} €"
-            binding.tvDetailUnitInfo.text = "Τιμή ανά ${product.unit}"
+            binding.tvDetailDescription.text = product.description
+            binding.tvDetailPrice.text = context.formatEuro(product.pricePerUnit)
+            binding.tvDetailUnitInfo.text = context.priceUnitLabel(product.unit)
 
             // Display product availability
             binding.tvDetailAvailability.text = "${product.availability}"

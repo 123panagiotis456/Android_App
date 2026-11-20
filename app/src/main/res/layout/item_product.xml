@@ -1,158 +1,128 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.Market.Card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="6dp"
-    android:elevation="4dp"
-    app:cardCornerRadius="12dp"
-    app:cardBackgroundColor="#1C1C1C"
-    app:cardUseCompatPadding="true"
-    app:cardPreventCornerOverlap="false"
-    android:foreground="?attr/selectableItemBackground">
+    android:clickable="true"
+    android:focusable="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
 
         <FrameLayout
-            android:id="@+id/topFrame"
-            android:layout_width="0dp"
-            android:layout_height="140dp"
-            android:background="@android:color/white"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            android:layout_width="match_parent"
+            android:layout_height="116dp"
+            android:background="@drawable/market_product_image">
+
+            <ImageView
+                android:id="@+id/ivProductImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:importantForAccessibility="no"
+                android:padding="22dp"
+                android:scaleType="fitCenter"
+                tools:src="@drawable/apple_svgrepo_com" />
 
             <TextView
                 android:id="@+id/tvProductOffer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|start"
-                android:layout_margin="8dp"
-                android:text="1+1 Δώρο"
-                android:textColor="#FF5C70"
-                android:textStyle="bold"
-                android:textSize="15sp"
-                android:background="@drawable/offer_background"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                android:visibility="gone"/>
-
-
-
-            <ImageView
-                android:id="@+id/ivProductImage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitCenter" />
-
-            <!-- Κουμπί + -->
-            <ImageButton
-                android:id="@+id/btnAdd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top|end"
                 android:layout_margin="6dp"
-                android:background="@drawable/add_button_background"
-                android:contentDescription="@string/add_product"
-                android:padding="4dp"
-                android:src="@drawable/ic_add"
-                app:tint="@android:color/white" />
+                android:background="@drawable/offer_background"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp"
+                android:textColor="@color/market_offer_text"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                tools:text="1+1"
+                tools:visibility="visible" />
+        </FrameLayout>
 
-            <!-- Layout ποσότητας -->
+        <TextView
+            android:id="@+id/tvProductName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:minLines="2"
+            android:textAppearance="@style/TextAppearance.Market.ItemTitle"
+            tools:text="Φρέσκα μήλα" />
+
+        <TextView
+            android:id="@+id/tvProductDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:minLines="2"
+            android:textAppearance="@style/TextAppearance.Market.Secondary"
+            tools:text="Φρέσκα μήλα από τον Ισημερινό" />
+
+        <TextView
+            android:id="@+id/tvProductPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:textAppearance="@style/TextAppearance.Market.Price"
+            tools:text="2,99 €" />
+
+        <TextView
+            android:id="@+id/tvProductUnit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.Market.Secondary"
+            tools:text="ανά κιλό" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btnAdd"
+                style="@style/Widget.Market.QuantityButton"
+                android:layout_gravity="end"
+                android:contentDescription="@string/add_product"
+                app:srcCompat="@drawable/ic_add" />
+
             <LinearLayout
                 android:id="@+id/quantityLayout"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top|end"
-                android:layout_margin="6dp"
-                android:background="@drawable/add_button_background"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="4dp"
                 android:visibility="gone">
 
-                <ImageButton
+                <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/btnDecrease"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:background="@drawable/rounded_button_background"
-                    android:src="@drawable/ic_remove"
-                    app:tint="@android:color/white"
-                    android:contentDescription="Decrease" />
+                    style="@style/Widget.Market.QuantityButton"
+                    android:contentDescription="@string/quantity_decrease"
+                    app:srcCompat="@drawable/ic_remove" />
 
                 <TextView
                     android:id="@+id/tvQuantity"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:text="1"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textAppearance="@style/TextAppearance.Market.ItemTitle"
+                    tools:text="1" />
 
-                <ImageButton
+                <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/btnIncrease"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:background="@drawable/rounded_button_background"
-                    android:src="@drawable/ic_add"
-                    app:tint="@android:color/white"
-                    android:contentDescription="Increase" />
+                    style="@style/Widget.Market.QuantityButton"
+                    android:contentDescription="@string/quantity_increase"
+                    app:srcCompat="@drawable/ic_add" />
             </LinearLayout>
         </FrameLayout>
-
-        <!-- Όνομα προϊόντος -->
-        <TextView
-            android:id="@+id/tvProductName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/product"
-            android:textColor="#FFFFFF"
-            android:textSize="15sp"
-            android:maxLines="2"
-            android:ellipsize="end"
-            app:layout_constraintTop_toBottomOf="@id/topFrame"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-        <!-- Περιγραφή -->
-        <TextView
-            android:id="@+id/tvProductDescription"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="4dp"
-            android:text="@string/description"
-            android:textColor="#CCCCCC"
-            android:textSize="13sp"
-            android:maxLines="2"
-            android:ellipsize="end"
-            app:layout_constraintTop_toBottomOf="@id/tvProductName"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tvProductPrice"/>
-
-        <!-- Τιμή -->
-        <TextView
-            android:id="@+id/tvProductPrice"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="2,50€ / τεμ."
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

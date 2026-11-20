@@ -6,14 +6,14 @@
     android:layout_height="wrap_content"
     app:cardElevation="4dp"
     app:cardCornerRadius="12dp"
-    android:background="#1E1E1E">
+    android:background="@color/market_surface">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
-        android:background="#1E1E1E">
+        android:background="@color/market_surface">
 
         <!-- Purchase Date -->
         <TextView
@@ -31,7 +31,7 @@
             android:layout_height="1dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:background="#555555" />
+            android:background="@color/market_outline" />
 
         <!-- Products Details -->
         <TextView
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:text="Milk x2 @ €1.20\nBread x1 @ €1.50"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-            android:textColor="#DDDDDD"
+            android:textColor="@color/market_muted"
             android:lineSpacingExtra="4dp" />
 
         <!-- Total Cost -->
@@ -51,7 +51,7 @@
             android:text="Total: €4.50"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             android:textStyle="bold"
-            android:textColor="#DDDDDD"
+            android:textColor="@color/market_muted"
         android:textAlignment="viewEnd"
         android:layout_marginTop="12dp" />
 
@@ -62,8 +62,8 @@
             android:layout_height="wrap_content"
             android:text="@string/buy"
             android:textAllCaps="false"
-            android:backgroundTint="#00D69D"
-            android:textColor="#1E1E1E"
+            android:backgroundTint="@color/market_mint"
+            android:textColor="@color/market_on_mint"
             android:layout_gravity="end"
             android:layout_marginTop="16dp"
             android:paddingStart="24dp"
