@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -26,14 +27,23 @@ class PurchaseHistoryFragment : Fragment(R.layout.fragment_purchase_history) {
         super.onViewCreated(view, savedInstanceState)
 
         val binding = FragmentPurchaseHistoryBinding.bind(view)
-        val adapter = PurchaseHistoryAdapter(emptyList(), emptyMap(), ::readdPurchase)
+        val adapter = PurchaseHistoryAdapter(::readdPurchase)
         binding.recyclerViewPurchaseHistory.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewPurchaseHistory.adapter = adapter
 
         historyViewModel.history.observe(viewLifecycleOwner) { result ->
             result.fold(
-                onSuccess = { adapter.updateData(it.purchases, it.productNames) },
-                onFailure = { showMessage(R.string.purchase_history_load_failed) }
+                onSuccess = { history ->
+                    adapter.updateData(history.purchases, history.productNames)
+                    binding.recyclerViewPurchaseHistory.isVisible = history.purchases.isNotEmpty()
+                    binding.tvHistoryStatus.isVisible = history.purchases.isEmpty()
+                    binding.tvHistoryStatus.setText(R.string.purchase_history_empty)
+                },
+                onFailure = {
+                    binding.recyclerViewPurchaseHistory.isVisible = false
+                    binding.tvHistoryStatus.setText(R.string.purchase_history_load_failed)
+                    binding.tvHistoryStatus.isVisible = true
+                }
             )
         }
         historyViewModel.loadPurchaseHistory()

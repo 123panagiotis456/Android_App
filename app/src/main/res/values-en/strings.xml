@@ -82,4 +82,9 @@
     <string name="nav_history">History</string>
     <string name="nav_view_cart">View cart · %1$s</string>
     <string name="nav_cart_quantity">Quantity in cart: %1$s</string>
+    <string name="purchase_history_empty">You don’t have any purchases yet.</string>
+    <string name="purchase_history_readd">Add again to cart</string>
+    <string name="purchase_history_legacy">This purchase has no saved product details.</string>
+    <string name="purchase_history_product">Product #%1$d</string>
+    <string name="purchase_history_line">%1$d × %2$s · %3$s / unit</string>
 </resources>

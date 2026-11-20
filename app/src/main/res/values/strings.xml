@@ -82,4 +82,9 @@
     <string name="nav_history">Ιστορικό</string>
     <string name="nav_view_cart">Προβολή καλαθιού · %1$s</string>
     <string name="nav_cart_quantity">Ποσότητα στο καλάθι: %1$s</string>
+    <string name="purchase_history_empty">Δεν έχεις ακόμη καταχωρημένες αγορές.</string>
+    <string name="purchase_history_readd">Προσθήκη ξανά στο καλάθι</string>
+    <string name="purchase_history_legacy">Η αγορά δεν έχει αποθηκευμένες λεπτομέρειες προϊόντων.</string>
+    <string name="purchase_history_product">Προϊόν #%1$d</string>
+    <string name="purchase_history_line">%1$d × %2$s · %3$s / μονάδα</string>
 </resources>
