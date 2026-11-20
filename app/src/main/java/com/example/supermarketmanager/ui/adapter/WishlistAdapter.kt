@@ -1,58 +1,56 @@
 package com.example.supermarketmanager.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.supermarketmanager.R
 import com.example.supermarketmanager.data.models.WishlistProductItem
 import com.example.supermarketmanager.databinding.ItemWishlistItemBinding
+import com.example.supermarketmanager.ui.formatEuro
+import com.example.supermarketmanager.ui.priceUnitLabel
 
 class WishlistAdapter(
-    private val items: List<WishlistProductItem>,
     private val onRemove: (WishlistProductItem) -> Unit,
-    private val onProductClick: (WishlistProductItem) -> Unit // ΝΕΟ
-) : RecyclerView.Adapter<WishlistAdapter.VH>() {
+    private val onProductClick: (WishlistProductItem) -> Unit
+) : ListAdapter<WishlistProductItem, WishlistAdapter.ViewHolder>(WishlistDiff) {
 
-    inner class VH(val binding: ItemWishlistItemBinding) : RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: ItemWishlistItemBinding) : RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-        val inflater = LayoutInflater.from(parent.context)
-        val binding = ItemWishlistItemBinding.inflate(inflater, parent, false)
-        return VH(binding)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+        ViewHolder(ItemWishlistItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = getItem(position)
+        val product = item.product
+        val binding = holder.binding
+        val context = binding.root.context
+
+        binding.tvProductName.text = product.name
+        binding.tvProductDescription.text = product.description
+        binding.tvProductPrice.text = context.formatEuro(product.pricePerUnit)
+        binding.tvProductUnit.text = context.priceUnitLabel(product.unit)
+        binding.tvProductOffer.text = product.offer
+        binding.tvProductOffer.isVisible = !product.offer.isNullOrBlank()
+
+        val imageId = product.imageDrawable?.let {
+            context.resources.getIdentifier(it, "drawable", context.packageName)
+        } ?: 0
+        binding.ivProductImage.setImageResource(if (imageId != 0) imageId else R.drawable.ic_placeholder)
+
+        binding.root.setOnClickListener { onProductClick(item) }
+        binding.btnRemoveFavorite.contentDescription =
+            context.getString(R.string.wishlist_remove_product, product.name)
+        binding.btnRemoveFavorite.setOnClickListener { onRemove(item) }
     }
 
-    override fun onBindViewHolder(holder: VH, position: Int) {
-        val item = items[position]
-        val b = holder.binding
+    private object WishlistDiff : DiffUtil.ItemCallback<WishlistProductItem>() {
+        override fun areItemsTheSame(oldItem: WishlistProductItem, newItem: WishlistProductItem) =
+            oldItem.wishlist.id == newItem.wishlist.id
 
-        // Όνομα
-        b.tvProductName.text = item.product.name
-        // Περιγραφή
-        b.tvProductDescription.text = item.product.description
-        // Τιμή + μονάδα
-        b.tvProductPrice.text = "${item.product.pricePerUnit}€ / ${item.product.unit}"
-
-        // Εικόνα (αν έχεις drawable):
-        item.product.imageDrawable?.let {
-            val context = b.ivProductImage.context
-            val resId = context.resources.getIdentifier(it, "drawable", context.packageName)
-            if (resId != 0) b.ivProductImage.setImageResource(resId)
-            else b.ivProductImage.setImageResource(android.R.color.darker_gray) // fallback
-        }
-
-        // Offer badge
-        b.tvProductOffer.apply {
-            text = item.product.offer ?: ""
-            visibility = if (!item.product.offer.isNullOrBlank()) View.VISIBLE else View.GONE
-        }
-
-        // CLICK LISTENERS
-        b.root.setOnClickListener {
-            onProductClick(item) // άνοιγμα λεπτομερειών!
-        }
-        // Προσθέτεις εδώ και το remove αν το έχεις:
-        // π.χ. b.btnRemove.setOnClickListener { onRemove(item) }
+        override fun areContentsTheSame(oldItem: WishlistProductItem, newItem: WishlistProductItem) =
+            oldItem == newItem
     }
-
-    override fun getItemCount(): Int = items.size
 }

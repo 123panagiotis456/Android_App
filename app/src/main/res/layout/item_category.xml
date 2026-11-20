@@ -1,36 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:gravity="center"
+    android:background="@drawable/bg_category_card"
+    android:layout_margin="6dp">
 
-  <data>
-    <!-- Αν δεν χρειάζεσαι binding για data objects, μπορεί να μείνει άδειο -->
-  </data>
+  <ImageView
+      android:id="@+id/ivCategoryIcon"
+      android:layout_width="72dp"
+      android:layout_height="72dp"
+      android:layout_marginBottom="8dp"
+      android:scaleType="centerInside"
+      android:src="@drawable/ic_placeholder"
+      android:contentDescription="@string/category_image" />
 
-  <LinearLayout
-      android:layout_width="match_parent"
+
+  <TextView
+      android:id="@+id/tvCategoryName"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:orientation="vertical"
-      android:padding="12dp"
-      android:gravity="center"
-      android:background="@drawable/bg_category_card"
-      android:layout_margin="6dp">
-
-    <ImageView
-        android:id="@+id/ivCategoryIcon"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_marginBottom="8dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/ic_placeholder"
-        android:contentDescription="@string/category_image" />
-
-
-    <TextView
-        android:id="@+id/tvCategoryName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Category"
-        android:textAppearance="@style/TextAppearance.Market.ItemTitle"
-        android:textAlignment="center" />
-  </LinearLayout>
-
-</layout>
+      android:text="@string/Category"
+      android:textAppearance="@style/TextAppearance.Market.ItemTitle"
+      android:textAlignment="center" />
+</LinearLayout>

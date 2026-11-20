@@ -75,4 +75,7 @@
     <string name="cart_clear">Άδειασμα καλαθιού</string>
     <string name="price_per_kg">ανά κιλό</string>
     <string name="price_per_item">ανά τεμάχιο</string>
+    <string name="wishlist_empty">Δεν έχεις ακόμη αγαπημένα.</string>
+    <string name="wishlist_remove_product">Αφαίρεση από τα αγαπημένα: %1$s</string>
+    <string name="cart_item_total">Σύνολο προϊόντος</string>
 </resources>
