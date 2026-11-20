@@ -3,7 +3,6 @@ package com.example.supermarketmanager.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.example.supermarketmanager.MyApplication
-import com.example.supermarketmanager.data.entities.PurchaseHistoryEntity
 import com.example.supermarketmanager.data.repository.CartRepository
 
 class ShoppingListViewModel : ViewModel() {
@@ -16,6 +15,6 @@ class ShoppingListViewModel : ViewModel() {
 
     suspend fun clearCart() = CartRepository.clear(database)
 
-    suspend fun readdPurchaseToCart(purchase: PurchaseHistoryEntity) =
-        CartRepository.readdPurchase(database, purchase)
+    suspend fun addOneIfAvailable(productId: Int) =
+        CartRepository.addOneIfAvailable(database, productId)
 }

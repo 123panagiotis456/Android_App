@@ -66,7 +66,6 @@
     <string name="wishlist_update_failed">Δεν ήταν δυνατή η ενημέρωση των αγαπημένων.</string>
     <string name="cart_update_failed">Δεν ήταν δυνατή η ενημέρωση του καλαθιού.</string>
     <string name="purchase_history_load_failed">Δεν ήταν δυνατή η φόρτωση του ιστορικού αγορών.</string>
-    <string name="purchase_readded">Τα προϊόντα προστέθηκαν ξανά στο καλάθι.</string>
     <string name="quantity_increase">Αύξηση ποσότητας</string>
     <string name="quantity_decrease">Μείωση ποσότητας</string>
     <string name="cart_back">Πίσω</string>
@@ -83,10 +82,15 @@
     <string name="nav_view_cart">Προβολή καλαθιού · %1$s</string>
     <string name="nav_cart_quantity">Ποσότητα στο καλάθι: %1$s</string>
     <string name="purchase_history_empty">Δεν έχεις ακόμη καταχωρημένες αγορές.</string>
-    <string name="purchase_history_readd">Προσθήκη ξανά στο καλάθι</string>
     <string name="purchase_history_legacy">Η αγορά δεν έχει αποθηκευμένες λεπτομέρειες προϊόντων.</string>
     <string name="purchase_history_product">Προϊόν #%1$d</string>
-    <string name="purchase_history_line">%1$d × %2$s · %3$s / μονάδα</string>
-    <string name="purchase_history_show_products">Προβολή προϊόντων</string>
-    <string name="purchase_history_hide_products">Απόκρυψη προϊόντων</string>
+    <string name="purchase_order_title">Λεπτομέρειες παραγγελίας</string>
+    <string name="purchase_order_open">Προβολή παραγγελίας</string>
+    <string name="purchase_order_add">Προσθήκη ενός στο καλάθι: %1$s</string>
+    <string name="purchase_order_added">Προστέθηκε στο καλάθι.</string>
+    <string name="purchase_order_stock">Δεν υπάρχει διαθέσιμη ποσότητα για προσθήκη.</string>
+    <string name="purchase_order_missing">Η παραγγελία δεν βρέθηκε.</string>
+    <string name="purchase_order_unavailable">Μη διαθέσιμο</string>
+    <string name="purchase_order_total">Σύνολο παραγγελίας · %1$s</string>
+    <string name="purchase_order_line">%1$d στην παραγγελία · %2$s / μονάδα</string>
 </resources>

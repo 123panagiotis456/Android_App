@@ -26,15 +26,15 @@ object CartRepository {
         }
     }
 
-    suspend fun readdPurchase(database: AppDatabase, purchase: PurchaseHistoryEntity) {
+    suspend fun addOneIfAvailable(database: AppDatabase, productId: Int): Boolean =
         database.withTransaction {
-            val dao = database.shoppingListDao()
-            purchase.productIds.forEachIndexed { index, productId ->
-                val quantity = purchase.quantities[index]
-                dao.changeQuantity(productId) { it + quantity }
-            }
+            val product = database.productDao().getById(productId) ?: return@withTransaction false
+            val cartDao = database.shoppingListDao()
+            if (cartDao.totalQuantity(productId) >= product.availability) return@withTransaction false
+
+            cartDao.changeQuantity(productId) { it + 1 }
+            true
         }
-    }
 
     private suspend fun ShoppingListDao.changeQuantity(
         productId: Int,

@@ -66,7 +66,6 @@
     <string name="wishlist_update_failed">Could not update favorites.</string>
     <string name="cart_update_failed">Could not update the cart.</string>
     <string name="purchase_history_load_failed">Could not load purchase history.</string>
-    <string name="purchase_readded">The products were added back to your cart.</string>
     <string name="quantity_increase">Increase quantity</string>
     <string name="quantity_decrease">Decrease quantity</string>
     <string name="cart_back">Back</string>
@@ -83,10 +82,15 @@
     <string name="nav_view_cart">View cart · %1$s</string>
     <string name="nav_cart_quantity">Quantity in cart: %1$s</string>
     <string name="purchase_history_empty">You don’t have any purchases yet.</string>
-    <string name="purchase_history_readd">Add again to cart</string>
     <string name="purchase_history_legacy">This purchase has no saved product details.</string>
     <string name="purchase_history_product">Product #%1$d</string>
-    <string name="purchase_history_line">%1$d × %2$s · %3$s / unit</string>
-    <string name="purchase_history_show_products">Show products</string>
-    <string name="purchase_history_hide_products">Hide products</string>
+    <string name="purchase_order_title">Order details</string>
+    <string name="purchase_order_open">View order</string>
+    <string name="purchase_order_add">Add one to cart: %1$s</string>
+    <string name="purchase_order_added">Added to cart.</string>
+    <string name="purchase_order_stock">There is no available stock to add.</string>
+    <string name="purchase_order_missing">Order not found.</string>
+    <string name="purchase_order_unavailable">Unavailable</string>
+    <string name="purchase_order_total">Order total · %1$s</string>
+    <string name="purchase_order_line">%1$d in order · %2$s / unit</string>
 </resources>

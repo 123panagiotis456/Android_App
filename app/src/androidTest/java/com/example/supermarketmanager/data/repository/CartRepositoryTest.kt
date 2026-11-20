@@ -95,6 +95,32 @@ class CartRepositoryTest {
         assertTrue(database.shoppingListDao().getItemByProductId(1) == null)
     }
 
+    @Test
+    fun addFromHistoryAddsOnlySelectedProductAndRespectsCurrentStock() = runBlocking {
+        seedCart(secondQuantity = 2)
+        assertTrue(CartRepository.makePurchase(database))
+        val historyDao = database.purchaseHistoryDao()
+        val purchase = historyDao.getAll().single()
+        assertEquals(purchase, historyDao.getById(purchase.id))
+
+        val selectedProduct = purchase.productIds.first()
+        val otherProduct = purchase.productIds.last()
+        assertTrue(CartRepository.addOneIfAvailable(database, selectedProduct))
+        val cartDao = database.shoppingListDao()
+        assertEquals(1L, cartDao.totalQuantity(selectedProduct))
+        assertEquals(0L, cartDao.totalQuantity(otherProduct))
+
+        val remaining = listOf(
+            async { CartRepository.addOneIfAvailable(database, selectedProduct) },
+            async { CartRepository.addOneIfAvailable(database, selectedProduct) },
+            async { CartRepository.addOneIfAvailable(database, selectedProduct) }
+        ).awaitAll()
+        assertEquals(2, remaining.count { it })
+        assertEquals(3L, cartDao.totalQuantity(selectedProduct))
+        assertEquals(0L, cartDao.totalQuantity(otherProduct))
+        assertEquals(purchase, historyDao.getById(purchase.id))
+    }
+
     private suspend fun seedCart(secondQuantity: Int) {
         database.categoryDao().insertAll(listOf(CategoryEntity(1, "Food")))
         database.productDao().insertAll(listOf(product(1, "Apple", 2.0), product(2, "Bread", 3.0)))
