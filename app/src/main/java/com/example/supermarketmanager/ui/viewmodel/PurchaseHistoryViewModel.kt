@@ -15,6 +15,7 @@ class PurchaseHistoryViewModel : ViewModel() {
     data class OrderLine(
         val productId: Int,
         val name: String?,
+        val imageDrawable: String?,
         val quantity: Int,
         val unitPrice: Double,
         val inStock: Boolean
@@ -50,8 +51,12 @@ class PurchaseHistoryViewModel : ViewModel() {
         return Order(purchase, ids.mapIndexed { index, productId ->
             val product = products[productId]
             OrderLine(
-                productId, product?.name, purchase.quantities[index], purchase.prices[index],
-                product != null && product.availability > 0
+                productId = productId,
+                name = product?.name,
+                imageDrawable = product?.imageDrawable,
+                quantity = purchase.quantities[index],
+                unitPrice = purchase.prices[index],
+                inStock = product != null && product.availability > 0
             )
         })
     }
